@@ -1,6 +1,8 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -24,23 +26,83 @@ public class Student implements Serializable {
 	private String prezime;
 	
 	private String srednjeIme;
-
+	
+	private int jmbg;
+	
+	private String datumRodj;
+	
+	private String mestoRodj;
+	
+	private String drzavaRodj;
+	
+	private String drzavljanstvo;
+	
+	private String nacionalnost;
+	
+	private String pol;
+	
+	private String emFax;
+	
+	private String emPers;
+	
+	private int brLK;
+	
+	private String adresa;
+	
+	private String izdavacLk;
+	
+	private int brTel;
+	
+	private int ukupanUspeh;
+	
 	//bi-directional many-to-one association to Studprogram
 	@ManyToOne
 	@JoinColumn(name="idstudProgram")
 	private Studprogram studprogram;
+	
+	@ManyToOne
+	@JoinColumn(name="idSkole")
+	private SrednjaSkola srednjaSkola;
+	
+	@ManyToOne
+	@JoinColumn(name="idVisokeSkole")
+	private VisokaSkola visokaSkola;
+	
+	@ManyToOne
+	@JoinColumn(name="idIndex")
+	private StudIndex index;
 
 	public Student() {
 	}
 
 	
 	
-	public Student(int godinaUpisa, String ime, String prezime, Studprogram studprogram) {
+	public Student(int godinaUpisa, String ime, String prezime, Studprogram studprogram, String srednjeIme, int jmbg, String datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, 
+			String pol, String emFax, String emPers, int brLk, String adresa, String izdavacLk, int brTel, SrednjaSkola srednjaSkola, int ukupanUspeh, VisokaSkola visokaSkola, StudIndex index) {
+		
 		super();
 		this.godinaUpisa = godinaUpisa;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.studprogram = studprogram;
+		this.srednjeIme = srednjeIme;
+		this.jmbg = jmbg;
+		this.datumRodj = datumRodjenja;
+		this.mestoRodj = mestoRodj;
+		this.drzavaRodj = drzavaRodj;
+		this.drzavljanstvo = drzavljanstvo;
+		this.nacionalnost = nacionalnost;
+		this.pol = pol;
+		this.emFax = emFax;
+		this.emPers = emPers;
+		this.brLK = brLk;
+		this.adresa = adresa;
+		this.izdavacLk = izdavacLk;
+		this.brTel = brTel;
+		this.srednjaSkola = srednjaSkola;
+		this.ukupanUspeh = ukupanUspeh;
+		this.visokaSkola = visokaSkola;
+		this.index = index;
 	}
 
 
@@ -95,6 +157,211 @@ public class Student implements Serializable {
 
 	public void setSrednjeIme(String srednjeIme) {
 		this.srednjeIme = srednjeIme;
+	}
+
+	
+
+	public SrednjaSkola getSrednjaSkola() {
+		return srednjaSkola;
+	}
+
+
+
+	public void setSrednjaSkola(SrednjaSkola srednjaSkola) {
+		this.srednjaSkola = srednjaSkola;
+	}
+
+
+
+	public int getJmbg() {
+		return jmbg;
+	}
+
+
+
+	public void setJmbg(int jmbg) {
+		this.jmbg = jmbg;
+	}
+
+
+
+	public String getDatumRodj() {
+		return datumRodj;
+	}
+
+
+
+	public void setDatumRodj(String datumRodj) {
+		this.datumRodj = datumRodj;
+	}
+
+
+
+	public String getMestoRodj() {
+		return mestoRodj;
+	}
+
+
+
+	public void setMestoRodj(String mestoRodj) {
+		this.mestoRodj = mestoRodj;
+	}
+
+
+
+	public String getDrzavaRodj() {
+		return drzavaRodj;
+	}
+
+
+
+	public void setDrzavaRodj(String drzavaRodj) {
+		this.drzavaRodj = drzavaRodj;
+	}
+
+
+
+	public String getDrzavljanstvo() {
+		return drzavljanstvo;
+	}
+
+
+
+	public void setDrzavljanstvo(String drzavljanstvo) {
+		this.drzavljanstvo = drzavljanstvo;
+	}
+
+
+
+	public String getNacionalnost() {
+		return nacionalnost;
+	}
+
+
+
+	public void setNacionalnost(String nacionalnost) {
+		this.nacionalnost = nacionalnost;
+	}
+
+
+
+	public String getPol() {
+		return pol;
+	}
+
+
+
+	public void setPol(String pol) {
+		this.pol = pol;
+	}
+
+
+
+	public String getEmFax() {
+		return emFax;
+	}
+
+
+
+	public void setEmFax(String emFax) {
+		this.emFax = emFax;
+	}
+
+
+
+	public String getEmPers() {
+		return emPers;
+	}
+
+
+
+	public void setEmPers(String emPers) {
+		this.emPers = emPers;
+	}
+
+
+
+	public int getBrLK() {
+		return brLK;
+	}
+
+
+
+	public void setBrLK(int brLK) {
+		this.brLK = brLK;
+	}
+
+
+
+	public String getAdresa() {
+		return adresa;
+	}
+
+
+
+	public void setAdresa(String adresa) {
+		this.adresa = adresa;
+	}
+
+
+
+	public String getIzdavacLk() {
+		return izdavacLk;
+	}
+
+
+
+	public void setIzdavacLk(String izdavacLk) {
+		this.izdavacLk = izdavacLk;
+	}
+
+
+
+	public int getBrTel() {
+		return brTel;
+	}
+
+
+
+	public void setBrTel(int brTel) {
+		this.brTel = brTel;
+	}
+
+	
+
+
+	public int getUkupanUspeh() {
+		return ukupanUspeh;
+	}
+
+
+
+	public void setUkupanUspeh(int ukupanUspeh) {
+		this.ukupanUspeh = ukupanUspeh;
+	}
+
+
+
+	public VisokaSkola getVisokaSkola() {
+		return visokaSkola;
+	}
+
+	
+
+	public void setVisokaSkola(VisokaSkola visokaSkola) {
+		this.visokaSkola = visokaSkola;
+	}
+
+	
+
+	public StudIndex getIndex() {
+		return index;
+	}
+
+
+
+	public void setIndex(StudIndex index) {
+		this.index = index;
 	}
 
 

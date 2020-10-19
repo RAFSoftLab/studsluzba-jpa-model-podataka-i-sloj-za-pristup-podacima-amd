@@ -32,6 +32,12 @@ public class Studprogram implements Serializable {
 	
 	public Studprogram() {
 	}
+	
+	public Studprogram(String naziv,String skraceniNaziv) {
+		super();
+		this.naziv = naziv;
+		this.skraceniNaziv = skraceniNaziv;
+	}
 
 	public int getIdstudProgram() {
 		return this.idstudProgram;
