@@ -1,0 +1,90 @@
+package studsluzba.model;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+@Entity
+@NamedQuery(name = "Nastavnik.findAll", query = "SELECT n FROM Nastavnik n")
+public class Nastavnik implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int idNastavnik;
+
+	private String ime;
+	private String prezime;
+	private String srednjeIme;
+	private String email;
+	private String obrazovanje;
+	
+	@OneToMany(mappedBy = "idZvanje")
+	private ArrayList<Zvanje> zvanja;
+
+	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje,
+			ArrayList<Zvanje> zvanja) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+		this.srednjeIme = srednjeIme;
+		this.email = email;
+		this.obrazovanje = obrazovanje;
+		this.zvanja = zvanja;
+	}
+
+	public String getIme() {
+		return ime;
+	}
+
+	public void setIme(String ime) {
+		this.ime = ime;
+	}
+
+	public String getPrezime() {
+		return prezime;
+	}
+
+	public void setPrezime(String prezime) {
+		this.prezime = prezime;
+	}
+
+	public String getSrednjeIme() {
+		return srednjeIme;
+	}
+
+	public void setSrednjeIme(String srednjeIme) {
+		this.srednjeIme = srednjeIme;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getObrazovanje() {
+		return obrazovanje;
+	}
+
+	public void setObrazovanje(String obrazovanje) {
+		this.obrazovanje = obrazovanje;
+	}
+
+	public ArrayList<Zvanje> getZvanja() {
+		return zvanja;
+	}
+
+	public void setZvanja(ArrayList<Zvanje> zvanja) {
+		this.zvanja = zvanja;
+	}
+
+}
