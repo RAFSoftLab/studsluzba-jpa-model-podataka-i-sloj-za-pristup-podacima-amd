@@ -1,7 +1,10 @@
+
+
 package studsluzba.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,10 +29,10 @@ public class Nastavnik implements Serializable {
 	private String obrazovanje;
 	
 	@OneToMany(mappedBy = "idZvanje")
-	private ArrayList<Zvanje> zvanja;
+	private List<Zvanje> zvanja;
 
 	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje,
-			ArrayList<Zvanje> zvanja) {
+			List<Zvanje> zvanja) {
 		super();
 		this.ime = ime;
 		this.prezime = prezime;
@@ -79,11 +82,11 @@ public class Nastavnik implements Serializable {
 		this.obrazovanje = obrazovanje;
 	}
 
-	public ArrayList<Zvanje> getZvanja() {
+	public List<Zvanje> getZvanja() {
 		return zvanja;
 	}
 
-	public void setZvanja(ArrayList<Zvanje> zvanja) {
+	public void setZvanja(List<Zvanje> zvanja) {
 		this.zvanja = zvanja;
 	}
 

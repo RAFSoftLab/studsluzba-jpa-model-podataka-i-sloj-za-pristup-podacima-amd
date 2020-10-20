@@ -1,12 +1,16 @@
-package studsluzba.model;
+
+  package studsluzba.model;
+ 
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -23,9 +27,9 @@ public class IspitniRok implements Serializable {
 	private String datumZavrsetka;
 
 	@OneToMany(mappedBy="idIspit")
-	private ArrayList<Ispit> ispiti;
+	private List<Ispit> ispiti;
 
-	public IspitniRok(String datumPocetka, String datumZavrsetka, ArrayList<Ispit> ispiti) {
+	public IspitniRok(String datumPocetka, String datumZavrsetka, List<Ispit> ispiti) {
 		super();
 		this.datumPocetka = datumPocetka;
 		this.datumZavrsetka = datumZavrsetka;
@@ -48,11 +52,11 @@ public class IspitniRok implements Serializable {
 		this.datumZavrsetka = datumZavrsetka;
 	}
 
-	public ArrayList<Ispit> getIspiti() {
+	public List<Ispit> getIspiti() {
 		return ispiti;
 	}
 
-	public void setIspiti(ArrayList<Ispit> ispiti) {
+	public void setIspiti(List<Ispit> ispiti) {
 		this.ispiti = ispiti;
 	}
 

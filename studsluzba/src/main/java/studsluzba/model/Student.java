@@ -27,7 +27,7 @@ public class Student implements Serializable {
 	
 	private String srednjeIme;
 	
-	private int jmbg;
+	private long jmbg;
 	
 	private String datumRodj;
 	
@@ -45,13 +45,13 @@ public class Student implements Serializable {
 	
 	private String emPers;
 	
-	private int brLK;
+	private long brLK;
 	
 	private String adresa;
 	
 	private String izdavacLk;
 	
-	private int brTel;
+	private long brTel;
 	
 	private int ukupanUspeh;
 	
@@ -68,19 +68,17 @@ public class Student implements Serializable {
 	@JoinColumn(name="idVisokeSkole")
 	private VisokaSkola visokaSkola;
 	
-	@ManyToOne
-	@JoinColumn(name="idIndex")
-	private StudIndex index;
+	@OneToMany(mappedBy = "student")
+	private List<StudIndex> indexs;
 
 	public Student() {
 	}
 
 	
 	
-	public Student(int godinaUpisa, String ime, String prezime, Studprogram studprogram, String srednjeIme, int jmbg, String datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, 
-			String pol, String emFax, String emPers, int brLk, String adresa, String izdavacLk, int brTel, SrednjaSkola srednjaSkola, int ukupanUspeh, VisokaSkola visokaSkola, StudIndex index) {
+	public Student(int godinaUpisa, String ime, String prezime, Studprogram studprogram, String srednjeIme, long jmbg, String datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, 
+			String pol, String emFax, String emPers, long brLk, String adresa, String izdavacLk, long brTel, SrednjaSkola srednjaSkola, int ukupanUspeh, List<StudIndex> indexs) {
 		
-		super();
 		this.godinaUpisa = godinaUpisa;
 		this.ime = ime;
 		this.prezime = prezime;
@@ -101,8 +99,7 @@ public class Student implements Serializable {
 		this.brTel = brTel;
 		this.srednjaSkola = srednjaSkola;
 		this.ukupanUspeh = ukupanUspeh;
-		this.visokaSkola = visokaSkola;
-		this.index = index;
+		this.indexs = indexs;
 	}
 
 
@@ -173,7 +170,7 @@ public class Student implements Serializable {
 
 
 
-	public int getJmbg() {
+	public long getJmbg() {
 		return jmbg;
 	}
 
@@ -281,7 +278,7 @@ public class Student implements Serializable {
 
 
 
-	public int getBrLK() {
+	public long getBrLK() {
 		return brLK;
 	}
 
@@ -317,7 +314,7 @@ public class Student implements Serializable {
 
 
 
-	public int getBrTel() {
+	public long getBrTel() {
 		return brTel;
 	}
 
@@ -351,17 +348,16 @@ public class Student implements Serializable {
 	public void setVisokaSkola(VisokaSkola visokaSkola) {
 		this.visokaSkola = visokaSkola;
 	}
-
 	
 
-	public StudIndex getIndex() {
-		return index;
+	public List<StudIndex> getIndexs() {
+		return indexs;
 	}
 
 
 
-	public void setIndex(StudIndex index) {
-		this.index = index;
+	public void setIndexs(List<StudIndex> indexs) {
+		this.indexs = indexs;
 	}
 
 

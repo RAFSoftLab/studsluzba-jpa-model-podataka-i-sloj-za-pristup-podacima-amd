@@ -7,4 +7,5 @@ import studsluzba.model.Student;
 
 public interface SrednjeSkoleRepository extends CrudRepository<SrednjaSkola, Integer>{
 
+	
 }
