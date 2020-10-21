@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
@@ -16,27 +17,31 @@ public class Ispit implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIspit;
-	
+
 	private String datumOdrzavanja;
 	private String vremePocetka;
 
-	@OneToOne
-	@JoinColumn(name="idPredmeta")
+	@ManyToOne
+	@JoinColumn(name = "idPredmeta")
 	private Predmet predmet;
-	
-	@OneToOne
-	@JoinColumn(name="idNastavnik")
+
+	@ManyToOne
+	@JoinColumn(name = "idNastavnik")
 	private Nastavnik nastavnik;
 
 	private boolean zakljucen;
-	
-	@OneToOne
-	@JoinColumn(name="idIspitniRok")
+
+	@ManyToOne
+	@JoinColumn(name = "idIspitniRok")
 	private IspitniRok ispitniRok;
 
-	public Ispit(String datumOdrzavanja, String vremePocetka, Predmet predmet, boolean zakljucen) {
+	public Ispit() {
+
+	}
+
+	public Ispit(String datumOdrzavanja, String vremePocetka, Nastavnik nastavnik, Predmet predmet, boolean zakljucen) {
 
 		this.datumOdrzavanja = datumOdrzavanja;
 		this.vremePocetka = vremePocetka;
@@ -85,5 +90,20 @@ public class Ispit implements Serializable {
 		this.zakljucen = zakljucen;
 	}
 
-}
+	public int getIdIspit() {
+		return idIspit;
+	}
 
+	public void setIdIspit(int idIspit) {
+		this.idIspit = idIspit;
+	}
+
+	public IspitniRok getIspitniRok() {
+		return ispitniRok;
+	}
+
+	public void setIspitniRok(IspitniRok ispitniRok) {
+		this.ispitniRok = ispitniRok;
+	}
+
+}

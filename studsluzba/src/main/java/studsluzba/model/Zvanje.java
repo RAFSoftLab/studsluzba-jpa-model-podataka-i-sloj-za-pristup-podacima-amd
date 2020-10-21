@@ -10,18 +10,22 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQuery(name = "Zvanje.findAll", query = "SELECT z FROM Zvanje z")
-public class Zvanje implements Serializable{
+public class Zvanje implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idZvanje;
-	
+
 	private String datumIzbora;
 	private String uzaNaucnaOblast;
 	private String naziv;
 
+	public Zvanje() {
+
+	}
+
 	public Zvanje(String datumIzbora, String uzaNaucnaOblast, String naziv) {
-		
+
 		this.datumIzbora = datumIzbora;
 		this.uzaNaucnaOblast = uzaNaucnaOblast;
 		this.naziv = naziv;

@@ -1,6 +1,5 @@
 
-  package studsluzba.model;
- 
+package studsluzba.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,16 +17,20 @@ import javax.persistence.OneToMany;
 @NamedQuery(name = "IspitniRok.findAll", query = "SELECT ir FROM IspitniRok ir")
 public class IspitniRok implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIspitniRok;
 
 	private String datumPocetka;
 	private String datumZavrsetka;
 
-	@OneToMany(mappedBy="idIspit")
+	@OneToMany(mappedBy = "ispitniRok")
 	private List<Ispit> ispiti;
+
+	public IspitniRok() {
+
+	}
 
 	public IspitniRok(String datumPocetka, String datumZavrsetka, List<Ispit> ispiti) {
 		super();

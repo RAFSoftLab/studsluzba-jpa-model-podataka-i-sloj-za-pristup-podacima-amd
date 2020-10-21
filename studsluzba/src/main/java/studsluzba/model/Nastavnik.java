@@ -1,5 +1,4 @@
 
-
 package studsluzba.model;
 
 import java.io.Serializable;
@@ -17,9 +16,9 @@ import javax.persistence.OneToMany;
 @NamedQuery(name = "Nastavnik.findAll", query = "SELECT n FROM Nastavnik n")
 public class Nastavnik implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idNastavnik;
 
 	private String ime;
@@ -27,13 +26,17 @@ public class Nastavnik implements Serializable {
 	private String srednjeIme;
 	private String email;
 	private String obrazovanje;
-	
+
 	@OneToMany(mappedBy = "idZvanje")
 	private List<Zvanje> zvanja;
 
+	public Nastavnik() {
+
+	}
+
 	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje,
 			List<Zvanje> zvanja) {
-		super();
+
 		this.ime = ime;
 		this.prezime = prezime;
 		this.srednjeIme = srednjeIme;
