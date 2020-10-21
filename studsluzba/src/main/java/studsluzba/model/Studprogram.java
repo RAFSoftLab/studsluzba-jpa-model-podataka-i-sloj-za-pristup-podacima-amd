@@ -2,6 +2,8 @@ package studsluzba.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,21 +24,30 @@ public class Studprogram implements Serializable {
 
 	private String skraceniNaziv;
 	
+	private String nazivZvanja;
+	
+	private Date godinaAkreditovanja;
+	
+	private int semestriTrajanje;
+	
+	@ManyToOne
+	@JoinColumn(name = "idVrstaStudija")
+	private VrstaStudija vrstaStudija;
 
-	//bi-directional many-to-one association to Student
-	@OneToMany(mappedBy="studprogram")
-	private List<Student> students;
-
-	@OneToMany(mappedBy = "studProgram", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "studProgram", fetch = FetchType.EAGER)
 	private List<Predmet> predmeti;
 	
 	public Studprogram() {
 	}
 	
-	public Studprogram(String naziv,String skraceniNaziv) {
+	public Studprogram(String naziv,String skraceniNaziv, String nazivZvanja, Date godinaAkreditovanja, int semestriTrajanje, VrstaStudija vrstaStudija) {
 
 		this.naziv = naziv;
 		this.skraceniNaziv = skraceniNaziv;
+		this.nazivZvanja = nazivZvanja;
+		this.godinaAkreditovanja = godinaAkreditovanja;
+		this.semestriTrajanje = semestriTrajanje;
+		this.vrstaStudija = vrstaStudija;
 	}
 
 	public int getIdstudProgram() {
@@ -63,28 +74,7 @@ public class Studprogram implements Serializable {
 		this.skraceniNaziv = skraceniNaziv;
 	}
 
-	public List<Student> getStudents() {
-		return this.students;
-	}
 
-	public void setStudents(List<Student> students) {
-		this.students = students;
-	}
-
-	public Student addStudent(Student student) {
-		getStudents().add(student);
-		student.setStudprogram(this);
-
-		return student;
-	}
-
-	public Student removeStudent(Student student) {
-		getStudents().remove(student);
-		student.setStudprogram(null);
-
-		return student;
-	}
-	
 	public Predmet addPredmet(Predmet predmet) {
 		getPredmeti().add(predmet);
 		predmet.setStudProgram(this);
@@ -105,6 +95,46 @@ public class Studprogram implements Serializable {
 
 	public void setPredmeti(List<Predmet> predmeti) {
 		this.predmeti = predmeti;
+	}
+
+	public String getNazivZvanja() {
+		return nazivZvanja;
+	}
+
+	public void setNazivZvanja(String nazivZvanja) {
+		this.nazivZvanja = nazivZvanja;
+	}
+
+	public Date getGodinaAkreditovanja() {
+		return godinaAkreditovanja;
+	}
+
+	public void setGodinaAkreditovanja(Date godinaAkreditovanja) {
+		this.godinaAkreditovanja = godinaAkreditovanja;
+	}
+
+	public int getSemestriTrajanje() {
+		return semestriTrajanje;
+	}
+
+	public void setSemestriTrajanje(int semestriTrajanje) {
+		this.semestriTrajanje = semestriTrajanje;
+	}
+
+	public VrstaStudija getVrstaStudija() {
+		return vrstaStudija;
+	}
+
+	public void setVrstaStudija(VrstaStudija vrstaStudija) {
+		this.vrstaStudija = vrstaStudija;
+	}
+
+	@Override
+	public String toString() {
+		return "Studprogram [idstudProgram=" + idstudProgram + ", naziv=" + naziv + ", skraceniNaziv=" + skraceniNaziv
+				+ ", nazivZvanja=" + nazivZvanja + ", godinaAkreditovanja=" + godinaAkreditovanja
+				+ ", semestriTrajanje=" + semestriTrajanje + ", vrstaStudija=" + vrstaStudija + ", predmeti=" + predmeti
+				+ "]";
 	}
 	
 	

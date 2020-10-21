@@ -54,12 +54,7 @@ public class Student implements Serializable {
 	private String brTel;
 	
 	private float ukupanUspeh;
-	
-	//bi-directional many-to-one association to Studprogram
-	@ManyToOne
-	@JoinColumn(name="idstudProgram")
-	private Studprogram studprogram;
-	
+
 	@ManyToOne
 	@JoinColumn(name="idSkole")
 	private SrednjaSkola srednjaSkola;
@@ -68,19 +63,18 @@ public class Student implements Serializable {
 	@JoinColumn(name="idVisokeSkole")
 	private VisokaSkola visokaSkola;
 	
-	@OneToMany(mappedBy = "student")
+	@OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
 	private List<StudIndex> indexs;
 
 	public Student() {
 	}
 
-	public Student(int godinaUpisa, String ime, String prezime, Studprogram studprogram, String srednjeIme, String jmbg, java.util.Date datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, 
+	public Student(int godinaUpisa, String ime, String prezime, String srednjeIme, String jmbg, java.util.Date datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, 
 			String pol, String emFax, String emPers, String brLk, String adresa, String izdavacLk, String brTel, SrednjaSkola srednjaSkola, float ukupanUspeh, List<StudIndex> indexs) {
 		
 		this.godinaUpisa = godinaUpisa;
 		this.ime = ime;
 		this.prezime = prezime;
-		this.studprogram = studprogram;
 		this.srednjeIme = srednjeIme;
 		this.jmbg = jmbg;
 		this.datumRodj = datumRodjenja;
@@ -133,15 +127,6 @@ public class Student implements Serializable {
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
-
-	public Studprogram getStudprogram() {
-		return this.studprogram;
-	}
-
-	public void setStudprogram(Studprogram studprogram) {
-		this.studprogram = studprogram;
-	}
-
 	
 
 	public String getSrednjeIme() {
@@ -363,7 +348,7 @@ public class Student implements Serializable {
 	@Override
 	public String toString() {
 		return "Student [idstudent=" + idstudent + ", godinaUpisa=" + godinaUpisa + ", ime=" + ime + ", prezime="
-				+ prezime + ", studprogram=" + studprogram + "]";
+				+ prezime;
 	}
 	
 	
