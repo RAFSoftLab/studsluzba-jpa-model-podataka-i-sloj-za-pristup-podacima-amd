@@ -39,6 +39,10 @@ public class Ispit implements Serializable {
 		this.nastavnik = nastavnik;
 		this.zakljucen = zakljucen;
 	}
+	
+	public Ispit() {
+		
+	}
 
 	public String getDatumOdrzavanja() {
 		return datumOdrzavanja;

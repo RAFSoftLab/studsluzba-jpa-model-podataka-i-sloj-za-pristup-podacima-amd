@@ -2,11 +2,13 @@ package studsluzba.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -25,8 +27,11 @@ public class Nastavnik implements Serializable {
 	private String email;
 	private String obrazovanje;
 	
+	@ManyToMany
+	private List<Predmet> predmeti;
+	
 	@OneToMany(mappedBy = "idZvanje")
-	private ArrayList<Zvanje> zvanja;
+	private List<Zvanje> zvanja;
 
 	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje,
 			ArrayList<Zvanje> zvanja) {
@@ -37,6 +42,10 @@ public class Nastavnik implements Serializable {
 		this.email = email;
 		this.obrazovanje = obrazovanje;
 		this.zvanja = zvanja;
+	}
+	
+	public Nastavnik() {
+		
 	}
 
 	public String getIme() {
@@ -79,7 +88,7 @@ public class Nastavnik implements Serializable {
 		this.obrazovanje = obrazovanje;
 	}
 
-	public ArrayList<Zvanje> getZvanja() {
+	public List<Zvanje> getZvanja() {
 		return zvanja;
 	}
 
