@@ -27,9 +27,9 @@ public class Student implements Serializable {
 	
 	private String srednjeIme;
 	
-	private long jmbg;
+	private String jmbg;
 	
-	private String datumRodj;
+	private java.util.Date datumRodj;
 	
 	private String mestoRodj;
 	
@@ -45,15 +45,15 @@ public class Student implements Serializable {
 	
 	private String emPers;
 	
-	private long brLK;
+	private String brLK;
 	
 	private String adresa;
 	
 	private String izdavacLk;
 	
-	private long brTel;
+	private String brTel;
 	
-	private int ukupanUspeh;
+	private float ukupanUspeh;
 	
 	//bi-directional many-to-one association to Studprogram
 	@ManyToOne
@@ -74,10 +74,8 @@ public class Student implements Serializable {
 	public Student() {
 	}
 
-	
-	
-	public Student(int godinaUpisa, String ime, String prezime, Studprogram studprogram, String srednjeIme, long jmbg, String datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, 
-			String pol, String emFax, String emPers, long brLk, String adresa, String izdavacLk, long brTel, SrednjaSkola srednjaSkola, int ukupanUspeh, List<StudIndex> indexs) {
+	public Student(int godinaUpisa, String ime, String prezime, Studprogram studprogram, String srednjeIme, String jmbg, java.util.Date datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, 
+			String pol, String emFax, String emPers, String brLk, String adresa, String izdavacLk, String brTel, SrednjaSkola srednjaSkola, float ukupanUspeh, List<StudIndex> indexs) {
 		
 		this.godinaUpisa = godinaUpisa;
 		this.ime = ime;
@@ -170,25 +168,25 @@ public class Student implements Serializable {
 
 
 
-	public long getJmbg() {
+	public String getJmbg() {
 		return jmbg;
 	}
 
 
 
-	public void setJmbg(int jmbg) {
+	public void setJmbg(String jmbg) {
 		this.jmbg = jmbg;
 	}
 
 
 
-	public String getDatumRodj() {
+	public java.util.Date getDatumRodj() {
 		return datumRodj;
 	}
 
 
 
-	public void setDatumRodj(String datumRodj) {
+	public void setDatumRodj(java.util.Date datumRodj) {
 		this.datumRodj = datumRodj;
 	}
 
@@ -278,13 +276,13 @@ public class Student implements Serializable {
 
 
 
-	public long getBrLK() {
+	public String getBrLK() {
 		return brLK;
 	}
 
 
 
-	public void setBrLK(int brLK) {
+	public void setBrLK(String brLK) {
 		this.brLK = brLK;
 	}
 
@@ -314,26 +312,26 @@ public class Student implements Serializable {
 
 
 
-	public long getBrTel() {
+	public String getBrTel() {
 		return brTel;
 	}
 
 
 
-	public void setBrTel(int brTel) {
+	public void setBrTel(String brTel) {
 		this.brTel = brTel;
 	}
 
 	
 
 
-	public int getUkupanUspeh() {
+	public float getUkupanUspeh() {
 		return ukupanUspeh;
 	}
 
 
 
-	public void setUkupanUspeh(int ukupanUspeh) {
+	public void setUkupanUspeh(float ukupanUspeh) {
 		this.ukupanUspeh = ukupanUspeh;
 	}
 

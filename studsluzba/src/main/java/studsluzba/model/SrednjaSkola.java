@@ -28,7 +28,7 @@ public class SrednjaSkola implements Serializable{
 	}
 	
 	public SrednjaSkola(String imeSkole, String mesto, String vrsta) {
-			super();
+
 			this.imeSkole = imeSkole;
 			this.mesto = mesto;
 			this.vrsta = vrsta;

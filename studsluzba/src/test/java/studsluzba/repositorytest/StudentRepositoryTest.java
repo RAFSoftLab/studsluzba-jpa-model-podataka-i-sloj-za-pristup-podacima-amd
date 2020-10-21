@@ -1,6 +1,9 @@
 package studsluzba.repositorytest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -18,6 +21,10 @@ import studsluzba.repositories.StudIndexRepository;
 import studsluzba.repositories.StudentRepository;
 import studsluzba.repositories.VisokaSkolaRepository;
 
+
+
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StudentRepositoryTest {
@@ -31,7 +38,7 @@ public class StudentRepositoryTest {
 	@Autowired //spring pravi sam instancu repositorija -------------------------
 	SrednjeSkoleRepository srednjeRepo;
 	@Test
-	public void saveStudentTest() {
+	public void saveStudentTest() throws ParseException {
 		
 		SrednjaSkola sk = new SrednjaSkola();
 		sk.setImeSkole("Mileta Micka");
@@ -46,13 +53,18 @@ public class StudentRepositoryTest {
 		vs.setSmer("Gluma");
 		visokaRepo.save(vs);
 		
-		Student s = new Student(2019, "David", "Nikolic", null, "Aleksa", 260200123, "26.02.2000.","Ivanjica", null, null, null, null, null, null, 0, null, null, 0, sk, 0, null);
+		Student s = new Student(2019, "David", "Nikolic", null, "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0, null);
 		s.setVisokaSkola(vs);
 		
 		studentRepo.save(s);
 		
+	
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = sdf.parse("2019-10-01");
+		
+	
 		StudIndex index = new StudIndex();
-		index.setDatumaktivnosti("01.10.2019");
+		index.setDatumaktivnosti(d);
 		index.setBroj(93);
 		index.setAktivan(true);
 		index.setGodinaUpisa(2019);

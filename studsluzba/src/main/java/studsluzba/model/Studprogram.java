@@ -27,14 +27,14 @@ public class Studprogram implements Serializable {
 	@OneToMany(mappedBy="studprogram")
 	private List<Student> students;
 
-	@OneToMany(mappedBy = "studProgram")
+	@OneToMany(mappedBy = "studProgram", fetch = FetchType.LAZY)
 	private List<Predmet> predmeti;
 	
 	public Studprogram() {
 	}
 	
 	public Studprogram(String naziv,String skraceniNaziv) {
-		super();
+
 		this.naziv = naziv;
 		this.skraceniNaziv = skraceniNaziv;
 	}
@@ -84,7 +84,21 @@ public class Studprogram implements Serializable {
 
 		return student;
 	}
+	
+	public Predmet addPredmet(Predmet predmet) {
+		getPredmeti().add(predmet);
+		predmet.setStudProgram(this);
 
+		return predmet;
+	}
+
+	public Predmet removePredmet(Predmet predmet) {
+		getPredmeti().remove(predmet);
+		predmet.setStudProgram(null);
+
+		return predmet;
+	}
+	
 	public List<Predmet> getPredmeti() {
 		return predmeti;
 	}
