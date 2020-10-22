@@ -33,7 +33,7 @@ public class Predmet implements Serializable {
 	@JoinColumn(name = "idstudProgram")
 	private Studprogram studProgram;
 	
-	@OneToMany(mappedBy = "idNastavnik")
+	@ManyToMany(targetEntity = Nastavnik.class)
 	private List<Nastavnik> nastavnici;
 
 	public Predmet() {

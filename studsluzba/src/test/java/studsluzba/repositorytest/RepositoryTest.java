@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import studsluzba.model.IzlazakNaIspit;
+import studsluzba.model.Nastavnik;
 import studsluzba.model.ObnovaGodine;
 import studsluzba.model.Predmet;
 import studsluzba.model.SrednjaSkola;
@@ -26,6 +27,7 @@ import studsluzba.model.VisokaSkola;
 import studsluzba.model.VrstaStudija;
 import studsluzba.model.prijavaIspita;
 import studsluzba.repositories.IzlazakNaIspitrepository;
+import studsluzba.repositories.NastavnikRepository;
 import studsluzba.repositories.ObnovaGodineRepository;
 import studsluzba.repositories.PredmetRepository;
 import studsluzba.repositories.PrijavaIspitarepository;
@@ -39,12 +41,9 @@ import studsluzba.repositories.VisokaSkolaRepository;
 import studsluzba.repositories.VrstaStudijaRepository;
 
 
-
-
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class StudentRepositoryTest {
+public class RepositoryTest {
 	
 	@Autowired 
 	PredmetRepository predmetRepo;
@@ -81,6 +80,9 @@ public class StudentRepositoryTest {
 	
 	@Autowired
 	TokStudijaRepository tokRepo;
+	
+	@Autowired
+	NastavnikRepository nasRepo;
 	
 	
 	@Test
@@ -173,28 +175,28 @@ public class StudentRepositoryTest {
 		izlazakRepo.save(in1);
 		izlazakRepo.save(in2);
 		
+		
 		Predmet p4 = new Predmet();
 		p4.setNaziv("MA");
 		p4.setSifra("943");
-
-		Predmet p5 = new Predmet();
-		p5.setNaziv("UI");
-		p5.setSifra("684");
-		
 		predmetRepo.save(p4);
-		predmetRepo.save(p5);
+
+		Nastavnik n1 = new Nastavnik();
+		n1.setIme("Pera");
+		nasRepo.save(n1);
 		
-		ObnovaGodine oGodine = new ObnovaGodine(3, p5, null, null);
+		
+		ObnovaGodine oGodine = new ObnovaGodine(3, p4, null, null);
 		ObnovaGodine oGodine1 = new ObnovaGodine(1, p4, null, null);
-		ObnovaGodine oGodine2 = new ObnovaGodine(1, p5, "Obnova zbog zbog", d);
+		ObnovaGodine oGodine2 = new ObnovaGodine(1, p4, "Obnova zbog zbog", d);
 		
 		obnovaRepo.save(oGodine);
 		obnovaRepo.save(oGodine1);
 		obnovaRepo.save(oGodine2);
 		
-		UpisGodine uGodine = new UpisGodine(3, p5,"....",null);
+		UpisGodine uGodine = new UpisGodine(3, p4,"....",null);
 		UpisGodine uGodine1 = new UpisGodine(1, p4, null, d);
-		UpisGodine uGodine2 = new UpisGodine(1, p5, null, null);
+		UpisGodine uGodine2 = new UpisGodine(1, p4, null, null);
 		
 		upisRepo.save(uGodine);
 		upisRepo.save(uGodine1);
