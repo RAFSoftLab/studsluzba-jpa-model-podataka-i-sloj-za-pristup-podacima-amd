@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.xml.crypto.Data;
 
 @Entity
-@NamedQuery(name = "pijavaIpita.findAll", query = "SELECT i FROM prijavaIspita i")
+@NamedQuery(name = "pijavaIpita.findAll", query = "SELECT p FROM prijavaIspita p")
 public class prijavaIspita {
 
 	

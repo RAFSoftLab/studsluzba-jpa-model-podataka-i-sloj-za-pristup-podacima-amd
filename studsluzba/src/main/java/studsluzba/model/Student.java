@@ -54,6 +54,12 @@ public class Student implements Serializable {
 	private String brTel;
 	
 	private float ukupanUspeh;
+	
+	@OneToMany(mappedBy = "student")
+	private List<TokStudija> tokStudija;
+	
+	@OneToMany(mappedBy = "student")
+	private List<IzlazakNaIspit> izlazakNaIspit;
 
 	@ManyToOne
 	@JoinColumn(name="idSkole")
@@ -70,7 +76,7 @@ public class Student implements Serializable {
 	}
 
 	public Student(int godinaUpisa, String ime, String prezime, String srednjeIme, String jmbg, java.util.Date datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, 
-			String pol, String emFax, String emPers, String brLk, String adresa, String izdavacLk, String brTel, SrednjaSkola srednjaSkola, float ukupanUspeh, List<StudIndex> indexs) {
+			String pol, String emFax, String emPers, String brLk, String adresa, String izdavacLk, String brTel, SrednjaSkola srednjaSkola, float ukupanUspeh) {
 		
 		this.godinaUpisa = godinaUpisa;
 		this.ime = ime;
@@ -91,7 +97,6 @@ public class Student implements Serializable {
 		this.brTel = brTel;
 		this.srednjaSkola = srednjaSkola;
 		this.ukupanUspeh = ukupanUspeh;
-		this.indexs = indexs;
 	}
 
 

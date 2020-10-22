@@ -9,15 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="predmet")
+@Table(name = "predmet")
 public class Predmet {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idPredmeta;	
+	private int idPredmeta;
 	private String sifra;
 	private String naziv;
 	private String opis;
@@ -25,13 +26,12 @@ public class Predmet {
 	private int semestar;
 	private int fondCasovaPredavanja;
 	private int fondCasovaVezbi;
-		
+
 	@ManyToOne
 	private Studprogram studProgram;
-	
+
 	@ManyToMany
 	private List<Nastavnik> nastavnici;
-	
 
 	public int getIdPredmeta() {
 		return idPredmeta;
@@ -112,6 +112,5 @@ public class Predmet {
 	public void setNastavnici(List<Nastavnik> nastavnici) {
 		this.nastavnici = nastavnici;
 	}
-	
-	
+
 }
