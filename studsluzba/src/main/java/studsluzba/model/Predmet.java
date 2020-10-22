@@ -15,15 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-<<<<<<< HEAD
 @Table(name="predmet")
 public class Predmet implements Serializable {
 	
-=======
-@Table(name = "predmet")
-public class Predmet {
-
->>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPredmeta;
@@ -38,18 +32,9 @@ public class Predmet {
 	@ManyToOne
 	@JoinColumn(name = "idstudProgram")
 	private Studprogram studProgram;
-<<<<<<< HEAD
 	
 	@OneToMany(mappedBy = "idNastavnik")
-=======
-
-	@ManyToMany
->>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 	private List<Nastavnik> nastavnici;
-<<<<<<< HEAD
-		
-=======
->>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 
 	public Predmet() {
 	}
