@@ -20,6 +20,11 @@ public class Predmet {
 	private int idPredmeta;	
 	private String sifra;
 	private String naziv;
+	private String opis;
+	private int espb;
+	private int semestar;
+	private int fondCasovaPredavanja;
+	private int fondCasovaVezbi;
 		
 	@ManyToOne
 	private Studprogram studProgram;
@@ -59,7 +64,54 @@ public class Predmet {
 	public void setStudProgram(Studprogram studProgram) {
 		this.studProgram = studProgram;
 	}
-	
+
+	public String getOpis() {
+		return opis;
+	}
+
+	public void setOpis(String opis) {
+		this.opis = opis;
+	}
+
+	public int getEspb() {
+		return espb;
+	}
+
+	public void setEspb(int espb) {
+		this.espb = espb;
+	}
+
+	public int getSemestar() {
+		return semestar;
+	}
+
+	public void setSemestar(int semestar) {
+		this.semestar = semestar;
+	}
+
+	public int getFondCasovaPredavanja() {
+		return fondCasovaPredavanja;
+	}
+
+	public void setFondCasovaPredavanja(int fondCasovaPredavanja) {
+		this.fondCasovaPredavanja = fondCasovaPredavanja;
+	}
+
+	public int getFondCasovaVezbi() {
+		return fondCasovaVezbi;
+	}
+
+	public void setFondCasovaVezbi(int fondCasovaVezbi) {
+		this.fondCasovaVezbi = fondCasovaVezbi;
+	}
+
+	public List<Nastavnik> getNastavnici() {
+		return nastavnici;
+	}
+
+	public void setNastavnici(List<Nastavnik> nastavnici) {
+		this.nastavnici = nastavnici;
+	}
 	
 	
 }

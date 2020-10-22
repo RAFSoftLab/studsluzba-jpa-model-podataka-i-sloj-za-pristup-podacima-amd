@@ -33,7 +33,7 @@ public class VisokaSkola implements Serializable{
 	}
 	
 	public VisokaSkola(String imeUstanove, String mestoUstanove, String smer) {
-		super();
+
 		this.imeUstanove = imeUstanove;
 		this.mestoUstanove = mestoUstanove;
 		this.smer = smer;

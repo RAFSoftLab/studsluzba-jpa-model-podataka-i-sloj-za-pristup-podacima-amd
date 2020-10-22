@@ -1,3 +1,4 @@
+
 package studsluzba.model;
 
 import java.io.Serializable;
@@ -8,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -16,9 +16,9 @@ import javax.persistence.OneToMany;
 @NamedQuery(name = "Nastavnik.findAll", query = "SELECT n FROM Nastavnik n")
 public class Nastavnik implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idNastavnik;
 
 	private String ime;
@@ -26,26 +26,23 @@ public class Nastavnik implements Serializable {
 	private String srednjeIme;
 	private String email;
 	private String obrazovanje;
-	
-	@ManyToMany
-	private List<Predmet> predmeti;
-	
+
 	@OneToMany(mappedBy = "idZvanje")
 	private List<Zvanje> zvanja;
 
+	public Nastavnik() {
+
+	}
+
 	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje,
-			ArrayList<Zvanje> zvanja) {
-		super();
+			List<Zvanje> zvanja) {
+
 		this.ime = ime;
 		this.prezime = prezime;
 		this.srednjeIme = srednjeIme;
 		this.email = email;
 		this.obrazovanje = obrazovanje;
 		this.zvanja = zvanja;
-	}
-	
-	public Nastavnik() {
-		
 	}
 
 	public String getIme() {
@@ -92,7 +89,7 @@ public class Nastavnik implements Serializable {
 		return zvanja;
 	}
 
-	public void setZvanja(ArrayList<Zvanje> zvanja) {
+	public void setZvanja(List<Zvanje> zvanja) {
 		this.zvanja = zvanja;
 	}
 

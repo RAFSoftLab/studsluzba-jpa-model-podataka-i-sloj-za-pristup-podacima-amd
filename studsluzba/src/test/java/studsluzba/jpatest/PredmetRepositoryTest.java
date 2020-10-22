@@ -1,6 +1,7 @@
-package jpatest;
+package studsluzba.jpatest;
 
 import java.awt.List;
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,16 +23,10 @@ public class PredmetRepositoryTest {
 	@Test
 	public void savePredmetTest() throws Exception {
 		
-		Studprogram sp = new Studprogram();
-		sp.setNaziv("Racunarkse Mreze");
-		sp.setPredmeti(null);
-		sp.setSkraceniNaziv("RM");
-		sp.setStudents(null);
-		
 		Predmet p = new Predmet();
 		p.setNaziv("Matematika");
 		p.setSifra("2020god");
-		p.setStudProgram(sp);
+		p.setStudProgram(null);
 		
 		predmetRepo.save(p);
 		

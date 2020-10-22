@@ -29,19 +29,24 @@ public class StudIndex implements Serializable{
 	
 	private Boolean aktivan;
 	
-	private String datumaktivnosti;
+	private java.util.Date datumaktivnosti;
+	
+	@ManyToOne
+	@JoinColumn(name="student_idstudent")
+	private Student student;
 	
 	public StudIndex() {
 		
 	}
 	
-	public StudIndex(int godinaUpisa, int broj, Studprogram studProgram, Boolean aktivan, String datumaktivnosti) {
-		super();
+	public StudIndex(int godinaUpisa, int broj, Studprogram studProgram, Boolean aktivan, java.util.Date datumaktivnosti, Student student) {
+
 		this.godinaUpisa = godinaUpisa;
 		this.broj = broj;
 		this.studProgram = studProgram;
 		this.aktivan = aktivan;
 		this.datumaktivnosti = datumaktivnosti;
+		this.student = student;
 	}
 
 	public int getIdIndex() {
@@ -84,12 +89,22 @@ public class StudIndex implements Serializable{
 		this.aktivan = aktivan;
 	}
 
-	public String getDatumaktivnosti() {
+	public java.util.Date getDatumaktivnosti() {
 		return datumaktivnosti;
 	}
 
-	public void setDatumaktivnosti(String datumaktivnosti) {
+	public void setDatumaktivnosti(java.util.Date datumaktivnosti) {
 		this.datumaktivnosti = datumaktivnosti;
 	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
+	
 
 }
