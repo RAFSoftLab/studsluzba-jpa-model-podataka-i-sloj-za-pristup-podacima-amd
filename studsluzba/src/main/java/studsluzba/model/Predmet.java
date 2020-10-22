@@ -15,12 +15,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+<<<<<<< HEAD
 @Table(name="predmet")
 public class Predmet implements Serializable {
 	
+=======
+@Table(name = "predmet")
+public class Predmet {
+
+>>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idPredmeta;	
+	private int idPredmeta;
 	private String sifra;
 	private String naziv;
 	private String opis;
@@ -28,14 +34,22 @@ public class Predmet implements Serializable {
 	private int semestar;
 	private int fondCasovaPredavanja;
 	private int fondCasovaVezbi;
-		
+
 	@ManyToOne
 	@JoinColumn(name = "idstudProgram")
 	private Studprogram studProgram;
+<<<<<<< HEAD
 	
 	@OneToMany(mappedBy = "idNastavnik")
+=======
+
+	@ManyToMany
+>>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 	private List<Nastavnik> nastavnici;
+<<<<<<< HEAD
 		
+=======
+>>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 
 	public Predmet() {
 	}
@@ -119,6 +133,5 @@ public class Predmet implements Serializable {
 	public void setNastavnici(List<Nastavnik> nastavnici) {
 		this.nastavnici = nastavnici;
 	}
-	
-	
+
 }

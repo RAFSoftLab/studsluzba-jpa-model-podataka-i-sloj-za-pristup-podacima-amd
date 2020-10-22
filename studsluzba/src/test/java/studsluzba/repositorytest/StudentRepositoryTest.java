@@ -13,18 +13,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import studsluzba.model.IzlazakNaIspit;
+import studsluzba.model.ObnovaGodine;
+import studsluzba.model.Predmet;
 import studsluzba.model.SrednjaSkola;
 import studsluzba.model.StudIndex;
 import studsluzba.model.Student;
 import studsluzba.model.Studprogram;
+import studsluzba.model.TokStudija;
+import studsluzba.model.UpisGodine;
 import studsluzba.model.VisokaSkola;
 import studsluzba.model.VrstaStudija;
 import studsluzba.model.prijavaIspita;
+import studsluzba.repositories.IzlazakNaIspitrepository;
+import studsluzba.repositories.ObnovaGodineRepository;
+import studsluzba.repositories.PredmetRepository;
 import studsluzba.repositories.PrijavaIspitarepository;
 import studsluzba.repositories.SrednjeSkoleRepository;
 import studsluzba.repositories.StudIndexRepository;
 import studsluzba.repositories.StudProgramRepository;
 import studsluzba.repositories.StudentRepository;
+import studsluzba.repositories.TokStudijaRepository;
+import studsluzba.repositories.UpisGodineRepository;
 import studsluzba.repositories.VisokaSkolaRepository;
 import studsluzba.repositories.VrstaStudijaRepository;
 
@@ -35,6 +45,9 @@ import studsluzba.repositories.VrstaStudijaRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StudentRepositoryTest {
+	
+	@Autowired 
+	PredmetRepository predmetRepo;
 	
 	@Autowired //spring pravi sam instancu repositorija -------------------------
 	StudentRepository studentRepo;
@@ -56,6 +69,19 @@ public class StudentRepositoryTest {
 	
 	@Autowired
 	PrijavaIspitarepository prijavaRepo;
+	
+	@Autowired
+	IzlazakNaIspitrepository izlazakRepo;
+	
+	@Autowired
+	ObnovaGodineRepository obnovaRepo;
+	
+	@Autowired
+	UpisGodineRepository upisRepo;
+	
+	@Autowired
+	TokStudijaRepository tokRepo;
+	
 	
 	@Test
 	public void saveStudentTest() throws ParseException {
@@ -86,13 +112,13 @@ public class StudentRepositoryTest {
 		vs.setSmer("Gluma");
 		visokaRepo.save(vs);
 		
-		Student s = new Student(2019, "David", "Nikolic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0, null);
+		Student s = new Student(2019, "David", "Nikolic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0);
 		s.setVisokaSkola(vs);
 		
-		Student s1 = new Student(2018, "David", "Lukic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0, null );
-		Student s2 = new Student(2018, "David", "Petrovic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0, null );
-		Student s3 = new Student(2018, "David", "Milic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0, null );
-		Student s4 = new Student(2018, "Aleksa", "Nikolic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0, null );
+		Student s1 = new Student(2018, "David", "Lukic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0);
+		Student s2 = new Student(2018, "David", "Petrovic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0);
+		Student s3 = new Student(2018, "David", "Milic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0);
+		Student s4 = new Student(2018, "Aleksa", "Nikolic", "Aleksa", "2602000790030", null,"Ivanjica", null, null, null, null, null, null, null, null, null, null, sk, 0);
 		
 		studentRepo.save(s);
 		studentRepo.save(s1);
@@ -140,6 +166,47 @@ public class StudentRepositoryTest {
 		prijavaRepo.save(pr1);
 		prijavaRepo.save(pr2);
 		prijavaRepo.save(pr3);
+		
+		IzlazakNaIspit in1 = new IzlazakNaIspit(91, "Polozio!", false, 10.0, true, s1, null);
+		IzlazakNaIspit in2 = new IzlazakNaIspit(31, "Pao!", false, 5.0, false, s3, null);
+		
+		izlazakRepo.save(in1);
+		izlazakRepo.save(in2);
+		
+		Predmet p4 = new Predmet();
+		p4.setNaziv("MA");
+		p4.setSifra("943");
+
+		Predmet p5 = new Predmet();
+		p5.setNaziv("UI");
+		p5.setSifra("684");
+		
+		predmetRepo.save(p4);
+		predmetRepo.save(p5);
+		
+		ObnovaGodine oGodine = new ObnovaGodine(3, p5, null, null);
+		ObnovaGodine oGodine1 = new ObnovaGodine(1, p4, null, null);
+		ObnovaGodine oGodine2 = new ObnovaGodine(1, p5, "Obnova zbog zbog", d);
+		
+		obnovaRepo.save(oGodine);
+		obnovaRepo.save(oGodine1);
+		obnovaRepo.save(oGodine2);
+		
+		UpisGodine uGodine = new UpisGodine(3, p5,"....",null);
+		UpisGodine uGodine1 = new UpisGodine(1, p4, null, d);
+		UpisGodine uGodine2 = new UpisGodine(1, p5, null, null);
+		
+		upisRepo.save(uGodine);
+		upisRepo.save(uGodine1);
+		upisRepo.save(uGodine2);
+		
+		TokStudija tStud = new TokStudija(s1, uGodine1, null, "Prvi put!", d);
+		TokStudija tStud2 = new TokStudija(s3, uGodine1, oGodine1, "Obnovljena godina zbog...", null);
+		TokStudija tStud3 = new TokStudija(s, uGodine, null,null,null);
+		
+		tokRepo.save(tStud);
+		tokRepo.save(tStud2);
+		tokRepo.save(tStud3);
 	}
 
 	@Test

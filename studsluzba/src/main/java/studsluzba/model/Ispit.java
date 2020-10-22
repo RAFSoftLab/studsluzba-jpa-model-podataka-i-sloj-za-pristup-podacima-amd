@@ -1,14 +1,17 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -37,6 +40,11 @@ public class Ispit implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idIspitniRok")
 	private IspitniRok ispitniRok;
+	
+	@OneToMany(mappedBy = "ispit")
+	private List<IzlazakNaIspit> izlazakNaIspit;
+	
+	
 
 	public Ispit(String datumOdrzavanja, String vremePocetka, Nastavnik nastavnik, Predmet predmet, boolean zakljucen) {
 
