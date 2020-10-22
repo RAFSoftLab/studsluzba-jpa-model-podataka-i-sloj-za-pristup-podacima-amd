@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
@@ -28,6 +29,9 @@ public class IspitniRok implements Serializable {
 	@OneToMany(mappedBy = "ispitniRok")
 	private List<Ispit> ispiti;
 
+	@ManyToOne
+	private SkolskaGodina skolskaGodina;
+	
 	public IspitniRok() {
 
 	}

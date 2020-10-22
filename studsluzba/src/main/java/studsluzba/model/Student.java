@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Any;
+
 
 /**
  * The persistent class for the student database table.
@@ -18,41 +20,23 @@ public class Student implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idstudent;
-
 	private int godinaUpisa;
-
 	private String ime;
-
 	private String prezime;
-	
 	private String srednjeIme;
-	
 	private String jmbg;
-	
 	private java.util.Date datumRodj;
-	
 	private String mestoRodj;
-	
 	private String drzavaRodj;
-	
 	private String drzavljanstvo;
-	
 	private String nacionalnost;
-	
 	private String pol;
-	
 	private String emFax;
-	
 	private String emPers;
-	
 	private String brLK;
-	
 	private String adresa;
-	
 	private String izdavacLk;
-	
 	private String brTel;
-	
 	private float ukupanUspeh;
 
 	@ManyToOne
@@ -65,6 +49,13 @@ public class Student implements Serializable {
 	
 	@OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
 	private List<StudIndex> indexs;
+	
+	@OneToMany(mappedBy = "idPredmeta")
+	private List<Predmet> predmeti;
+	
+	@ManyToOne
+	@JoinColumn(name = "idSkolskeGodine")
+	private SkolskaGodina skolskaGodina;
 
 	public Student() {
 	}
