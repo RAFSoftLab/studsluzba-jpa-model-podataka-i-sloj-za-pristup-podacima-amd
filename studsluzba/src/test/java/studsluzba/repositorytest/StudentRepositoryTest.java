@@ -19,6 +19,8 @@ import studsluzba.model.Student;
 import studsluzba.model.Studprogram;
 import studsluzba.model.VisokaSkola;
 import studsluzba.model.VrstaStudija;
+import studsluzba.model.prijavaIspita;
+import studsluzba.repositories.PrijavaIspitarepository;
 import studsluzba.repositories.SrednjeSkoleRepository;
 import studsluzba.repositories.StudIndexRepository;
 import studsluzba.repositories.StudProgramRepository;
@@ -36,10 +38,13 @@ public class StudentRepositoryTest {
 	
 	@Autowired //spring pravi sam instancu repositorija -------------------------
 	StudentRepository studentRepo;
+	
 	@Autowired
 	StudIndexRepository studIndex;
+	
 	@Autowired //spring pravi sam instancu repositorija -------------------------
 	VisokaSkolaRepository visokaRepo;
+	
 	@Autowired //spring pravi sam instancu repositorija -------------------------
 	SrednjeSkoleRepository srednjeRepo;
 
@@ -48,6 +53,9 @@ public class StudentRepositoryTest {
 	
 	@Autowired
 	StudProgramRepository studProgramRepo;
+	
+	@Autowired
+	PrijavaIspitarepository prijavaRepo;
 	
 	@Test
 	public void saveStudentTest() throws ParseException {
@@ -124,7 +132,14 @@ public class StudentRepositoryTest {
 	    studIndex.save(index);
 	    studIndex.save(index1);
 	    studIndex.save(index2);
-			
+	    
+	    prijavaIspita pr1 = new prijavaIspita(null, null, s1, true);
+	    prijavaIspita pr2 = new prijavaIspita(null, null, s2, false);
+	    prijavaIspita pr3 = new prijavaIspita(null, null, s, true);
+	    
+		prijavaRepo.save(pr1);
+		prijavaRepo.save(pr2);
+		prijavaRepo.save(pr3);
 	}
 
 	@Test
