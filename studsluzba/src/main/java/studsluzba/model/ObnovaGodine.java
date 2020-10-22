@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "obnovagodine")
 @NamedQuery(name = "ObnovaGodine.findAll", query = "SELECT og FROM ObnovaGodine og")
 public class ObnovaGodine implements Serializable {
 
@@ -26,9 +28,9 @@ public class ObnovaGodine implements Serializable {
 	@OneToMany(mappedBy = "obnovaGodine")
 	private List<TokStudija> tokStudija;
 
-	@ManyToOne
-	@JoinColumn(name = "idPonovljenogPredmeta")
-	private Predmet ponovljeniPredmeti;
+	@OneToMany
+	@JoinColumn(name = "idPredmeta")
+	private List<Predmet> ponovljeniPredmeti;
 
 	
 	private Date datum;
@@ -36,7 +38,7 @@ public class ObnovaGodine implements Serializable {
 	private String napomena;
 
 
-	public ObnovaGodine(int godina, Predmet ponovljeniPredmeti, String napomena, Date datum) {
+	public ObnovaGodine(int godina, List<Predmet> ponovljeniPredmeti, String napomena, Date datum) {
 
 		this.godina = godina;
 		this.ponovljeniPredmeti =  ponovljeniPredmeti;
@@ -52,11 +54,11 @@ public class ObnovaGodine implements Serializable {
 		this.godina = godina;
 	}
 
-	public Predmet getPonovljeniPredmeti() {
+	public List<Predmet> getPonovljeniPredmeti() {
 		return ponovljeniPredmeti;
 	}
 
-	public void setPonovljeniPredmeti(Predmet ponovljeniPredmeti) {
+	public void setPonovljeniPredmeti(List<Predmet> ponovljeniPredmeti) {
 		this.ponovljeniPredmeti = ponovljeniPredmeti;
 	}
 

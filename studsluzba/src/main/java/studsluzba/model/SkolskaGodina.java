@@ -25,14 +25,11 @@ public class SkolskaGodina implements Serializable {
 	private boolean aktivna;
 	private String godina;
 	
+	@OneToMany
+	private List<Nastavnik> nastavnici;
 	
-	@ManyToOne
-	@JoinColumn(name = "idNastavnik")
-	private Nastavnik nastavnik;
-	
-	@ManyToOne
-	@JoinColumn(name = "idPredmeta")
-	private Predmet predmet;
+	@OneToMany
+	private List<Predmet> predmeti;
 	
 	@OneToMany
 	private List<Student> studenti;
@@ -66,20 +63,20 @@ public class SkolskaGodina implements Serializable {
 		this.godina = godina;
 	}
 
-	public Nastavnik getNastavnik() {
-		return nastavnik;
+	public List<Nastavnik> getNastavnici() {
+		return nastavnici;
 	}
 
-	public void setNastavnik(Nastavnik nastavnik) {
-		this.nastavnik = nastavnik;
+	public void setNastavnici(List<Nastavnik> nastavnici) {
+		this.nastavnici = nastavnici;
 	}
 
-	public Predmet getPredmet() {
-		return predmet;
+	public List<Predmet> getPredmeti() {
+		return predmeti;
 	}
 
-	public void setPredmet(Predmet predmet) {
-		this.predmet = predmet;
+	public void setPredmeti(List<Predmet> predmeti) {
+		this.predmeti = predmeti;
 	}
 
 	public List<Student> getStudenti() {

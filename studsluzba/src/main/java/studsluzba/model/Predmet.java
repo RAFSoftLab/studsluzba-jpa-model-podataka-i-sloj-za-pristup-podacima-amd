@@ -35,6 +35,9 @@ public class Predmet implements Serializable {
 	
 	@ManyToMany(targetEntity = Nastavnik.class)
 	private List<Nastavnik> nastavnici;
+	
+	@ManyToOne
+	private ObnovaGodine og;
 
 	public Predmet() {
 	}

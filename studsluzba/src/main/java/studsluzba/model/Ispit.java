@@ -1,6 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class Ispit implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIspit;
 
-	private String datumOdrzavanja;
+	private Date datumOdrzavanja;
 	private String vremePocetka;
 	private String vremeZavrsetka;
 
@@ -46,7 +47,7 @@ public class Ispit implements Serializable {
 	
 	
 
-	public Ispit(String datumOdrzavanja, String vremePocetka, Nastavnik nastavnik, Predmet predmet, boolean zakljucen) {
+	public Ispit(Date datumOdrzavanja, String vremePocetka, Nastavnik nastavnik, Predmet predmet, boolean zakljucen) {
 
 		this.datumOdrzavanja = datumOdrzavanja;
 		this.vremePocetka = vremePocetka;
@@ -59,11 +60,11 @@ public class Ispit implements Serializable {
 		
 	}
 
-	public String getDatumOdrzavanja() {
+	public Date getDatumOdrzavanja() {
 		return datumOdrzavanja;
 	}
 
-	public void setDatumOdrzavanja(String datumOdrzavanja) {
+	public void setDatumOdrzavanja(Date datumOdrzavanja) {
 		this.datumOdrzavanja = datumOdrzavanja;
 	}
 

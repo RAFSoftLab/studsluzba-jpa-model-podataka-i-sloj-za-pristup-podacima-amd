@@ -3,6 +3,7 @@ package studsluzba.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,8 +24,8 @@ public class IspitniRok implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIspitniRok;
 
-	private String datumPocetka;
-	private String datumZavrsetka;
+	private Date datumPocetka;
+	private Date datumZavrsetka;
 
 	@OneToMany(mappedBy = "ispitniRok")
 	private List<Ispit> ispiti;
@@ -36,26 +37,26 @@ public class IspitniRok implements Serializable {
 
 	}
 
-	public IspitniRok(String datumPocetka, String datumZavrsetka, List<Ispit> ispiti) {
+	public IspitniRok(Date datumPocetka, Date datumZavrsetka, List<Ispit> ispiti) {
 		super();
 		this.datumPocetka = datumPocetka;
 		this.datumZavrsetka = datumZavrsetka;
 		this.ispiti = ispiti;
 	}
 
-	public String getDatumPocetka() {
+	public Date getDatumPocetka() {
 		return datumPocetka;
 	}
 
-	public void setDatumPocetka(String datumPocetka) {
+	public void setDatumPocetka(Date datumPocetka) {
 		this.datumPocetka = datumPocetka;
 	}
 
-	public String getDatumZavrsetka() {
+	public Date getDatumZavrsetka() {
 		return datumZavrsetka;
 	}
 
-	public void setDatumZavrsetka(String datumZavrsetka) {
+	public void setDatumZavrsetka(Date datumZavrsetka) {
 		this.datumZavrsetka = datumZavrsetka;
 	}
 
