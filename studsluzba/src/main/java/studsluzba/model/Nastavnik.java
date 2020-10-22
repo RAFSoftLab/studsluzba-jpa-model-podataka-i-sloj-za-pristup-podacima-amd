@@ -31,11 +31,14 @@ public class Nastavnik implements Serializable {
 	private String email;
 	private String obrazovanje;
 
-	@OneToMany(mappedBy = "idZvanje")
+	@OneToMany(mappedBy = "nastavnik")
 	private List<Zvanje> zvanja;
 	
-	@ManyToMany(targetEntity = Predmet.class)
-	private List<Predmet> predmeti;
+
+	
+	@OneToMany(mappedBy = "nastavnik")
+	private List<DrziPredmet> drziPredmet;
+	
 	
 	@ManyToOne
 	private SkolskaGodina skolskaGodina;
@@ -103,4 +106,13 @@ public class Nastavnik implements Serializable {
 		this.zvanja = zvanja;
 	}
 
+	public List<DrziPredmet> getDrziPredmet() {
+		return drziPredmet;
+	}
+
+	public void setDrziPredmet(List<DrziPredmet> drziPredmet) {
+		this.drziPredmet = drziPredmet;
+	}
+
+	
 }

@@ -28,9 +28,9 @@ public class ObnovaGodine implements Serializable {
 	@OneToMany(mappedBy = "obnovaGodine")
 	private List<TokStudija> tokStudija;
 
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name = "idPredmeta")
-	private List<Predmet> ponovljeniPredmeti;
+	private Predmet ponovljeniPredmeti;
 
 	
 	private Date datum;
@@ -38,7 +38,7 @@ public class ObnovaGodine implements Serializable {
 	private String napomena;
 
 
-	public ObnovaGodine(int godina, List<Predmet> ponovljeniPredmeti, String napomena, Date datum) {
+	public ObnovaGodine(int godina, Predmet ponovljeniPredmeti, String napomena, Date datum) {
 
 		this.godina = godina;
 		this.ponovljeniPredmeti =  ponovljeniPredmeti;
@@ -54,11 +54,11 @@ public class ObnovaGodine implements Serializable {
 		this.godina = godina;
 	}
 
-	public List<Predmet> getPonovljeniPredmeti() {
+	public Predmet getPonovljeniPredmeti() {
 		return ponovljeniPredmeti;
 	}
 
-	public void setPonovljeniPredmeti(List<Predmet> ponovljeniPredmeti) {
+	public void setPonovljeniPredmeti(Predmet ponovljeniPredmeti) {
 		this.ponovljeniPredmeti = ponovljeniPredmeti;
 	}
 

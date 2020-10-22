@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import studsluzba.model.DrziPredmet;
 import studsluzba.model.Ispit;
 import studsluzba.model.IspitniRok;
 import studsluzba.model.IzlazakNaIspit;
@@ -31,6 +32,7 @@ import studsluzba.model.VisokaSkola;
 import studsluzba.model.VrstaStudija;
 import studsluzba.model.Zvanje;
 import studsluzba.model.prijavaIspita;
+import studsluzba.repositories.DrziPredmetRepository;
 import studsluzba.repositories.IspitRepository;
 import studsluzba.repositories.IspitniRokRepository;
 import studsluzba.repositories.IzlazakNaIspitrepository;
@@ -88,6 +90,8 @@ public class RepositoryTest {
 	SkolskaGodinaRepository sgRepo;
 	@Autowired
 	ZvanjeRepository zvanjeRepo;
+	@Autowired
+	DrziPredmetRepository  drziPredmetRepo;
 	
 	
 	
@@ -167,13 +171,7 @@ public class RepositoryTest {
 	    studIndex.save(index1);
 	    studIndex.save(index2);
 	    
-	    prijavaIspita pr1 = new prijavaIspita(null, null, s1, true);
-	    prijavaIspita pr2 = new prijavaIspita(null, null, s2, false);
-	    prijavaIspita pr3 = new prijavaIspita(null, null, s, true);
 	    
-		prijavaRepo.save(pr1);
-		prijavaRepo.save(pr2);
-		prijavaRepo.save(pr3);
 		
 		IzlazakNaIspit in1 = new IzlazakNaIspit(91, "Polozio!", false, 10.0, true, s1, null);
 		IzlazakNaIspit in2 = new IzlazakNaIspit(31, "Pao!", false, 5.0, false, s3, null);
@@ -200,11 +198,7 @@ public class RepositoryTest {
 		n1.setSrednjeIme("Peki");
 		nasRepo.save(n1);
 		
-		IspitniRok ir = new IspitniRok();
-		ir.setDatumPocetka(new Date(2020,5,2));
-		ir.setDatumZavrsetka(new Date(2020,6,2));
 		
-	
 		
 
 		
@@ -212,7 +206,16 @@ public class RepositoryTest {
 		p4.setNaziv("MA");
 		p4.setSifra("943");
 		p4.setEspb(20);
+		p4.setStudProgram(sp1);
 		predmetRepo.save(p4);
+		
+		SkolskaGodina sg = new SkolskaGodina();
+		sg.setGodina("2020-2021");
+		sg.setAktivna(true);
+		sgRepo.save(sg);
+		
+		IspitniRok ir = new IspitniRok(new Date(2020,5,2),new Date(2020,6,2), null, sg);
+		isrokRepo.save(ir);
 		
 		Ispit ispit = new Ispit();
 		ispit.setDatumOdrzavanja(new Date(2020,5,5));
@@ -223,22 +226,16 @@ public class RepositoryTest {
 		ispit.setZakljucen(false);
 		ispit.setIspitniRok(ir);
 		
-		SkolskaGodina sg = new SkolskaGodina();
-		sg.setAktivna(true);
-		sg.setGodina("2020-2021");
-		List<Nastavnik> nastavnici = new ArrayList<Nastavnik>();
-		nastavnici.add(n1);
-		sg.setNastavnici(nastavnici);
-		List<Predmet> predmeti = new ArrayList<Predmet>();
-		predmeti.add(p4);
-		sg.setPredmeti(predmeti);
-		List<IspitniRok> rokovi = new ArrayList<IspitniRok>();
-		rokovi.add(ir);
-		sg.setRokovi(rokovi);
-		List<Student> studenti = new ArrayList<Student>();
-		studenti.add(s4);
-		sg.setStudenti(studenti);
-		sgRepo.save(sg);
+		ispitRepo.save(ispit);
+		
+		
+		prijavaIspita pr1 = new prijavaIspita(null, ispit, s1, true);
+	    prijavaIspita pr2 = new prijavaIspita(null, null, s2, false);
+	    prijavaIspita pr3 = new prijavaIspita(null, ispit, s, true);
+	    
+		prijavaRepo.save(pr1);
+		prijavaRepo.save(pr2);
+		prijavaRepo.save(pr3);
 		
 		UpisGodine uGodine = new UpisGodine(3, p4,"....",null);
 		UpisGodine uGodine1 = new UpisGodine(1, p4, null, d);
@@ -255,8 +252,9 @@ public class RepositoryTest {
 		tokRepo.save(tStud);
 		tokRepo.save(tStud3);
 
+
 		
-		ObnovaGodine oGodine = new ObnovaGodine(3, predmeti, "napomena neka", new Date(2020,6,7));
+		ObnovaGodine oGodine = new ObnovaGodine(3, p4, "napomena neka", new Date(2020,6,7));
 		List<TokStudija> tss = new ArrayList<TokStudija>();
 		tss.add(tStud);
 		oGodine.setTokStudija(tss);
@@ -264,7 +262,8 @@ public class RepositoryTest {
 
 		
 		
-		
+		DrziPredmet dPredmet = new DrziPredmet(sg, p4, n1, s1);
+		drziPredmetRepo.save(dPredmet);
 		
 		
 		

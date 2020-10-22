@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name = "Zvanje.findAll", query = "SELECT z FROM Zvanje z")
@@ -20,6 +23,10 @@ public class Zvanje implements Serializable {
 	private Date datumIzbora;
 	private String uzaNaucnaOblast;
 	private String naziv;
+	
+	@ManyToOne
+	@JoinColumn(name = "idZvanja")
+	private Nastavnik nastavnik;
 
 	public Zvanje() {
 

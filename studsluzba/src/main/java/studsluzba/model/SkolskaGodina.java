@@ -17,27 +17,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "skolskagodina")
 public class SkolskaGodina implements Serializable {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idSkolskeGodine;
-	
+
 	private boolean aktivna;
 	private String godina;
-	
-	@OneToMany
-	private List<Nastavnik> nastavnici;
-	
-	@OneToMany
-	private List<Predmet> predmeti;
-	
-	@OneToMany
-	private List<Student> studenti;
-	
-	@OneToMany
+
+	@OneToMany(mappedBy = "sg")
+	private List<DrziPredmet> drziPredmet;
+
+	@OneToMany(mappedBy = "skolskaGodina")
 	private List<IspitniRok> rokovi;
-	
-	public SkolskaGodina() {}
+
+	public SkolskaGodina() {
+
+	}
 
 	public int getIdSkolskeGodine() {
 		return idSkolskeGodine;
@@ -63,30 +59,6 @@ public class SkolskaGodina implements Serializable {
 		this.godina = godina;
 	}
 
-	public List<Nastavnik> getNastavnici() {
-		return nastavnici;
-	}
-
-	public void setNastavnici(List<Nastavnik> nastavnici) {
-		this.nastavnici = nastavnici;
-	}
-
-	public List<Predmet> getPredmeti() {
-		return predmeti;
-	}
-
-	public void setPredmeti(List<Predmet> predmeti) {
-		this.predmeti = predmeti;
-	}
-
-	public List<Student> getStudenti() {
-		return studenti;
-	}
-
-	public void setStudenti(List<Student> studenti) {
-		this.studenti = studenti;
-	}
-
 	public List<IspitniRok> getRokovi() {
 		return rokovi;
 	}
@@ -94,7 +66,14 @@ public class SkolskaGodina implements Serializable {
 	public void setRokovi(List<IspitniRok> rokovi) {
 		this.rokovi = rokovi;
 	}
-	
-	
+
+	public List<DrziPredmet> getDrziPredmet() {
+		return drziPredmet;
+	}
+
+	public void setDrziPredmet(List<DrziPredmet> drziPredmet) {
+		this.drziPredmet = drziPredmet;
+	}
+
 	
 }

@@ -28,16 +28,17 @@ public class Predmet implements Serializable {
 	private int semestar;
 	private int fondCasovaPredavanja;
 	private int fondCasovaVezbi;
+	
+	@OneToMany(mappedBy = "predmet")
+	private List<DrziPredmet> drziPredmet;
 
 	@ManyToOne
 	@JoinColumn(name = "idstudProgram")
 	private Studprogram studProgram;
+
 	
-	@ManyToMany(targetEntity = Nastavnik.class)
-	private List<Nastavnik> nastavnici;
-	
-	@ManyToOne
-	private ObnovaGodine og;
+	@OneToMany(mappedBy = "ponovljeniPredmeti")
+	private List<ObnovaGodine> og;
 
 	public Predmet() {
 	}
@@ -114,12 +115,15 @@ public class Predmet implements Serializable {
 		this.fondCasovaVezbi = fondCasovaVezbi;
 	}
 
-	public List<Nastavnik> getNastavnici() {
-		return nastavnici;
+	public List<DrziPredmet> getDrziPredmet() {
+		return drziPredmet;
 	}
 
-	public void setNastavnici(List<Nastavnik> nastavnici) {
-		this.nastavnici = nastavnici;
+	public void setDrziPredmet(List<DrziPredmet> drziPredmet) {
+		this.drziPredmet = drziPredmet;
 	}
+
+	
+
 
 }

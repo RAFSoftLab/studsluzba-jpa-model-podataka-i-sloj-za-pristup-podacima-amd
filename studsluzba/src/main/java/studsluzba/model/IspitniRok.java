@@ -31,17 +31,16 @@ public class IspitniRok implements Serializable {
 	private List<Ispit> ispiti;
 
 	@ManyToOne
+	@JoinColumn(name = "idSkolskeGodine")
 	private SkolskaGodina skolskaGodina;
 	
-	public IspitniRok() {
 
-	}
-
-	public IspitniRok(Date datumPocetka, Date datumZavrsetka, List<Ispit> ispiti) {
+	public IspitniRok(Date datumPocetka, Date datumZavrsetka, List<Ispit> ispiti, SkolskaGodina skolskaGodina) {
 		super();
 		this.datumPocetka = datumPocetka;
 		this.datumZavrsetka = datumZavrsetka;
 		this.ispiti = ispiti;
+		this.skolskaGodina = skolskaGodina;
 	}
 
 	public Date getDatumPocetka() {

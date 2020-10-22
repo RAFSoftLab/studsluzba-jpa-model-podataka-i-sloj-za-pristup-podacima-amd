@@ -56,12 +56,10 @@ public class Student implements Serializable {
 	@OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
 	private List<StudIndex> indexs;
 	
-	@OneToMany(mappedBy = "idPredmeta")
-	private List<Predmet> predmeti;
 	
-	@ManyToOne
-	@JoinColumn(name = "idSkolskeGodine")
-	private SkolskaGodina skolskaGodina;
+	@OneToMany(mappedBy = "student")
+	private List<DrziPredmet> drziPredmet;
+	
 
 	public Student() {
 	}
@@ -346,7 +344,8 @@ public class Student implements Serializable {
 		return "Student [idstudent=" + idstudent + ", godinaUpisa=" + godinaUpisa + ", ime=" + ime + ", prezime="
 				+ prezime;
 	}
-	
+
+
 	
 
 }
