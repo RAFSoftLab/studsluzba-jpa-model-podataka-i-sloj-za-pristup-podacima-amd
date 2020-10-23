@@ -20,11 +20,13 @@ import studsluzba.model.IspitniRok;
 import studsluzba.model.IzlazakNaIspit;
 import studsluzba.model.Nastavnik;
 import studsluzba.model.ObnovaGodine;
+import studsluzba.model.PredispitnaObaveza;
 import studsluzba.model.Predmet;
 import studsluzba.model.SkolskaGodina;
 import studsluzba.model.SrednjaSkola;
 import studsluzba.model.StudIndex;
 import studsluzba.model.Student;
+import studsluzba.model.StudentPredispitneObaveze;
 import studsluzba.model.Studprogram;
 import studsluzba.model.TokStudija;
 import studsluzba.model.UpisGodine;
@@ -38,12 +40,14 @@ import studsluzba.repositories.IspitniRokRepository;
 import studsluzba.repositories.IzlazakNaIspitrepository;
 import studsluzba.repositories.NastavnikRepository;
 import studsluzba.repositories.ObnovaGodineRepository;
+import studsluzba.repositories.PredispitnaObavezaRepository;
 import studsluzba.repositories.PredmetRepository;
 import studsluzba.repositories.PrijavaIspitarepository;
 import studsluzba.repositories.SkolskaGodinaRepository;
 import studsluzba.repositories.SrednjeSkoleRepository;
 import studsluzba.repositories.StudIndexRepository;
 import studsluzba.repositories.StudProgramRepository;
+import studsluzba.repositories.StudentPredispitneObavezeRepository;
 import studsluzba.repositories.StudentRepository;
 import studsluzba.repositories.TokStudijaRepository;
 import studsluzba.repositories.UpisGodineRepository;
@@ -92,6 +96,10 @@ public class RepositoryTest {
 	ZvanjeRepository zvanjeRepo;
 	@Autowired
 	DrziPredmetRepository  drziPredmetRepo;
+	@Autowired
+	StudentPredispitneObavezeRepository spoRepo;
+	@Autowired
+	PredispitnaObavezaRepository poRepo;
 	
 	
 	
@@ -199,9 +207,6 @@ public class RepositoryTest {
 		nasRepo.save(n1);
 		
 		
-		
-
-		
 		Predmet p4 = new Predmet();
 		p4.setNaziv("MA");
 		p4.setSifra("943");
@@ -265,10 +270,11 @@ public class RepositoryTest {
 		DrziPredmet dPredmet = new DrziPredmet(sg, p4, n1, s1);
 		drziPredmetRepo.save(dPredmet);
 		
+		PredispitnaObaveza po = new PredispitnaObaveza("Kolokvijum", 100);
+		poRepo.save(po);
 		
-		
-	
-		
+		StudentPredispitneObaveze spo = new StudentPredispitneObaveze(95, po, dPredmet);
+		spoRepo.save(spo);
 	}
 
 	@Test

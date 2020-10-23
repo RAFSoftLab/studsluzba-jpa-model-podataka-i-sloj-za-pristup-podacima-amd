@@ -56,7 +56,6 @@ public class Student implements Serializable {
 	@OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
 	private List<StudIndex> indexs;
 	
-	
 	@OneToMany(mappedBy = "student")
 	private List<DrziPredmet> drziPredmet;
 	
