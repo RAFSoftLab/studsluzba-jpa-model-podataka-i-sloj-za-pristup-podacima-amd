@@ -32,7 +32,7 @@ public class StudIndex implements Serializable{
 	private java.util.Date datumaktivnosti;
 	
 	@ManyToOne
-	@JoinColumn(name="student_idstudent")
+	@JoinColumn(name="idstudent")
 	private Student student;
 	
 	public StudIndex() {
