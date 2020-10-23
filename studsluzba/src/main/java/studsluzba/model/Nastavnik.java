@@ -40,8 +40,6 @@ public class Nastavnik implements Serializable {
 	private List<DrziPredmet> drziPredmet;
 	
 	
-	@ManyToOne
-	private SkolskaGodina skolskaGodina;
 
 	public Nastavnik() {
 
