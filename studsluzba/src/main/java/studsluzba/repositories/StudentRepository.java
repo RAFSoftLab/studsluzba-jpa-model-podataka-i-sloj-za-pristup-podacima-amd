@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import studsluzba.model.ObnovaGodine;
 import studsluzba.model.PolozenPredmet;
 import studsluzba.model.Student;
 import studsluzba.model.UpisGodine;
@@ -23,15 +24,14 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 
 	@Query("select s from Student s where (s.srednjaSkola.imeSkole like :srednjaSkola and s.srednjaSkola.mesto like :mesto)")
 	List<Student> selectAllStudFromHighSchool(String srednjaSkola, String mesto);
-/*
-	@Query("select ug from UpisGodine ug where tokStudija = (select ts fromS TokStudija ts where studIndex =  (select si from StudIndex si where "
-			+ "(:index = si.broj and " + ":studProgram like si.studProgram.skraceniNaziv and "
-			+ ":godina = si.godinaUpisa)))")
-	List<UpisGodine> selectAllEnrolledYearsForIndex(int index, String studProgram, int godina);
 
-	@Query("select po from PolozenPredmet po where po.studIndex = " + "(select si from StudIndex si where "
-			+ "(:index = si.broj and " + ":studProgram like si.studProgram.skraceniNaziv and "
-			+ ":godina = si.godinaUpisa))")
+	@Query("select ug from UpisGodine ug where ug.tokStudija.studIndex.broj = :index and ug.tokStudija.studIndex.studProgram.skraceniNaziv like :studProgram and ug.tokStudija.studIndex.godinaUpisa = :godina")
+	List<UpisGodine> selectAllEnrolledYearsForIndex(int index, String studProgram, int godina);
+	
+	@Query("select og from ObnovaGodine og where og.tokStudija.studIndex.broj = :index and og.tokStudija.studIndex.studProgram.skraceniNaziv like :studProgram and og.tokStudija.studIndex.godinaUpisa = :godina")
+	List<ObnovaGodine> selectAllRenewYearsForIndex(int index, String studProgram, int godina);
+
+	@Query("select po from PolozenPredmet po where po.studIndex.broj = :index and po.studIndex.studProgram.skraceniNaziv like :studProgram and po.studIndex.godinaUpisa = :godina ")
 	List<PolozenPredmet> selectAllPassedSub(int index, String studProgram, int godina);
-*/
+
 }

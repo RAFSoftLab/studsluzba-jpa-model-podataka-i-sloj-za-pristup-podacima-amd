@@ -302,7 +302,49 @@ public class RepositoryTest {
 
 		StudentPredispitneObaveze spo = new StudentPredispitneObaveze(95, po, dPredmet);
 		spoRepo.save(spo);
+		
+		
+		System.out.println("-------------");
+		String studProg = "RN";
+		System.out.println("Svi predmeti na studentskom programu " + studProg + ": ");
 
+		List<Predmet> predmeti = studProgramRepo.selectSubOnSubProg(studProg);
+		for (Predmet p : predmeti) {
+			System.out.println(p.toString());
+		}
+
+		System.out.println("-------------");
+		
+
+		System.out.println("-------------");
+
+		int brIndex = 94;
+		String program = "RN";
+		int godina = 2019;
+
+		System.out.println("Sve upisane godine za studenta sa brojem indeksa " + brIndex + ": ");
+		List<UpisGodine> upisane = studentRepo.selectAllEnrolledYearsForIndex(brIndex, program, godina);
+		for (UpisGodine u : upisane) {
+			System.out.println(u.toString());
+		}
+
+		System.out.println("-------------");
+		
+		System.out.println("-------------");
+
+		int brIndex1 = 93;
+		String program1 = "RN";
+		int godina1 = 2019;
+
+		System.out.println("Sve obnovljene godine za studenta sa brojem indeksa " + brIndex + ": ");
+		List<ObnovaGodine> obnovljene = studentRepo.selectAllRenewYearsForIndex(brIndex1, program1, godina1);
+		for (ObnovaGodine o : obnovljene) {
+			System.out.println(o.toString());
+		}
+
+		System.out.println("-------------");
+	
+		
 	}
 
 	@Test
@@ -338,21 +380,8 @@ public class RepositoryTest {
 		System.out.println("-------------");
 	}
 
-	@Test
-	public void selectSubonSubProgTest() {
 
-		System.out.println("-------------");
-		String studProg = "Racunarske nauke";
-		System.out.println("Svi predmeti na studentskom programu " + studProg + ": ");
 
-		List<Predmet> predmeti = studProgramRepo.selectSubOnSubProg(studProg);
-		for (Predmet p : predmeti) {
-			System.out.println(p.toString());
-		}
-
-		System.out.println("-------------");
-	}
-/*
 	@Test
 	public void selectAllPassedSubTest() {
 
@@ -368,7 +397,7 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
-*/
+
 	@Test
 	public void selectAllStudFromHighSchoolTest() {
 		System.out.println("-------------");
@@ -382,22 +411,5 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
-/*
-	@Test
-	public void selectAllEnrolledYearsForIndexTest() {
-		System.out.println("-------------");
 
-		int brIndex = 94;
-		String program = "RN";
-		int godina = 2019;
-
-		System.out.println("Sve upisane godine za studenta sa brojem indeksa " + brIndex + ": ");
-		List<UpisGodine> upisane = studentRepo.selectAllEnrolledYearsForIndex(brIndex, program, godina);
-		for (UpisGodine u : upisane) {
-			System.out.println(u.toString());
-		}
-
-		System.out.println("-------------");
-	}
-*/
 }

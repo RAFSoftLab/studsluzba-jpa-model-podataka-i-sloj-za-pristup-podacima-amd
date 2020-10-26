@@ -10,8 +10,7 @@ import studsluzba.model.Studprogram;
 
 public interface StudProgramRepository extends CrudRepository<Studprogram, Integer>{
 	
-	@Query("select p from Predmet p where p.studProgram = (select s from Studprogram s where "
-			+ "(:nazivStudPrograma like s.naziv))")
+	@Query("select p from Predmet p where p.studProgram.skraceniNaziv like :nazivStudPrograma")
 	List<Predmet> selectSubOnSubProg(String nazivStudPrograma);
 	
 }

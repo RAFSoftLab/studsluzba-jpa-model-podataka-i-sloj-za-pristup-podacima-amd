@@ -39,6 +39,9 @@ public class ObnovaGodine implements Serializable {
 	
 	private String napomena;
 
+	public ObnovaGodine() {
+		
+	}
 
 	public ObnovaGodine(int godina, Predmet ponovljeniPredmeti, String napomena, Date datum, TokStudija tokStudija) {
 
@@ -97,6 +100,11 @@ public class ObnovaGodine implements Serializable {
 
 	public void setNapomena(String napomena) {
 		this.napomena = napomena;
+	}
+
+	@Override
+	public String toString() {
+		return "ObnovaGodine [idObnovaGodine=" + idObnovaGodine + ", godina=" + godina + ", datum=" + datum + ", napomena=" + napomena + "]";
 	}
 	
 	
