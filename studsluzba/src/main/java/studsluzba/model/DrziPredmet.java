@@ -38,6 +38,11 @@ public class DrziPredmet {
 	@OneToMany(mappedBy = "drziPredmet")
 	private List<StudentPredispitneObaveze> spo;
 	
+
+	public DrziPredmet() {
+		
+	}
+	
 	public DrziPredmet( SkolskaGodina sg, Predmet predmet,  Nastavnik nastavnik, Student student) {
 		this.nastavnik = nastavnik;
 		this.predmet = predmet;

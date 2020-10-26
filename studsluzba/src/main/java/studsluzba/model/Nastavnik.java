@@ -33,11 +33,13 @@ public class Nastavnik implements Serializable {
 
 	@OneToMany(mappedBy = "nastavnik")
 	private List<Zvanje> zvanja;
-	
 
-	
 	@OneToMany(mappedBy = "nastavnik")
 	private List<DrziPredmet> drziPredmet;
+
+
+	@ManyToOne
+	private SkolskaGodina skolskaGodina;
 
 
 	public Nastavnik() {
@@ -111,5 +113,11 @@ public class Nastavnik implements Serializable {
 		this.drziPredmet = drziPredmet;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Nastavnik [ime=" + ime + ", prezime=" + prezime + ", srednjeIme=" + srednjeIme + ", email=" + email
+				+ ", obrazovanje=" + obrazovanje + ", zvanja=" + zvanja + ", drziPredmet=" + drziPredmet
+				+ ", skolskaGodina=" + skolskaGodina + "]";
+	}
+
 }

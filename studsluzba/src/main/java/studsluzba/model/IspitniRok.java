@@ -33,7 +33,10 @@ public class IspitniRok implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idSkolskeGodine")
 	private SkolskaGodina skolskaGodina;
-	
+
+	public IspitniRok() {
+
+	}
 
 	public IspitniRok(Date datumPocetka, Date datumZavrsetka, List<Ispit> ispiti, SkolskaGodina skolskaGodina) {
 		super();
@@ -65,6 +68,12 @@ public class IspitniRok implements Serializable {
 
 	public void setIspiti(List<Ispit> ispiti) {
 		this.ispiti = ispiti;
+	}
+
+	@Override
+	public String toString() {
+		return "IspitniRok [datumPocetka=" + datumPocetka + ", datumZavrsetka=" + datumZavrsetka + ", ispiti=" + ispiti
+				+ ", skolskaGodina=" + skolskaGodina + "]";
 	}
 
 }

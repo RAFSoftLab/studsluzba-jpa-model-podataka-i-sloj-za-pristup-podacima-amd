@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -29,8 +31,9 @@ public class UpisGodine implements Serializable {
 	private Predmet prenetiPredmeti;
 
 	
-	@OneToMany(mappedBy = "upisGodine")
-	private List<TokStudija> tokStudija;
+	@ManyToOne
+	@JoinColumn(name = "tokStudija")
+	private TokStudija tokStudija;
 	
 	private Date datum;
 	
@@ -40,12 +43,13 @@ public class UpisGodine implements Serializable {
 
 	}
 
-	public UpisGodine(int godina, Predmet p5, String napomena, Date datum) {
+	public UpisGodine(int godina, Predmet p5, String napomena, Date datum, TokStudija tokStudija) {
 
 		this.godina = godina;
 		this.prenetiPredmeti =  p5;
 		this.datum = datum;
 		this.napomena = napomena;
+		this.tokStudija = tokStudija;
 	}
 
 	public int getGodina() {
@@ -63,5 +67,20 @@ public class UpisGodine implements Serializable {
 	public void setPrenetiPredmeti(Predmet prenetiPredmeti) {
 		this.prenetiPredmeti = prenetiPredmeti;
 	}
+
+	@Override
+	public String toString() {
+		return "UpisGodine [godina=" + godina + ", datum=" + datum + ", napomena=" + napomena + "]";
+	}
+
+	public TokStudija getTokStudija() {
+		return tokStudija;
+	}
+
+	public void setTokStudija(TokStudija tokStudija) {
+		this.tokStudija = tokStudija;
+	}
+	
+	
 
 }

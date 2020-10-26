@@ -1,6 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name = "IzlazakNaIspit.findAll", query = "SELECT i FROM IzlazakNaIspit i")
@@ -17,41 +19,40 @@ public class IzlazakNaIspit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIzlazakNaIspit;
-	
-	private int brPoena;
-	
+
+	private double brPoena;
+
 	private String napomena;
-	
+
 	private boolean ponistava;
-	
-	private double ocena;
-	
+
+	private int ocena;
+
 	private boolean polozen;
-	
-	private boolean priznatVS;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "idStudent")
-	private Student student;
-	
+	@JoinColumn(name = "idStudIndex")
+	private StudIndex studIndex;
+
 	@ManyToOne
 	@JoinColumn(name = "idIspit")
 	private Ispit ispit;
-	
+
 	public IzlazakNaIspit() {
-		
+
 	}
-	
-	public IzlazakNaIspit(int brPoena, String napomena, boolean ponistava, double ocena, boolean polozen, Student student, Ispit ispit) {
-		
+
+	public IzlazakNaIspit(double brPoena, String napomena, boolean ponistava,boolean polozen, int ocena, 
+			StudIndex studIndex, Ispit ispit) {
+
 		this.brPoena = brPoena;
 		this.napomena = napomena;
 		this.ponistava = ponistava;
 		this.ocena = ocena;
-		this.polozen = polozen;
-		this.student = student;
+		this.studIndex = studIndex;
 		this.ispit = ispit;
-		
+		this.polozen = polozen;
+
 	}
 
 	public int getIdIzlazakNaIspit() {
@@ -62,11 +63,11 @@ public class IzlazakNaIspit implements Serializable {
 		this.idIzlazakNaIspit = idIzlazakNaIspit;
 	}
 
-	public int getBrPoena() {
+	public double getBrPoena() {
 		return brPoena;
 	}
 
-	public void setBrPoena(int brPoena) {
+	public void setBrPoena(double brPoena) {
 		this.brPoena = brPoena;
 	}
 
@@ -86,11 +87,11 @@ public class IzlazakNaIspit implements Serializable {
 		this.ponistava = ponistava;
 	}
 
-	public double getOcena() {
+	public int getOcena() {
 		return ocena;
 	}
 
-	public void setOcena(double ocena) {
+	public void setOcena(int ocena) {
 		this.ocena = ocena;
 	}
 
@@ -102,20 +103,12 @@ public class IzlazakNaIspit implements Serializable {
 		this.polozen = polozen;
 	}
 
-	public boolean isPriznatVS() {
-		return priznatVS;
+	public StudIndex getStudIndex() {
+		return studIndex;
 	}
 
-	public void setPriznatVS(boolean priznatVS) {
-		this.priznatVS = priznatVS;
-	}
-
-	public Student getStudent() {
-		return student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setStudIndex(StudIndex studIndex) {
+		this.studIndex = studIndex;
 	}
 
 	public Ispit getIspit() {
@@ -125,7 +118,6 @@ public class IzlazakNaIspit implements Serializable {
 	public void setIspit(Ispit ispit) {
 		this.ispit = ispit;
 	}
-	
-	
+		
 	
 }

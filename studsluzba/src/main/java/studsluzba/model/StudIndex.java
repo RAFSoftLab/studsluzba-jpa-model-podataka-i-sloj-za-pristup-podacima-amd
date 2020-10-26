@@ -1,18 +1,21 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-@NamedQuery(name="StudIndex.findAll", query="SELECT s FROM StudIndex s")
+@NamedQuery(name="StudIndex.findAll", query="SELECT si FROM StudIndex si")
 public class StudIndex implements Serializable{
 
 	@Id
@@ -34,6 +37,21 @@ public class StudIndex implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="idstudent")
 	private Student student;
+	
+	@OneToMany(mappedBy = "studIndex")
+	private List<PolozenPredmet> polozenPredmet;
+	
+	@OneToMany(mappedBy = "studIndex")
+	private List<TokStudija> tokStudija;
+	
+	@OneToMany(mappedBy = "studIndex")
+	private List<IzlazakNaIspit> izlazakNaIspit;
+	
+	@OneToMany(mappedBy = "student")
+	private List<PrijavaIspita> prijavaIspita;
+	
+	@OneToMany(mappedBy = "studIndex")
+	private List<PriznatPredmet> priznatiPredmeti;
 	
 	public StudIndex() {
 		
@@ -103,6 +121,46 @@ public class StudIndex implements Serializable{
 
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	
+	
+
+	public List<TokStudija> getTokStudija() {
+		return tokStudija;
+	}
+
+	public void setTokStudija(List<TokStudija> tokStudija) {
+		this.tokStudija = tokStudija;
+	}
+
+	@Override
+	public String toString() {
+		return "StudIndex [godinaUpisa=" + godinaUpisa + ", broj=" + broj + ", studProgram=" + studProgram
+				+ ", aktivan=" + aktivan + ", datumaktivnosti=" + datumaktivnosti + ", student=" + student + "]";
+	}
+
+	public List<IzlazakNaIspit> getIzlazakNaIspit() {
+		return izlazakNaIspit;
+	}
+
+	public void setIzlazakNaIspit(List<IzlazakNaIspit> izlazakNaIspit) {
+		this.izlazakNaIspit = izlazakNaIspit;
+	}
+
+	public List<PrijavaIspita> getPrijavaIspita() {
+		return prijavaIspita;
+	}
+
+	public void setPrijavaIspita(List<PrijavaIspita> prijavaIspita) {
+		this.prijavaIspita = prijavaIspita;
+	}
+
+	public List<PriznatPredmet> getPriznatiPredmeti() {
+		return priznatiPredmeti;
+	}
+
+	public void setPriznatiPredmeti(List<PriznatPredmet> priznatiPredmeti) {
+		this.priznatiPredmeti = priznatiPredmeti;
 	}
 	
 	
