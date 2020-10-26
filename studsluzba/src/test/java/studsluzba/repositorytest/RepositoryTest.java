@@ -18,7 +18,9 @@ import studsluzba.model.IspitniRok;
 import studsluzba.model.IzlazakNaIspit;
 import studsluzba.model.Nastavnik;
 import studsluzba.model.ObnovaGodine;
+
 import studsluzba.model.PolozenPredmet;
+
 import studsluzba.model.PredispitnaObaveza;
 import studsluzba.model.Predmet;
 import studsluzba.model.PrijavaIspita;
@@ -236,8 +238,8 @@ public class RepositoryTest {
 		p7.setStudProgram(sp1);
 		predmetRepo.save(p7);
 
-		PolozenPredmet pp1 = new PolozenPredmet(index1, p6, 8,true);
-		PolozenPredmet pp2 = new PolozenPredmet(index1, p7, 7,true);
+		PolozenPredmet pp1 = new PolozenPredmet(index1, p6, 8, true);
+		PolozenPredmet pp2 = new PolozenPredmet(index1, p7, 7, true);
 
 		polozenPredmetRepo.save(pp1);
 		polozenPredmetRepo.save(pp2);
@@ -300,8 +302,7 @@ public class RepositoryTest {
 
 		StudentPredispitneObaveze spo = new StudentPredispitneObaveze(95, po, dPredmet);
 		spoRepo.save(spo);
-		
-		
+
 	}
 
 	@Test
@@ -330,8 +331,8 @@ public class RepositoryTest {
 		int brIndex = 94;
 		String program = "RN";
 		int godina = 2019;
-		
-		Student studentPoIndeksu = studentRepo.findStudentbyIndex(brIndex,program,godina);
+
+		Student studentPoIndeksu = studentRepo.findStudentbyIndex(brIndex, program, godina);
 		System.out.println("Informacije o studentu sa brojem indeksa " + brIndex + ": ");
 		System.out.println(studentPoIndeksu.toString());
 		System.out.println("-------------");
@@ -343,7 +344,7 @@ public class RepositoryTest {
 		System.out.println("-------------");
 		String studProg = "Racunarske nauke";
 		System.out.println("Svi predmeti na studentskom programu " + studProg + ": ");
-	
+
 		List<Predmet> predmeti = studProgramRepo.selectSubOnSubProg(studProg);
 		for (Predmet p : predmeti) {
 			System.out.println(p.toString());
@@ -351,7 +352,7 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
-
+/*
 	@Test
 	public void selectAllPassedSubTest() {
 
@@ -360,14 +361,14 @@ public class RepositoryTest {
 		String program = "RN";
 		int godina = 2019;
 		System.out.println("Svi polozeni predmeti za studenta s brojem indeksa " + brIndex + ": ");
-		List<PolozenPredmet> polozeiPredmeti = studentRepo.selectAllPassedSub(brIndex,program,godina);
-		for (PolozenPredmet pp: polozeiPredmeti) {
+		List<PolozenPredmet> polozeiPredmeti = studentRepo.selectAllPassedSub(brIndex, program, godina);
+		for (PolozenPredmet pp : polozeiPredmeti) {
 			System.out.println(pp.toString());
 		}
 
 		System.out.println("-------------");
 	}
-
+*/
 	@Test
 	public void selectAllStudFromHighSchoolTest() {
 		System.out.println("-------------");
@@ -381,7 +382,7 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
-
+/*
 	@Test
 	public void selectAllEnrolledYearsForIndexTest() {
 		System.out.println("-------------");
@@ -389,7 +390,7 @@ public class RepositoryTest {
 		int brIndex = 94;
 		String program = "RN";
 		int godina = 2019;
-		
+
 		System.out.println("Sve upisane godine za studenta sa brojem indeksa " + brIndex + ": ");
 		List<UpisGodine> upisane = studentRepo.selectAllEnrolledYearsForIndex(brIndex, program, godina);
 		for (UpisGodine u : upisane) {
@@ -398,5 +399,5 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
-
+*/
 }

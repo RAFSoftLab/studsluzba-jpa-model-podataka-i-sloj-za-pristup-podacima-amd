@@ -38,6 +38,7 @@ public class DrziPredmet {
 	@OneToMany(mappedBy = "drziPredmet")
 	private List<StudentPredispitneObaveze> spo;
 	
+
 	public DrziPredmet() {
 		
 	}

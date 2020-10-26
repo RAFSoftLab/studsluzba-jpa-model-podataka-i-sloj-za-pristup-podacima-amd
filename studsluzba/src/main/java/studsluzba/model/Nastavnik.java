@@ -37,8 +37,10 @@ public class Nastavnik implements Serializable {
 	@OneToMany(mappedBy = "nastavnik")
 	private List<DrziPredmet> drziPredmet;
 
+
 	@ManyToOne
 	private SkolskaGodina skolskaGodina;
+
 
 	public Nastavnik() {
 

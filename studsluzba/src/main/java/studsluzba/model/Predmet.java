@@ -42,11 +42,13 @@ public class Predmet implements Serializable {
 	@OneToMany(mappedBy = "ponovljeniPredmeti")
 	private List<ObnovaGodine> og;
 	
+
 	@OneToMany(mappedBy = "predmet")
 	private List<PriznatPredmet> priznatPredmet;
 	
 	@OneToMany(mappedBy = "predmet")
 	private List<PolozenPredmet> polozenPredmet;
+
 
 	public Predmet() {
 	}

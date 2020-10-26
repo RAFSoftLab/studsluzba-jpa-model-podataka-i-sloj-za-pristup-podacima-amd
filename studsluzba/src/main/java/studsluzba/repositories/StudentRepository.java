@@ -23,7 +23,7 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 
 	@Query("select s from Student s where (s.srednjaSkola.imeSkole like :srednjaSkola and s.srednjaSkola.mesto like :mesto)")
 	List<Student> selectAllStudFromHighSchool(String srednjaSkola, String mesto);
-
+/*
 	@Query("select ug from UpisGodine ug where tokStudija = (select ts fromS TokStudija ts where studIndex =  (select si from StudIndex si where "
 			+ "(:index = si.broj and " + ":studProgram like si.studProgram.skraceniNaziv and "
 			+ ":godina = si.godinaUpisa)))")
@@ -33,5 +33,5 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 			+ "(:index = si.broj and " + ":studProgram like si.studProgram.skraceniNaziv and "
 			+ ":godina = si.godinaUpisa))")
 	List<PolozenPredmet> selectAllPassedSub(int index, String studProgram, int godina);
-
+*/
 }
