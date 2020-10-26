@@ -36,10 +36,7 @@ import studsluzba.model.UpisGodine;
 import studsluzba.model.VisokaSkola;
 import studsluzba.model.VrstaStudija;
 import studsluzba.model.Zvanje;
-<<<<<<< HEAD
 import studsluzba.model.PrijavaIspita;
-=======
->>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 import studsluzba.repositories.DrziPredmetRepository;
 import studsluzba.repositories.IspitRepository;
 import studsluzba.repositories.IspitniRokRepository;
@@ -272,20 +269,11 @@ public class RepositoryTest {
 		ispit.setIspitniRok(ir);
 
 		ispitRepo.save(ispit);
-<<<<<<< HEAD
 		
-		
-		PrijavaIspita pr1 = new PrijavaIspita(null, ispit, s1, true);
-	    PrijavaIspita pr2 = new PrijavaIspita(null, null, s2, false);
-	    PrijavaIspita pr3 = new PrijavaIspita(null, ispit, s, true);
-	    
-=======
-
 		PrijavaIspita pr1 = new PrijavaIspita(null, ispit, index1, true);
 		PrijavaIspita pr2 = new PrijavaIspita(null, null, index2, false);
 		PrijavaIspita pr3 = new PrijavaIspita(null, ispit, index, true);
 
->>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 		prijavaRepo.save(pr1);
 		prijavaRepo.save(pr2);
 		prijavaRepo.save(pr3);
@@ -378,7 +366,6 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
-<<<<<<< HEAD
 	
 	@Test
 	public void findPrijavljeniTest() {
@@ -389,7 +376,6 @@ public class RepositoryTest {
 		}
 	}
 	
-=======
 
 	@Test
 	public void findStudentByIndexTest() {
@@ -436,6 +422,4 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
-
->>>>>>> branch 'master' of https://github.com/RAFSoftLab/studsluzba-jpa-model-podataka-i-sloj-za-pristup-podacima-amd
 }
