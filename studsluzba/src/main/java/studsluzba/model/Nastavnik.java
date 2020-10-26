@@ -111,4 +111,11 @@ public class Nastavnik implements Serializable {
 		this.drziPredmet = drziPredmet;
 	}
 
+	@Override
+	public String toString() {
+		return "Nastavnik [ime=" + ime + ", prezime=" + prezime + ", srednjeIme=" + srednjeIme + ", email=" + email
+				+ ", obrazovanje=" + obrazovanje + ", zvanja=" + zvanja + ", drziPredmet=" + drziPredmet
+				+ ", skolskaGodina=" + skolskaGodina + "]";
+	}
+
 }

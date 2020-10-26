@@ -14,35 +14,34 @@ import javax.persistence.OneToOne;
 import javax.xml.crypto.Data;
 
 @Entity
-@NamedQuery(name = "pijavaIpita.findAll", query = "SELECT p FROM prijavaIspita p")
-public class prijavaIspita {
+@NamedQuery(name = "PrijavaIspita.findAll", query = "SELECT p FROM PrijavaIspita p")
+public class PrijavaIspita {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPrijavaIpita;
 	private Date datumPrijave;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idIspit")
 	private Ispit ispit;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "idStudenta")
-	private Student student;
-	
+	@JoinColumn(name = "idStudIndex")
+	private StudIndex student;
+
 	private boolean izlazak;
-	
-	public prijavaIspita() {
-		
+
+	public PrijavaIspita() {
+
 	}
-	
-	public prijavaIspita(Date datumPrijave, Ispit ispit, Student prijavljuje_student, boolean izlazak) {
+
+	public PrijavaIspita(Date datumPrijave, Ispit ispit, StudIndex prijavljuje_student, boolean izlazak) {
 		this.datumPrijave = datumPrijave;
 		this.ispit = ispit;
 		this.student = prijavljuje_student;
 		this.izlazak = izlazak;
-		
+
 	}
 
 	public int getIdPrijavaIpita() {
@@ -69,11 +68,11 @@ public class prijavaIspita {
 		this.ispit = ispit;
 	}
 
-	public Student getStudent() {
+	public StudIndex getStudent() {
 		return student;
 	}
 
-	public void setStudent(Student student) {
+	public void setStudent(StudIndex student) {
 		this.student = student;
 	}
 
@@ -84,6 +83,5 @@ public class prijavaIspita {
 	public void setIzlazak(boolean izlazak) {
 		this.izlazak = izlazak;
 	}
-	
-	
+
 }

@@ -1,5 +1,7 @@
 package studsluzba.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name="DrziPredmet.findAll", query="SELECT d FROM DrziPredmet d")
@@ -31,6 +34,13 @@ public class DrziPredmet {
 	@ManyToOne
 	@JoinColumn(name = "idStudent")
 	private Student student;
+	
+	@OneToMany(mappedBy = "drziPredmet")
+	private List<StudentPredispitneObaveze> spo;
+	
+	public DrziPredmet() {
+		
+	}
 	
 	public DrziPredmet( SkolskaGodina sg, Predmet predmet,  Nastavnik nastavnik, Student student) {
 		this.nastavnik = nastavnik;

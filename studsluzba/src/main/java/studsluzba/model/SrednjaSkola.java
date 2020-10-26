@@ -6,32 +6,31 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name="SrednjaSkola.findAll", query="SELECT s FROM SrednjaSkola s")
-public class SrednjaSkola implements Serializable{
+@NamedQuery(name = "SrednjaSkola.findAll", query = "SELECT s FROM SrednjaSkola s")
+public class SrednjaSkola implements Serializable {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idSkole;
-	
+
 	private String imeSkole;
-	
+
 	private String mesto;
-	
+
 	private String vrsta;
-	
-	@OneToMany(mappedBy = "srednjaSkola")
+
+	@OneToMany(mappedBy = "srednjaSkola", fetch = FetchType.EAGER)
 	private List<Student> students;
-	
+
 	public SrednjaSkola() {
-		
+
 	}
-	
+
 	public SrednjaSkola(String imeSkole, String mesto, String vrsta) {
 
-			this.imeSkole = imeSkole;
-			this.mesto = mesto;
-			this.vrsta = vrsta;
+		this.imeSkole = imeSkole;
+		this.mesto = mesto;
+		this.vrsta = vrsta;
 	}
 
 	public int getIdSkole() {
@@ -73,7 +72,7 @@ public class SrednjaSkola implements Serializable{
 	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
-	
+
 	public Student addStudent(Student student) {
 		getStudents().add(student);
 		student.setSrednjaSkola(this);
@@ -87,5 +86,10 @@ public class SrednjaSkola implements Serializable{
 
 		return student;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "SrednjaSkola [imeSkole=" + imeSkole + ", mesto=" + mesto + "]";
+	}
+
 }

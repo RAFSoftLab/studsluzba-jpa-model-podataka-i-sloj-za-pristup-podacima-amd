@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,11 +42,9 @@ public class Ispit implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idIspitniRok")
 	private IspitniRok ispitniRok;
-	
+
 	@OneToMany(mappedBy = "ispit")
 	private List<IzlazakNaIspit> izlazakNaIspit;
-	
-	
 
 	public Ispit(Date datumOdrzavanja, String vremePocetka, Nastavnik nastavnik, Predmet predmet, boolean zakljucen) {
 
@@ -55,9 +54,9 @@ public class Ispit implements Serializable {
 		this.nastavnik = nastavnik;
 		this.zakljucen = zakljucen;
 	}
-	
+
 	public Ispit() {
-		
+
 	}
 
 	public Date getDatumOdrzavanja() {
@@ -123,5 +122,13 @@ public class Ispit implements Serializable {
 	public void setVremeZavrsetka(String vremeZavrsetka) {
 		this.vremeZavrsetka = vremeZavrsetka;
 	}
+
+	@Override
+	public String toString() {
+		return "Ispit [datumOdrzavanja=" + datumOdrzavanja + ", vremePocetka=" + vremePocetka + ", vremeZavrsetka="
+				+ vremeZavrsetka + ", zakljucen=" + zakljucen + "]";
+	}
+
+	
 
 }

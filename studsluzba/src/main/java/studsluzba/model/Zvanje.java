@@ -25,7 +25,7 @@ public class Zvanje implements Serializable {
 	private String naziv;
 	
 	@ManyToOne
-	@JoinColumn(name = "idZvanja")
+	@JoinColumn(name = "idNastavnik")
 	private Nastavnik nastavnik;
 
 	public Zvanje() {

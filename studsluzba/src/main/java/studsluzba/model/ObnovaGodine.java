@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,9 +26,10 @@ public class ObnovaGodine implements Serializable {
 	
 	private int godina;
 	
-	@OneToMany(mappedBy = "obnovaGodine")
-	private List<TokStudija> tokStudija;
-
+	@ManyToOne
+	@JoinColumn(name = "tokStudija")
+	private TokStudija tokStudija;
+	
 	@ManyToOne
 	@JoinColumn(name = "idPredmeta")
 	private Predmet ponovljeniPredmeti;
@@ -38,12 +40,13 @@ public class ObnovaGodine implements Serializable {
 	private String napomena;
 
 
-	public ObnovaGodine(int godina, Predmet ponovljeniPredmeti, String napomena, Date datum) {
+	public ObnovaGodine(int godina, Predmet ponovljeniPredmeti, String napomena, Date datum, TokStudija tokStudija) {
 
 		this.godina = godina;
 		this.ponovljeniPredmeti =  ponovljeniPredmeti;
 		this.datum = datum;
 		this.napomena = napomena;
+		this.tokStudija = tokStudija;
 	}
 
 	public int getGodina() {
@@ -70,11 +73,13 @@ public class ObnovaGodine implements Serializable {
 		this.idObnovaGodine = idObnovaGodine;
 	}
 
-	public List<TokStudija> getTokStudija() {
+	
+
+	public TokStudija getTokStudija() {
 		return tokStudija;
 	}
 
-	public void setTokStudija(List<TokStudija> tokStudija) {
+	public void setTokStudija(TokStudija tokStudija) {
 		this.tokStudija = tokStudija;
 	}
 

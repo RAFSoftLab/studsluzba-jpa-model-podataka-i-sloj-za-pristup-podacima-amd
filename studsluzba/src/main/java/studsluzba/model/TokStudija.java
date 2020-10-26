@@ -2,73 +2,67 @@ package studsluzba.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name = "TokStudija.findAll", query = "SELECT ts FROM TokStudija ts")
 public class TokStudija implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTokStudija;
+
+	@ManyToMany(mappedBy = "tokStudija")
+	private List<UpisGodine> upisGodine;
+
+	@ManyToMany(mappedBy = "tokStudija")
+	private List<ObnovaGodine> obnovaGodine;
 	
 	@ManyToOne
-	@JoinColumn(name = "idStudenta")
-	private Student student;
+	@JoinColumn(name = "idStudIndex")
+	private StudIndex studIndex;
 
-	@ManyToOne
-	@JoinColumn(name = "idUpisaGodine")
-	private UpisGodine upisGodine;
-
-	@ManyToOne
-	@JoinColumn(name = "idObnovaGodine")
-	private ObnovaGodine obnovaGodine;
-	
 	private Date datum;
-	
+
 	private String napomena;
 
 	public TokStudija() {
 
 	}
 
-	public TokStudija(Student student, UpisGodine upisGodine, ObnovaGodine obnovaGodine, String napomena, Date datum ) {
+	public TokStudija(String napomena, Date datum, StudIndex studIndex) {
 
-		this.student = student;
-		this.upisGodine = upisGodine;
-		this.obnovaGodine = obnovaGodine;
+		
 		this.datum = datum;
 		this.napomena = napomena;
+		this.studIndex = studIndex;
 	}
 
-	public Student getStudent() {
-		return student;
-	}
+	
 
-	public void setStudent(Student student) {
-		this.student = student;
-	}
-
-	public UpisGodine getUpisGodine() {
+	public List<UpisGodine> getUpisGodine() {
 		return upisGodine;
 	}
 
-	public void setUpisGodine(UpisGodine upisGodine) {
+	public void setUpisGodine(List<UpisGodine> upisGodine) {
 		this.upisGodine = upisGodine;
 	}
 
-	public ObnovaGodine getObnovaGodine() {
+	public List<ObnovaGodine> getObnovaGodine() {
 		return obnovaGodine;
 	}
 
-	public void setObnovaGodine(ObnovaGodine obnovaGodine) {
+	public void setObnovaGodine(List<ObnovaGodine> obnovaGodine) {
 		this.obnovaGodine = obnovaGodine;
 	}
 
@@ -95,7 +89,14 @@ public class TokStudija implements Serializable {
 	public void setNapomena(String napomena) {
 		this.napomena = napomena;
 	}
-	
-	
 
+	public StudIndex getStudIndex() {
+		return studIndex;
+	}
+
+	public void setStudIndex(StudIndex studIndex) {
+		this.studIndex = studIndex;
+	}
+
+	
 }

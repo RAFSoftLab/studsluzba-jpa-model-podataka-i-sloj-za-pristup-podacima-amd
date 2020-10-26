@@ -5,19 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="predmet")
+@Table(name = "predmet")
+@NamedQuery(name = "Predmet.findAll", query = "SELECT p FROM Predmet p")
 public class Predmet implements Serializable {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPredmeta;
@@ -28,21 +31,26 @@ public class Predmet implements Serializable {
 	private int semestar;
 	private int fondCasovaPredavanja;
 	private int fondCasovaVezbi;
-	
-	@OneToMany(mappedBy = "predmet")
+
+	@OneToMany(mappedBy = "predmet", fetch = FetchType.EAGER)
 	private List<DrziPredmet> drziPredmet;
 
 	@ManyToOne
 	@JoinColumn(name = "idstudProgram")
 	private Studprogram studProgram;
 
-	
 	@OneToMany(mappedBy = "ponovljeniPredmeti")
 	private List<ObnovaGodine> og;
+	
+	@OneToMany(mappedBy = "predmet")
+	private List<PriznatPredmet> priznatPredmet;
+	
+	@OneToMany(mappedBy = "predmet")
+	private List<PolozenPredmet> polozenPredmet;
 
 	public Predmet() {
 	}
-	
+
 	public int getIdPredmeta() {
 		return idPredmeta;
 	}
@@ -122,8 +130,24 @@ public class Predmet implements Serializable {
 	public void setDrziPredmet(List<DrziPredmet> drziPredmet) {
 		this.drziPredmet = drziPredmet;
 	}
-
+	
 	
 
+	public List<PriznatPredmet> getPriznatPredmet() {
+		return priznatPredmet;
+	}
+
+	public void setPriznatPredmet(List<PriznatPredmet> priznatPredmet) {
+		this.priznatPredmet = priznatPredmet;
+	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Predmet [sifra=" + sifra + ", naziv=" + naziv + ", opis=" + opis + ", espb=" + espb + ", semestar="
+				+ semestar + ", fondCasovaPredavanja=" + fondCasovaPredavanja + ", fondCasovaVezbi=" + fondCasovaVezbi
+				+ "]";
+	}
 
 }
