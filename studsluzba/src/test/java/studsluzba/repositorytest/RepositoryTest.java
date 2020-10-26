@@ -33,7 +33,7 @@ import studsluzba.model.UpisGodine;
 import studsluzba.model.VisokaSkola;
 import studsluzba.model.VrstaStudija;
 import studsluzba.model.Zvanje;
-import studsluzba.model.prijavaIspita;
+import studsluzba.model.PrijavaIspita;
 import studsluzba.repositories.DrziPredmetRepository;
 import studsluzba.repositories.IspitRepository;
 import studsluzba.repositories.IspitniRokRepository;
@@ -234,9 +234,9 @@ public class RepositoryTest {
 		ispitRepo.save(ispit);
 		
 		
-		prijavaIspita pr1 = new prijavaIspita(null, ispit, s1, true);
-	    prijavaIspita pr2 = new prijavaIspita(null, null, s2, false);
-	    prijavaIspita pr3 = new prijavaIspita(null, ispit, s, true);
+		PrijavaIspita pr1 = new PrijavaIspita(null, ispit, s1, true);
+	    PrijavaIspita pr2 = new PrijavaIspita(null, null, s2, false);
+	    PrijavaIspita pr3 = new PrijavaIspita(null, ispit, s, true);
 	    
 		prijavaRepo.save(pr1);
 		prijavaRepo.save(pr2);
@@ -292,6 +292,15 @@ public class RepositoryTest {
 			System.out.println(s.getIndexs().get(0).getStudProgram());
 		}
 			
+	}
+	
+	@Test
+	public void findPrijavljeniTest() {
+		System.out.println("Nadji studente po prijavljenom ispitu");
+		List<Student> studenti = ispitRepo.findPrijavljeni(1);
+		for(Student s : studenti) {
+			System.out.println(s);
+		}
 	}
 	
 }

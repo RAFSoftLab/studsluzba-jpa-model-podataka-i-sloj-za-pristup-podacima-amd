@@ -2,8 +2,8 @@ package studsluzba.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import studsluzba.model.prijavaIspita;
+import studsluzba.model.PrijavaIspita;
 
-public interface PrijavaIspitarepository  extends CrudRepository<prijavaIspita, Integer>{
+public interface PrijavaIspitarepository  extends CrudRepository<PrijavaIspita, Integer>{
 
 }
