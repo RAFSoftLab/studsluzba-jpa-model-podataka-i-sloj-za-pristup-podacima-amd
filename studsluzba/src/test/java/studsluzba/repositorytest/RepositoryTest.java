@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -188,12 +189,6 @@ public class RepositoryTest {
 		studIndex.save(index1);
 		studIndex.save(index2);
 
-		IzlazakNaIspit in1 = new IzlazakNaIspit(91, "Polozio!", false, true, 10, index1, null);
-		IzlazakNaIspit in2 = new IzlazakNaIspit(31, "Pao!", false, false, 5, index2, null);
-
-		izlazakRepo.save(in1);
-		izlazakRepo.save(in2);
-
 		Zvanje zv1 = new Zvanje();
 		zv1.setDatumIzbora(new Date(2020, 2, 2));
 		zv1.setNaziv("DOKTOR");
@@ -345,7 +340,12 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	
-		
+		IzlazakNaIspit in3 = new IzlazakNaIspit(31, "Pao!", false, false, 5, index2, ispit);
+		IzlazakNaIspit in1 = new IzlazakNaIspit(91, "Polozio!", false, true, 10, index1, ispit);
+		IzlazakNaIspit in2 = new IzlazakNaIspit(31, "Pao!", false, false, 5, index2, ispit);
+		izlazakRepo.save(in1);
+		izlazakRepo.save(in2);
+		izlazakRepo.save(in3);
 	}
 
 	@Test
@@ -368,13 +368,34 @@ public class RepositoryTest {
 	}
 	
 	@Test
-	public void findPrijavljeniTest() {
+	public void ispitRepoTestovi() {
 		System.out.println("Nadji studente po prijavljenom ispitu");
 		List<Student> studenti = ispitRepo.findPrijavljeni(1);
 		for(Student s : studenti) {
 			System.out.println(s);
 		}
-	}
+		System.out.println("--------------------");
+		System.out.println("Nadji prosek ocena po ispitu");
+		int id = 1;
+		double prosek = ispitRepo.findProsek(id);
+		System.out.println("Prosek po ispitu " + id + " je: " + prosek);
+		System.out.println("--------------------");
+		System.out.println("Nadji studente i njihove poene za odredjeni ispit");
+		List<Object[]> poeni = ispitRepo.findRezultatiIspita(id);
+		for (Object o[] : poeni) {
+			System.out.println(o[0].toString() + ": " + o[1].toString());
+		}
+		System.out.println("--------------------");
+		System.out.println("Nadji predispitne poene za studenta i predmet u skolskoj godini");
+		double predpoeni = ispitRepo.findPoeniStudentPredmet(2, 1, 1);
+		System.out.println("Predispitni poeni za datog studenta su: " + predpoeni);
+		System.out.println("--------------------");
+		System.out.println("Nadji broj izlazaka na ispit za datog studenta i predmet");
+		int idstud = 3;
+		int izlasci = ispitRepo.findBrojIzlazakaNaIspit(idstud, id);
+		System.out.println("Broj izlazaka za studenta " + idstud + " i predmet " + id + " je " + izlasci);
+		System.out.println("-------------------");
+ 	}
 	
 
 	@Test
