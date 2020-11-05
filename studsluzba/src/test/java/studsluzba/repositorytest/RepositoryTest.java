@@ -397,6 +397,16 @@ public class RepositoryTest {
 		System.out.println("-------------------");
  	}
 	
+	@Test
+	public void predmetRepoTest() {
+		System.out.println("--------------");
+		int idPredmeta = 1, start = 2019, end = 2022;
+		
+		double x = predmetRepo.findProsecnaOcenaURasponu(idPredmeta, start, end);
+		System.out.println("Prosecna ocena za predmet u rasponu godina je: " + x);
+		System.out.println("----------------");
+	}
+	
 
 	@Test
 	public void findStudentByIndexTest() {
