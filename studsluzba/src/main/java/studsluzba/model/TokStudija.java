@@ -27,7 +27,7 @@ public class TokStudija implements Serializable {
 
 	@ManyToMany(mappedBy = "tokStudija")
 	private List<ObnovaGodine> obnovaGodine;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idStudIndex")
 	private StudIndex studIndex;
@@ -42,13 +42,10 @@ public class TokStudija implements Serializable {
 
 	public TokStudija(String napomena, Date datum, StudIndex studIndex) {
 
-		
 		this.datum = datum;
 		this.napomena = napomena;
 		this.studIndex = studIndex;
 	}
-
-	
 
 	public List<UpisGodine> getUpisGodine() {
 		return upisGodine;
@@ -98,5 +95,4 @@ public class TokStudija implements Serializable {
 		this.studIndex = studIndex;
 	}
 
-	
 }

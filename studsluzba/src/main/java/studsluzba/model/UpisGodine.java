@@ -19,26 +19,24 @@ import javax.persistence.OneToMany;
 @NamedQuery(name = "UpisGodine.findAll", query = "SELECT ug FROM UpisGodine ug")
 public class UpisGodine implements Serializable {
 
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idUpisGodine;
-	
+
 	public int godina;
 
 	@ManyToOne
 	@JoinColumn(name = "idPrenetogPredmeta")
 	private Predmet prenetiPredmeti;
 
-	
 	@ManyToOne
 	@JoinColumn(name = "tokStudija")
 	private TokStudija tokStudija;
-	
+
 	private Date datum;
-	
+
 	private String napomena;
-	
+
 	public UpisGodine() {
 
 	}
@@ -46,7 +44,7 @@ public class UpisGodine implements Serializable {
 	public UpisGodine(int godina, Predmet p5, String napomena, Date datum, TokStudija tokStudija) {
 
 		this.godina = godina;
-		this.prenetiPredmeti =  p5;
+		this.prenetiPredmeti = p5;
 		this.datum = datum;
 		this.napomena = napomena;
 		this.tokStudija = tokStudija;
@@ -58,6 +56,22 @@ public class UpisGodine implements Serializable {
 
 	public void setGodina(int godina) {
 		this.godina = godina;
+	}
+
+	public Date getDatum() {
+		return datum;
+	}
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
+	}
+
+	public String getNapomena() {
+		return napomena;
+	}
+
+	public void setNapomena(String napomena) {
+		this.napomena = napomena;
 	}
 
 	public Predmet getPrenetiPredmeti() {
@@ -80,7 +94,5 @@ public class UpisGodine implements Serializable {
 	public void setTokStudija(TokStudija tokStudija) {
 		this.tokStudija = tokStudija;
 	}
-	
-	
 
 }

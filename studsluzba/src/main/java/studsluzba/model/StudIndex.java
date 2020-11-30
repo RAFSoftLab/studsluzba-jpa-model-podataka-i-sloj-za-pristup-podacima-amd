@@ -1,6 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,56 +16,70 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-@NamedQuery(name="StudIndex.findAll", query="SELECT si FROM StudIndex si")
-public class StudIndex implements Serializable{
+@NamedQuery(name = "StudIndex.findAll", query = "SELECT si FROM StudIndex si")
+public class StudIndex implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIndex;
-	
+
 	private int godinaUpisa;
-	
+
 	private int broj;
-	
+
 	@OneToOne
-	@JoinColumn(name="idstudProgram")
+	@JoinColumn(name = "idstudProgram")
 	private Studprogram studProgram;
-	
+
 	private Boolean aktivan;
-	
-	private java.util.Date datumaktivnosti;
-	
+
+	private Date datumaktivnosti;
+
 	@ManyToOne
-	@JoinColumn(name="idstudent")
+	@JoinColumn(name = "idstudent")
 	private Student student;
-	
+
 	@OneToMany(mappedBy = "studIndex")
 	private List<PolozenPredmet> polozenPredmet;
-	
+
 	@OneToMany(mappedBy = "studIndex")
 	private List<TokStudija> tokStudija;
-	
+
 	@OneToMany(mappedBy = "studIndex")
 	private List<IzlazakNaIspit> izlazakNaIspit;
-	
+
 	@OneToMany(mappedBy = "student")
 	private List<PrijavaIspita> prijavaIspita;
-	
+
 	@OneToMany(mappedBy = "studIndex")
 	private List<PriznatPredmet> priznatiPredmeti;
-	
-	public StudIndex() {
-		
-	}
-	
-	public StudIndex(int godinaUpisa, int broj, Studprogram studProgram, Boolean aktivan, java.util.Date datumaktivnosti, Student student) {
 
+	public StudIndex() {
+
+	}
+
+	public StudIndex(int broj, int godinaUpisa) {
+		super();
+		this.broj = broj;
+		this.godinaUpisa = godinaUpisa;
+	}
+
+	public StudIndex(int broj, int godinaUpisa, Studprogram studProgram,  Student student, Boolean aktivan, Date datumaktivnosti) {
+		super();
 		this.godinaUpisa = godinaUpisa;
 		this.broj = broj;
 		this.studProgram = studProgram;
 		this.aktivan = aktivan;
 		this.datumaktivnosti = datumaktivnosti;
 		this.student = student;
+	}
+
+	public StudIndex(int broj, int godinaUpisa, Studprogram studProgram, boolean aktivan) {
+		super();
+		this.broj = broj;
+		this.godinaUpisa = godinaUpisa;
+		this.studProgram = studProgram;
+		this.aktivan = aktivan;
 	}
 
 	public int getIdIndex() {
@@ -107,11 +122,11 @@ public class StudIndex implements Serializable{
 		this.aktivan = aktivan;
 	}
 
-	public java.util.Date getDatumaktivnosti() {
+	public Date getDatumaktivnosti() {
 		return datumaktivnosti;
 	}
 
-	public void setDatumaktivnosti(java.util.Date datumaktivnosti) {
+	public void setDatumaktivnosti(Date datumaktivnosti) {
 		this.datumaktivnosti = datumaktivnosti;
 	}
 
@@ -122,8 +137,6 @@ public class StudIndex implements Serializable{
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-	
-	
 
 	public List<TokStudija> getTokStudija() {
 		return tokStudija;
@@ -162,7 +175,5 @@ public class StudIndex implements Serializable{
 	public void setPriznatiPredmeti(List<PriznatPredmet> priznatiPredmeti) {
 		this.priznatiPredmeti = priznatiPredmeti;
 	}
-	
-	
 
 }

@@ -1,0 +1,27 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane fx:id="menu" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studsluzba.client.fxmlcontrollers.StudProgramController">
+
+<top>
+	
+	<fx:include source="menuBar.fxml"/>
+</top>
+<center>
+<GridPane alignment="center" hgap="10" vgap="10">
+	<Label text="Pun naziv" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+	<TextField fx:id="nazivTf"  GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+	
+	<Label text="Skraćeni naziv" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+	<TextField fx:id="skraceniNazivTf"  GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+	
+	<HBox spacing="10" alignment="bottom_right" 
+        GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <Button text="Sačuvaj"     
+        onAction="#handleSaveStudProgram"/>
+	</HBox>
+	</GridPane>
+</center>
+	
+
+</BorderPane>

@@ -13,4 +13,7 @@ public interface StudProgramRepository extends CrudRepository<Studprogram, Integ
 	@Query("select p from Predmet p where p.studProgram.skraceniNaziv like :nazivStudPrograma")
 	List<Predmet> selectSubOnSubProg(String nazivStudPrograma);
 	
+	@Query("select sp from Studprogram sp join fetch sp.predmeti where sp.idstudProgram like :id")
+	Studprogram getStudprogramWithPredmeti(Integer id);
+	
 }
