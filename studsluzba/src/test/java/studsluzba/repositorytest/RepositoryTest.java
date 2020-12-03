@@ -64,7 +64,7 @@ import studsluzba.repositories.ZvanjeRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class RepositoryTest {
-
+/*
 	@Autowired
 	PredmetRepository predmetRepo;
 	@Autowired // spring pravi sam instancu repositorija -------------------------
@@ -162,7 +162,7 @@ public class RepositoryTest {
 		Date d = sdf.parse("2019-10-01");
 
 		StudIndex index = new StudIndex();
-		index.setDatumaktivnosti(d);
+		//index.setDatumaktivnosti(d);
 		index.setBroj(93);
 		index.setAktivan(true);
 		index.setGodinaUpisa(2019);
@@ -170,7 +170,7 @@ public class RepositoryTest {
 		index.setStudProgram(sp1);
 
 		StudIndex index1 = new StudIndex();
-		index1.setDatumaktivnosti(d);
+		//index1.setDatumaktivnosti(d);
 		index1.setBroj(94);
 		index1.setAktivan(true);
 		index1.setGodinaUpisa(2019);
@@ -178,7 +178,7 @@ public class RepositoryTest {
 		index1.setStudProgram(sp1);
 
 		StudIndex index2 = new StudIndex();
-		index2.setDatumaktivnosti(d);
+		//index2.setDatumaktivnosti(d);
 		index2.setBroj(100);
 		index2.setAktivan(true);
 		index2.setGodinaUpisa(2019);
@@ -453,4 +453,5 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
+	*/
 }

@@ -1,5 +1,8 @@
 package studsluzba.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
@@ -19,6 +22,15 @@ public class StudProgramService {
 		sp.setNaziv(punNaziv);
 		sp.setSkraceniNaziv(skraceniNaziv);
 		return studProgramRepo.save(sp);
+	}
+
+	public List<Studprogram> getAllPrograms() {
+
+		Iterable<Studprogram> iter = studProgramRepo.findAll();
+		List<Studprogram> rez = new ArrayList<Studprogram>();
+		iter.forEach(rez::add);
+		return rez;
+
 	}
 
 }

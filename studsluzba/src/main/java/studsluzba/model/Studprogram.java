@@ -127,10 +127,7 @@ public class Studprogram implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Studprogram [idstudProgram=" + idstudProgram + ", naziv=" + naziv + ", skraceniNaziv=" + skraceniNaziv
-				+ ", nazivZvanja=" + nazivZvanja + ", godinaAkreditovanja=" + godinaAkreditovanja
-				+ ", semestriTrajanje=" + semestriTrajanje + ", vrstaStudija=" + vrstaStudija + ", predmeti=" + predmeti
-				+ "]";
+		return skraceniNaziv +", " +godinaAkreditovanja;
 	}
 	
 	
