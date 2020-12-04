@@ -1,7 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
-
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.*;
@@ -25,7 +25,7 @@ public class Student implements Serializable {
 	private String prezime;
 	private String srednjeIme;
 	private String jmbg;
-	private java.util.Date datumRodj;
+	private LocalDate datumRodj;
 	private String mestoRodj;
 	private String drzavaRodj;
 	private String drzavljanstvo;
@@ -57,7 +57,7 @@ public class Student implements Serializable {
 	}
 
 	public Student(int godinaUpisa, String ime, String prezime, String srednjeIme, String jmbg,
-			java.util.Date datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo,
+			LocalDate datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo,
 			String nacionalnost, String pol, String emFax, String emPers, String brLk, String adresa, String izdavacLk,
 			String brTel, SrednjaSkola srednjaSkola, float ukupanUspeh) {
 
@@ -138,12 +138,12 @@ public class Student implements Serializable {
 		this.jmbg = jmbg;
 	}
 
-	public java.util.Date getDatumRodj() {
+	public LocalDate getDatumRodj() {
 		return datumRodj;
 	}
 
-	public void setDatumRodj(java.util.Date datumRodj) {
-		this.datumRodj = datumRodj;
+	public void setDatumRodj(LocalDate datumRodj2) {
+		this.datumRodj = datumRodj2;
 	}
 
 	public String getMestoRodj() {

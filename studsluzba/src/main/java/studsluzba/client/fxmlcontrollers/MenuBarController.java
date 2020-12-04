@@ -51,6 +51,9 @@ public class MenuBarController {
 	
 	
 
+	public void openFindStudent(ActionEvent event) {
+		mainViewManager.changeRoot("findStudent");
+	}
 
 	
 

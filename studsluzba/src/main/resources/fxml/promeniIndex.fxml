@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" vgap="10" fx:controller="studsluzba.client.fxmlcontrollers.FindStudentController">
+			
+			<Label text="Promena index-a za studenta:" fx:id="labelStudent"  GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" style="-fx-text-fill: #FF0000;" />
+			<HBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+				<ComboBox fx:id="studProgramCb2" maxWidth="10"/>
+				<TextField fx:id="brojIndexTf2" />
+				<Label text="/" GridPane.halignment="RIGHT"/>
+				<TextField fx:id="godinaUpisaTf2" />
+			</HBox>
+			 
+			<HBox GridPane.columnIndex="0" GridPane.rowIndex="3">
+				<Label text="Datum Aktivnosti" />
+				<DatePicker fx:id="datumAktivnostiDp2" />
+				
+			</HBox> 
+			
+			<Button onAction="#handlePromeniIndex" text="Promeni Index" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>	 
+		
+</GridPane>
