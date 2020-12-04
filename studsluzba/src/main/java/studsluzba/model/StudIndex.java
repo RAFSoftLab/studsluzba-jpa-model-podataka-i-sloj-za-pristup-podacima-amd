@@ -53,6 +53,9 @@ public class StudIndex implements Serializable {
 
 	@OneToMany(mappedBy = "studIndex")
 	private List<PriznatPredmet> priznatiPredmeti;
+	
+	@OneToMany(mappedBy = "studIndex")
+	private List<DrziPredmet> drziPredmet;
 
 	public StudIndex() {
 

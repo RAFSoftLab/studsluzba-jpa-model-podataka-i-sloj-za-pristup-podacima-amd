@@ -76,4 +76,9 @@ public class SkolskaGodina implements Serializable {
 	}
 
 	
+	@Override
+	public String toString() {
+		return this.godina + "";
+	}
+	
 }

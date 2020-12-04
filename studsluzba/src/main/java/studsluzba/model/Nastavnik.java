@@ -4,6 +4,7 @@ package studsluzba.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,30 +32,28 @@ public class Nastavnik implements Serializable {
 	private String email;
 	private String obrazovanje;
 
-	@OneToMany(mappedBy = "nastavnik")
-	private List<Zvanje> zvanja;
+	@ManyToMany(mappedBy = "nastavnik")
+	private List<NastavnikZvanja> nastavnikZvanja;
 
 	@OneToMany(mappedBy = "nastavnik")
 	private List<DrziPredmet> drziPredmet;
 
-
-	@ManyToOne
-	private SkolskaGodina skolskaGodina;
+//
+//	@ManyToOne
+//	private SkolskaGodina skolskaGodina;
 
 
 	public Nastavnik() {
 
 	}
 
-	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje,
-			List<Zvanje> zvanja) {
+	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje) {
 
 		this.ime = ime;
 		this.prezime = prezime;
 		this.srednjeIme = srednjeIme;
 		this.email = email;
 		this.obrazovanje = obrazovanje;
-		this.zvanja = zvanja;
 	}
 
 	public String getIme() {
@@ -97,12 +96,12 @@ public class Nastavnik implements Serializable {
 		this.obrazovanje = obrazovanje;
 	}
 
-	public List<Zvanje> getZvanja() {
-		return zvanja;
+	public List<NastavnikZvanja> getNastavnikZvanja() {
+		return nastavnikZvanja;
 	}
 
-	public void setZvanja(List<Zvanje> zvanja) {
-		this.zvanja = zvanja;
+	public void setNastavnikZvanja(List<NastavnikZvanja> nastavnikZvanja) {
+		this.nastavnikZvanja = nastavnikZvanja;
 	}
 
 	public List<DrziPredmet> getDrziPredmet() {
@@ -113,11 +112,16 @@ public class Nastavnik implements Serializable {
 		this.drziPredmet = drziPredmet;
 	}
 
+	
+	public int getIdNastavnik() {
+		return idNastavnik;
+	}
+
 	@Override
 	public String toString() {
 		return "Nastavnik [ime=" + ime + ", prezime=" + prezime + ", srednjeIme=" + srednjeIme + ", email=" + email
-				+ ", obrazovanje=" + obrazovanje + ", zvanja=" + zvanja + ", drziPredmet=" + drziPredmet
-				+ ", skolskaGodina=" + skolskaGodina + "]";
+				+ ", obrazovanje=" + obrazovanje + ", drziPredmet=" + drziPredmet
+				+ "]";
 	}
 
 }

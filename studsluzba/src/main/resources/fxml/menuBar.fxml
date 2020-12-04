@@ -15,7 +15,7 @@
             <Menu text="Pretraži">
                 <items>
                     <MenuItem text="Studenti" />                
-                    <MenuItem text="Nastavnici" />               
+                    <MenuItem text="Nastavnici" onAction="#openPregledNastavnika"/>               
                     <MenuItem text="Predmeti" />                
                     <MenuItem text="Ispitni rokovi" />
                 </items>                           
@@ -23,7 +23,7 @@
             <Menu text="Novi">
                 <items>
                     <MenuItem text="Student" onAction="#openNewStudent" />               
-                    <MenuItem text="Nastavnik" />                
+                    <MenuItem text="Nastavnik" onAction="#openNewNastavnik" />                
                     <MenuItem text="Predmet" />
                 </items>                          
             </Menu>
@@ -31,8 +31,9 @@
                 <items>
                     <MenuItem text="Šifarnici" />   
                     <MenuItem text="Studijski programi" onAction="#openStudProgrami"/>              
-                    <MenuItem text="Školska godina" />               
+                    <MenuItem text="Školska godina" onAction="#openSkolskaGodina" />               
                     <MenuItem text="Korisnici" />
+                    <MenuItem text="Zvanja" onAction="#openZvanja" />
                 </items>                          
             </Menu>
         </MenuBar>    

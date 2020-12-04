@@ -32,8 +32,8 @@ public class DrziPredmet {
 	private Nastavnik nastavnik;
 	
 	@ManyToOne
-	@JoinColumn(name = "idStudent")
-	private Student student;
+	@JoinColumn(name = "idIndex")
+	private StudIndex studIndex;
 	
 	@OneToMany(mappedBy = "drziPredmet")
 	private List<StudentPredispitneObaveze> spo;
@@ -43,11 +43,11 @@ public class DrziPredmet {
 		
 	}
 	
-	public DrziPredmet( SkolskaGodina sg, Predmet predmet,  Nastavnik nastavnik, Student student) {
+	public DrziPredmet( SkolskaGodina sg, Predmet predmet,  Nastavnik nastavnik, StudIndex student) {
 		this.nastavnik = nastavnik;
 		this.predmet = predmet;
 		this.sg = sg;
-		this.student = student;
+		this.studIndex = student;
 	}
 
 	public int getIdDrziPremet() {
@@ -82,12 +82,12 @@ public class DrziPredmet {
 		this.nastavnik = nastavnik;
 	}
 
-	public Student getStudent() {
-		return student;
+	public StudIndex getStudIndex() {
+		return studIndex;
 	}
 
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setStudIndex(StudIndex student) {
+		this.studIndex = student;
 	}
 	
 	
