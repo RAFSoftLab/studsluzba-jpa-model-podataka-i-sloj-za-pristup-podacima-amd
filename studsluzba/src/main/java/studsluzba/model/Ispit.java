@@ -1,6 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Ispit implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idIspit;
 
-	private Date datumOdrzavanja;
+	private LocalDate datumOdrzavanja;
 	private String vremePocetka;
 	private String vremeZavrsetka;
 
@@ -46,11 +47,13 @@ public class Ispit implements Serializable {
 	@OneToMany(mappedBy = "ispit")
 	private List<IzlazakNaIspit> izlazakNaIspit;
 
-	public Ispit(Date datumOdrzavanja, String vremePocetka, Nastavnik nastavnik, Predmet predmet, boolean zakljucen) {
+	public Ispit(LocalDate datumOdrzavanja2, String vremePocetka,String vremeZavrsetka, Nastavnik nastavnik, Predmet predmet, IspitniRok ispitniRok, boolean zakljucen) {
 
-		this.datumOdrzavanja = datumOdrzavanja;
+		this.datumOdrzavanja = datumOdrzavanja2;
 		this.vremePocetka = vremePocetka;
+		this.vremeZavrsetka = vremeZavrsetka;
 		this.predmet = predmet;
+		this.ispitniRok= ispitniRok;
 		this.nastavnik = nastavnik;
 		this.zakljucen = zakljucen;
 	}
@@ -59,11 +62,11 @@ public class Ispit implements Serializable {
 
 	}
 
-	public Date getDatumOdrzavanja() {
+	public LocalDate getDatumOdrzavanja() {
 		return datumOdrzavanja;
 	}
 
-	public void setDatumOdrzavanja(Date datumOdrzavanja) {
+	public void setDatumOdrzavanja(LocalDate datumOdrzavanja) {
 		this.datumOdrzavanja = datumOdrzavanja;
 	}
 
