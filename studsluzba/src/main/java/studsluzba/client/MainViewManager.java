@@ -1,6 +1,8 @@
 package studsluzba.client;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 @Component
 public class MainViewManager {
 	
+		private static List<Object> parameters = new ArrayList<Object>();
 		
 		@Autowired
 		ContextFXMLLoader appFXMLLoader; 
@@ -40,6 +43,14 @@ public class MainViewManager {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		
+		public static void setParameters(List<Object> p) {
+			parameters = p;
+		}
+
+		public static List<Object> getParameters() {
+			return parameters;
 		}
 		
 		public void openModal(String fxml) {

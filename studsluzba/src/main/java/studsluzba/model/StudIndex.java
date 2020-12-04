@@ -1,6 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class StudIndex implements Serializable {
 
 	private Boolean aktivan;
 
-	private Date datumaktivnosti;
+	private LocalDate datumaktivnosti;
 
 	@ManyToOne
 	@JoinColumn(name = "idstudent")
@@ -53,6 +54,9 @@ public class StudIndex implements Serializable {
 
 	@OneToMany(mappedBy = "studIndex")
 	private List<PriznatPredmet> priznatiPredmeti;
+	
+	@OneToMany(mappedBy = "studIndex")
+	private List<DrziPredmet> drziPredmet;
 
 	public StudIndex() {
 
@@ -64,7 +68,7 @@ public class StudIndex implements Serializable {
 		this.godinaUpisa = godinaUpisa;
 	}
 
-	public StudIndex(int broj, int godinaUpisa, Studprogram studProgram,  Student student, Boolean aktivan, Date datumaktivnosti) {
+	public StudIndex(int broj, int godinaUpisa, Studprogram studProgram,  Student student, Boolean aktivan, LocalDate datumaktivnosti) {
 		super();
 		this.godinaUpisa = godinaUpisa;
 		this.broj = broj;
@@ -122,12 +126,12 @@ public class StudIndex implements Serializable {
 		this.aktivan = aktivan;
 	}
 
-	public Date getDatumaktivnosti() {
+	public LocalDate getDatumaktivnosti() {
 		return datumaktivnosti;
 	}
 
-	public void setDatumaktivnosti(Date datumaktivnosti) {
-		this.datumaktivnosti = datumaktivnosti;
+	public void setDatumaktivnosti(LocalDate datum) {
+		this.datumaktivnosti = datum;
 	}
 
 	public Student getStudent() {

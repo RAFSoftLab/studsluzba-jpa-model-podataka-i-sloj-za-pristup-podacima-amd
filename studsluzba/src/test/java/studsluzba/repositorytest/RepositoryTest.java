@@ -65,7 +65,7 @@ import studsluzba.repositories.ZvanjeRepository;
 @SpringBootTest
 public class RepositoryTest {
 
-	@Autowired
+	/*
 	PredmetRepository predmetRepo;
 	@Autowired // spring pravi sam instancu repositorija -------------------------
 	StudentRepository studentRepo;
@@ -199,7 +199,6 @@ public class RepositoryTest {
 		n1.setIme("Pera");
 		List<Zvanje> zvanja = new ArrayList<Zvanje>();
 		zvanja.add(zv1);
-		n1.setZvanja(zvanja);
 		n1.setEmail("pera@raf.rs");
 		n1.setObrazovanje("Visoko");
 		n1.setPrezime("Peric");
@@ -304,7 +303,7 @@ public class RepositoryTest {
 		String studProg = "RN";
 		System.out.println("Svi predmeti na studentskom programu " + studProg + ": ");
 
-		List<Predmet> predmeti = studProgramRepo.selectSubOnSubProg(studProg);
+		List<Predmet> predmeti = studProgramRepo.selectSubOnSubProg(1);
 		for (Predmet p : predmeti) {
 			System.out.println(p.toString());
 		}
@@ -453,4 +452,5 @@ public class RepositoryTest {
 
 		System.out.println("-------------");
 	}
+	*/
 }

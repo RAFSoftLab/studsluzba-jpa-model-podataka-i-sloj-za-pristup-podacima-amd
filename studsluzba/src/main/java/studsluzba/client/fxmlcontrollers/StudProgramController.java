@@ -1,5 +1,8 @@
 package studsluzba.client.fxmlcontrollers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
@@ -12,19 +15,26 @@ import studsluzba.services.StudProgramService;
 
 @Component
 public class StudProgramController {
-	
-    @Autowired
+
+	@Autowired
 	StudProgramService studProgramService;
-	
-	
-	@FXML private TextField nazivTf;
-	@FXML private TextField skraceniNazivTf;
-	
+
+	@FXML
+	private TextField nazivTf;
+	@FXML
+	private TextField skraceniNazivTf;
+
+	private static List<Studprogram> sviProgrami = new ArrayList();
+
 	public void handleSaveStudProgram(ActionEvent event) {
 		Studprogram sp = studProgramService.saveStudProgram(nazivTf.getText(), skraceniNazivTf.getText());
-		// ubaciti u listi svih programa		
+		sviProgrami.add(sp);
 	}
-	
-	
 
+	public static List<Studprogram> getSviProgrami() {
+		return sviProgrami;
+	}
+
+
+	
 }

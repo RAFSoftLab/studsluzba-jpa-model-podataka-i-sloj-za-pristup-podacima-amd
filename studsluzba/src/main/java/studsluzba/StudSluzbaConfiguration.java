@@ -4,7 +4,9 @@ import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.Configuration;
 
+import studsluzba.services.NastavnikService;
 import studsluzba.services.SifarniciService;
+import studsluzba.services.SkolskaGodinaService;
 import studsluzba.services.StudProgramService;
 import studsluzba.services.StudentService;
 
@@ -22,5 +24,6 @@ public class StudSluzbaConfiguration {
 	 * 
 	 * @Bean(name="studentService") public StudentService studentService(){ return
 	 * new StudentService(); }
-	 */
+	 * 
+	 */ 
 }

@@ -23,20 +23,38 @@
 		<Label text="Srednje ime" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 		<TextField fx:id="srednjeImeTf"  GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 		
-		<Label text="JMBG" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-		<TextField fx:id="jmbgTf"  GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+		<Label text="Index" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+		<GridPane alignment="center" hgap="10" vgap="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+			
+			<HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+				<ComboBox fx:id="studProgramCb" maxWidth="10"/>
+				<TextField fx:id="brojIndexTf" />
+				<Label text="/" GridPane.halignment="RIGHT"/>
+				<TextField fx:id="godinaUpisaTf" />
+			</HBox>
+			
+			<HBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+				<Label text="Datum Aktivnosti" />
+				<DatePicker fx:id="datumAktivnostiDp" />
+				
+			</HBox> 
+			
+		</GridPane>
 		
-		<Label text="Datum rođenja" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-		<DatePicker fx:id="datumRodjenjaDp"  GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+		<Label text="JMBG" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+		<TextField fx:id="jmbgTf"  GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 		
-		<Label text="Mesto rođenja" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-		<ComboBox fx:id="mestoRodjenjaCb"  GridPane.columnIndex="1" GridPane.rowIndex="5"/>		
+		<Label text="Datum rođenja" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+		<DatePicker fx:id="datumRodjenjaDp"  GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 		
-		<Label text="Država rođenja" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-		<ComboBox fx:id="drzavaRodjenjaCb"  GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+		<Label text="Mesto rođenja" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+		<ComboBox fx:id="mestoRodjenjaCb"  GridPane.columnIndex="1" GridPane.rowIndex="6"/>		
 		
-		<Label text="Pol" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-		<HBox GridPane.columnIndex="1" GridPane.rowIndex="7">
+		<Label text="Država rođenja" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+		<ComboBox fx:id="drzavaRodjenjaCb"  GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+		
+		<Label text="Pol" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+		<HBox GridPane.columnIndex="1" GridPane.rowIndex="8">
 			 <fx:define>
         		<ToggleGroup fx:id="polGroup" />
    		 	</fx:define>
@@ -76,14 +94,14 @@
          <Tab text="Kontakt podaci">
          <HBox alignment="center">
          <GridPane alignment="center" hgap="10" vgap="10">
-         	<Label text="Emejl" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-		   	<TextField fx:id="emailTf"  GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-		   	<Label text="Broj telefona" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-		   	<TextField fx:id="brojTelefonaTf"   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-		   	<Label text="Adresa prebivališta" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-		   	<TextField fx:id="adresaPrebivalistaTf" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-		   	<Label text="Mesto prebivališta" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-		   	<ComboBox fx:id="mestoPrebivalistaCb" GridPane.columnIndex="1" GridPane.rowIndex="3"/>		   	
+         	<Label text="Emejl Fakulteta" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+		   	<TextField fx:id="emailFaxTf"  GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+		   	
+		   	<Label text="Emejl Personalni" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+		   	<TextField fx:id="emailPersTf"  GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+		   	
+		   	<Label text="Broj telefona" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+		   	<TextField fx:id="brojTelefonaTf"   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 		  </GridPane>		 
 		  
 		  <GridPane  alignment="center" hgap="10" vgap="10"> 	
@@ -91,9 +109,7 @@
         		<Insets left="40.0" />
     		</padding> 
 		   	<Label text="Adresa stanovanja" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-		   	<TextField fx:id="adresaStanovanjaTf"   GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-		   	<Label text="Mesto stanovanja" GridPane.halignment="RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-		   	<ComboBox fx:id="mestoStanovanjaCb"  GridPane.columnIndex="1" GridPane.rowIndex="1"/>		   	
+		   	<TextField fx:id="adresaStanovanjaTf"   GridPane.columnIndex="1" GridPane.rowIndex="0"/>	   	
 		 </GridPane>
 		 </HBox>  	
 		   	

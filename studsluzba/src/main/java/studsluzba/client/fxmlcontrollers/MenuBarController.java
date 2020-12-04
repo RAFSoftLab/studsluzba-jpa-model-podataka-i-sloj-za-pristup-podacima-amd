@@ -31,10 +31,29 @@ public class MenuBarController {
 		mainViewManager.changeRoot("newStudent");
 	}
 	
+	public void openNewNastavnik(ActionEvent event) {
+		mainViewManager.changeRoot("newNastavnik");
+	}
+	
+	public void openSkolskaGodina(ActionEvent event) {
+		mainViewManager.changeRoot("skolskaGodina");
+	}
+	
+	public void openZvanja(ActionEvent event) {
+		mainViewManager.changeRoot("zvanja");
+	}
+	
+	public void openPregledNastavnika(ActionEvent event) {
+		mainViewManager.changeRoot("nastavnikSearch");
+	}
+	
 	
 	
 	
 
+	public void openFindStudent(ActionEvent event) {
+		mainViewManager.changeRoot("findStudent");
+	}
 
 	
 
