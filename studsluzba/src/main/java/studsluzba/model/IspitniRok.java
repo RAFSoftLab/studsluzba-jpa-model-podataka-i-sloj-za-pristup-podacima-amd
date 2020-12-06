@@ -76,7 +76,7 @@ public class IspitniRok implements Serializable {
 
 	@Override
 	public String toString() {
-		return "IspitniRok [datumPocetka=" + datumPocetka + ", datumZavrsetka=" + datumZavrsetka + ", skolskaGodina=" + skolskaGodina + "]";
+		return this.datumPocetka + " do " + this.datumZavrsetka + " (" + this.skolskaGodina + ")";
 	}
 
 }

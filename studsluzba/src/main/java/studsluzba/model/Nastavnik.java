@@ -124,5 +124,13 @@ public class Nastavnik implements Serializable {
 				+ ", obrazovanje=" + obrazovanje + ", drziPredmet=" + drziPredmet
 				+ "]";
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null)
+			return this.idNastavnik == ((Nastavnik)obj).idNastavnik;
+		return false;
+			
+	}
 
 }

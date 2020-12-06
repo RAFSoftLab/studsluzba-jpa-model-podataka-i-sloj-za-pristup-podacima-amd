@@ -30,6 +30,8 @@ public class NastavnikController {
 	
 	private List<Zvanje> svaZvanja = new ArrayList<Zvanje>();
 	private List<Zvanje> izabranaZvanja = new ArrayList<Zvanje>();
+	
+	private List<Nastavnik> svi;
 		
 	@FXML private TextField imeTf;
 	@FXML private TextField prezimeTf;
@@ -45,6 +47,7 @@ public class NastavnikController {
 	
 	@FXML
 	public void initialize() {
+		svi = nastavnikService.findAll();
 		svaZvanja = zvanjaService.getZvanja();
 		
 		for (Zvanje z : svaZvanja) {
@@ -71,6 +74,11 @@ public class NastavnikController {
 		String email = emailTf.getText();
 		String obrazovanje = obrazovanjeTf.getText();
 		Nastavnik n = new Nastavnik(ime, prezime, srednjeIme, email, obrazovanje);
+		
+		if (svi.contains(n)) {
+			errorL.setText("Nastavnik vec postoji!");
+			return;
+		}
 		
 		if (CustomValidator.emptyString(ime, prezime, email, obrazovanje)) {
 			errorL.setText("Sva polja osim \"Srednje ime\" moraju biti popunjena!");

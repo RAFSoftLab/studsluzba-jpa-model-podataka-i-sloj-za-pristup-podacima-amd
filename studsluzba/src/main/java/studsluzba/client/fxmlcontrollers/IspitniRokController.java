@@ -145,6 +145,9 @@ public class IspitniRokController {
 
 				lvIspitaZaIspitniRok.setItems(ispitiO);
 			}
+			else {
+				lvIspitaZaIspitniRok.setItems(null);
+			}
 
 		}
 

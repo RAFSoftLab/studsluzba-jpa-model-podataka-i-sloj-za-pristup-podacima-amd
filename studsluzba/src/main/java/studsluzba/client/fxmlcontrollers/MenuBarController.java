@@ -63,5 +63,8 @@ public class MenuBarController {
 		mainViewManager.changeRoot("newPredmet");
 	}
 	
+	public void openPregledPredmeta(ActionEvent event) {
+		mainViewManager.changeRoot("predmetSearch");
+	}
 		
 }

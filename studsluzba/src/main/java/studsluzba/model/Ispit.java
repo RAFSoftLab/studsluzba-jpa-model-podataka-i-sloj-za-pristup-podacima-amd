@@ -128,8 +128,7 @@ public class Ispit implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Ispit [datumOdrzavanja=" + datumOdrzavanja + ", vremePocetka=" + vremePocetka + ", vremeZavrsetka="
-				+ vremeZavrsetka + ", zakljucen=" + zakljucen + "]";
+		return this.predmet.getNaziv();
 	}
 
 	

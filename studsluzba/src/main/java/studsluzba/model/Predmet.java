@@ -160,5 +160,13 @@ public class Predmet implements Serializable {
 	public String toString() {
 		return this.naziv;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null) {			
+			return this.sifra.equals(((Predmet)obj).sifra) || this.idPredmeta == ((Predmet)obj).idPredmeta;
+		}
+		return false;
+	}
 
 }

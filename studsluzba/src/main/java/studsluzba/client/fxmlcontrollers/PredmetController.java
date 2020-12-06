@@ -31,6 +31,8 @@ public class PredmetController {
 	@Autowired
 	PredmetStudprogramService pspService;
 	
+	private List<Predmet> svi;
+	
 	@FXML private TextField nazivTf;
 	@FXML private TextField espbTf;
 	@FXML private TextField fcpTf;
@@ -46,6 +48,8 @@ public class PredmetController {
 	@FXML
 	public void initialize() {
 		List<Studprogram> sp = spService.getAllPrograms();
+		
+		svi = predmetService.findAll();
 		
 		for (Studprogram s : sp) {
 			CheckBox cx = new CheckBox(s.getNaziv());
@@ -72,6 +76,11 @@ public class PredmetController {
 		 String sifra = sifraTf.getText();
 		 String opis = opisTf.getText();
 		 Predmet p = new Predmet(sifra, naziv, opis, espb, sem, fcp, fcv);
+		 
+		 if (svi.contains(p)) {
+			 errorL.setText("Ovaj predmet vec postoji!");
+			 return;
+		 }
 		 
 		 if (CustomValidator.emptyOrNull(naziv, espb, fcp, fcv, sem, sifra, opis)) {
 			 errorL.setText("Sva polja moraju biti popunjena!");

@@ -49,6 +49,12 @@ public class DrziPredmet {
 		this.sg = sg;
 		this.studIndex = student;
 	}
+	
+	public DrziPredmet(SkolskaGodina sg, Predmet p, Nastavnik n) {
+		this.nastavnik = n;
+		this.sg = sg;
+		this.predmet = p;
+	}
 
 	public int getIdDrziPremet() {
 		return idDrziPremet;
@@ -90,6 +96,13 @@ public class DrziPredmet {
 		this.studIndex = student;
 	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		DrziPredmet dp = (DrziPredmet) obj;
+		if (this.nastavnik.equals(dp.nastavnik) && this.sg.equals(dp.sg) && this.predmet.equals(dp.predmet)) {
+			return true;
+		}
+		return false;
+	}
 	
 }

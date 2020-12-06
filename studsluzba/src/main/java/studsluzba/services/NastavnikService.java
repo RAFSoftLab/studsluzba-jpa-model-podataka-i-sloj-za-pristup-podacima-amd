@@ -26,8 +26,6 @@ public class NastavnikService {
 	NastavnikZvanjaRepository nzRepo;
 	@Autowired
 	ZvanjeRepository zvanjeRepo;
-	@Autowired
-	DrziPredmetRepository dpRepo;
 	
 	public Nastavnik saveNastavnik(Nastavnik n) {
 		return nastavnikRepo.save(n);
@@ -61,9 +59,5 @@ public class NastavnikService {
 		return nzRepo.findZvanjeByNastavnik(i);
 	}
 	
-	public List<DrziPredmet> findInfoByNastavnik(Nastavnik n) {
-		Integer i = n.getIdNastavnik();
-		return dpRepo.findInfoByNastavnik(i);
-	}
 	
 }
