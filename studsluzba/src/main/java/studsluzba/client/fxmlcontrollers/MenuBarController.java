@@ -54,6 +54,10 @@ public class MenuBarController {
 	public void openNewIspitniRok(ActionEvent event) {
 		mainViewManager.changeRoot("ispitIspitRok");
 	}
+	
+	public void openPrikazStudenata(ActionEvent event) {
+		mainViewManager.changeRoot("prikazPrijavljenihStudenataZaIspit");
+	}
 
 	
 
