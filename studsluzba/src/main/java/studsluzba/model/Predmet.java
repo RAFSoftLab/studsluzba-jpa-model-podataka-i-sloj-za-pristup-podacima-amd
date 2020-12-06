@@ -35,10 +35,6 @@ public class Predmet implements Serializable {
 	@OneToMany(mappedBy = "predmet", fetch = FetchType.EAGER)
 	private List<DrziPredmet> drziPredmet;
 
-	@ManyToOne
-	@JoinColumn(name = "idstudProgram")
-	private Studprogram studProgram;
-
 	@OneToMany(mappedBy = "ponovljeniPredmeti")
 	private List<ObnovaGodine> og;
 	
@@ -48,10 +44,27 @@ public class Predmet implements Serializable {
 	
 	@OneToMany(mappedBy = "predmet")
 	private List<PolozenPredmet> polozenPredmet;
-
+	
+	@ManyToMany(mappedBy = "predmet")
+	private List<PredmetStudprogram> predmetStudprogram;
 
 	public Predmet() {
 	}
+	
+
+	public Predmet(String sifra, String naziv, String opis, int espb, int semestar, int fondCasovaPredavanja,
+			int fondCasovaVezbi) {
+		super();
+		this.sifra = sifra;
+		this.naziv = naziv;
+		this.opis = opis;
+		this.espb = espb;
+		this.semestar = semestar;
+		this.fondCasovaPredavanja = fondCasovaPredavanja;
+		this.fondCasovaVezbi = fondCasovaVezbi;
+	}
+
+
 
 	public int getIdPredmeta() {
 		return idPredmeta;
@@ -75,14 +88,6 @@ public class Predmet implements Serializable {
 
 	public void setNaziv(String naziv) {
 		this.naziv = naziv;
-	}
-
-	public Studprogram getStudProgram() {
-		return studProgram;
-	}
-
-	public void setStudProgram(Studprogram studProgram) {
-		this.studProgram = studProgram;
 	}
 
 	public String getOpis() {
@@ -142,8 +147,14 @@ public class Predmet implements Serializable {
 	public void setPriznatPredmet(List<PriznatPredmet> priznatPredmet) {
 		this.priznatPredmet = priznatPredmet;
 	}
-	
-	
+
+	public List<PredmetStudprogram> getPredmetStudprogram() {
+		return predmetStudprogram;
+	}
+
+	public void setPredmetStudprogram(List<PredmetStudprogram> predmetStudprogram) {
+		this.predmetStudprogram = predmetStudprogram;
+	}
 
 	@Override
 	public String toString() {

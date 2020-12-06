@@ -46,6 +46,7 @@ public class Nastavnik implements Serializable {
 	public Nastavnik() {
 
 	}
+	
 
 	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje) {
 

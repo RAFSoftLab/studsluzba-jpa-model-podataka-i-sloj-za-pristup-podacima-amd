@@ -46,7 +46,7 @@ public class NastavnikInfoController {
 	public void initialize() {
 		passed = MainViewManager.getParameters();
 		if (passed == null || passed.isEmpty()) {
-			Alert a = new Alert(AlertType.ERROR, "Neuspesno ocitavanje informacija o nastavniku!", ButtonType.CLOSE);
+			Alert a = new Alert(AlertType.ERROR, "Neuspesno ocitavanje informacija o nastavniku ili niste izabrali nastavnika!", ButtonType.CLOSE);
 			a.show();
 			a.setOnCloseRequest(new EventHandler<DialogEvent>() {
 				@Override

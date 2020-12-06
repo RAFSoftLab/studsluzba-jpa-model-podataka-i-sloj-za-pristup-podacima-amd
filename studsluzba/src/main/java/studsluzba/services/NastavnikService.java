@@ -33,6 +33,10 @@ public class NastavnikService {
 		return nastavnikRepo.save(n);
 	}
 	
+	public void delete(Nastavnik n) {
+		nastavnikRepo.delete(n);
+	}
+	
 	public NastavnikZvanja saveNastavnikZvanja(NastavnikZvanja nz) {
 		return nzRepo.save(nz);
 	}

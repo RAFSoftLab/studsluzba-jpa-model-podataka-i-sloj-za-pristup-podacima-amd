@@ -47,16 +47,13 @@ public class MenuBarController {
 		mainViewManager.changeRoot("nastavnikSearch");
 	}
 	
-	
-	
-	
-
 	public void openFindStudent(ActionEvent event) {
 		mainViewManager.changeRoot("findStudent");
 	}
 
-	
-
+	public void openNewPredmet(ActionEvent event) {
+		mainViewManager.changeRoot("newPredmet");
+	}
 	
 		
 }

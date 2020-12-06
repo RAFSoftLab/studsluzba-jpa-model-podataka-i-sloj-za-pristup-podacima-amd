@@ -23,7 +23,7 @@ public class StudProgramRepositoryTest {
 
 	@Test
 	public void saveStudentTest() throws Exception {
-		Studprogram sp = new Studprogram();
+		/*Studprogram sp = new Studprogram();
 		sp.setNaziv("Racunarske nauke");
 		sp.setSkraceniNaziv("RN");
 		studProgramRepo.save(sp);
@@ -45,7 +45,7 @@ public class StudProgramRepositoryTest {
 		for (Predmet pr : sp1.getPredmeti()) {
 			System.out.println(pr.getNaziv());
 		}
-
+*/
 	}
 
 }
