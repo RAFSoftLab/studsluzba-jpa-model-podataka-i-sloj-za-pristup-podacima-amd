@@ -50,6 +50,14 @@ public class MenuBarController {
 	public void openFindStudent(ActionEvent event) {
 		mainViewManager.changeRoot("findStudent");
 	}
+	
+	public void openNewIspitniRok(ActionEvent event) {
+		mainViewManager.changeRoot("ispitIspitRok");
+	}
+	
+	public void openPrikazStudenata(ActionEvent event) {
+		mainViewManager.changeRoot("prikazPrijavljenihStudenataZaIspit");
+	}
 
 	public void openNewPredmet(ActionEvent event) {
 		mainViewManager.changeRoot("newPredmet");
