@@ -31,7 +31,7 @@ public class IzlazakNaIspit implements Serializable {
 	private boolean polozen;
 
 	@ManyToOne
-	@JoinColumn(name = "idStudIndex")
+	@JoinColumn(name = "idIndex")
 	private StudIndex studIndex;
 
 	@ManyToOne

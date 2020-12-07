@@ -24,19 +24,23 @@ public interface IspitRepository extends CrudRepository<Ispit, Integer> {
 	
 	// kad je query sa value i nativequery onda se pristupa preko polja u tabeli
 	// da proverim da li ovaj query daje ono sto bi trebalo da daje !!!!
-	@Query( value = "select s.idIndex, (spo.poeni + i.brPoena) from StudIndex s"
-			+ " join IzlazakNaIspit i on (i.idStudIndex = s.idIndex)"
-			+ " join DrziPredmet dp on (s.idstudent = dp.idStudent)"
-			+ " join StudentPredispitneObaveze spo on (spo.idDrziPremet = dp.idDrziPremet)"
-			+ " where i.idIspit = :idIspita"
-			+ " order by s.idstudProgram, s.godinaUpisa, s.broj", nativeQuery = true)
-	List<Object[]> findRezultatiIspita(int idIspita);
+	
+	
+	@Query( "select s.ime,s.prezime,spo.poeni, i.brPoena, (spo.poeni + i.brPoena) from Student s"
+			+ " join StudIndex si on (s.idstudent = si.student)"
+			+ " join IzlazakNaIspit i on (i.studIndex = si.idIndex)"
+			+ " join DrziPredmet dp on (si.idIndex = dp.studIndex)"
+			+ " join StudentPredispitneObaveze spo on (spo.drziPredmet = dp.idDrziPremet)"
+			+ " where i.ispit = :idIspita"
+			+ " order by si.studProgram, si.godinaUpisa, si.broj")
+
+	List<Object> findRezultatiIspita(int idIspita);
 	
 	@Query("select spo.poeni from StudentPredispitneObaveze spo"
 			+ " join DrziPredmet dp on (spo.drziPredmet.idDrziPremet = dp.idDrziPremet)"
 			+ " join StudIndex s on (dp.studIndex.idIndex = s.idIndex)"
 			+ " where dp.sg.idSkolskeGodine = :idSkolskeGodine and s.idIndex = :idIndex and dp.predmet.idPredmeta = :idPredmeta")
-	Double findPoeniStudentPredmet(int idIndex, int idPredmeta, int idSkolskeGodine);
+	Integer findPoeniStudentPredmet(int idIndex, int idPredmeta, int idSkolskeGodine);
 	
 	@Query("select count(ini.idIzlazakNaIspit) from Ispit i"
 			+ " join IzlazakNaIspit ini on (i.idIspit = ini.ispit.idIspit)"

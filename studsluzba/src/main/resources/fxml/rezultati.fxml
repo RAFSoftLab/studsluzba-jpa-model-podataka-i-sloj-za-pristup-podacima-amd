@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:controller="studsluzba.client.fxmlcontrollers.PrijavljeniStudentiZaIspitController" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="366.0" minHeight="10.0" prefHeight="366.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label fx:id="lblRezultati" prefHeight="17.0" prefWidth="188.0" text="Rezultati ispita:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tvRezultati" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <columns>
+          <TableColumn fx:id="tcIme" prefWidth="101.0" text="ime" />
+          <TableColumn fx:id="tcPrezime" prefWidth="99.0" text="prezime" />
+            <TableColumn fx:id="tcPredispitne" prefWidth="92.0" text="predispitne" />
+            <TableColumn fx:id="tcIspit" prefWidth="42.0" text="ispit" />
+            <TableColumn fx:id="tcPoeni" prefWidth="76.0" text="poeni" />
+            <TableColumn fx:id="tcOcena" prefWidth="70.0" text="ocena" />
+            <TableColumn fx:id="tcNapomena" prefWidth="75.0" text="napomena" />
+        </columns>
+      </TableView>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</GridPane>
