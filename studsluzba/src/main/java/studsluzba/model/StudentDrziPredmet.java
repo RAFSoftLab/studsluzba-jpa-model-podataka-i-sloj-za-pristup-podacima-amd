@@ -28,6 +28,8 @@ public class StudentDrziPredmet {
     	
     }
     
+    // komentar
+    
     public StudentDrziPredmet(DrziPredmet dp, StudIndex si) {
     	this.studIndex = si;
     	this.drziPredmet = dp;
