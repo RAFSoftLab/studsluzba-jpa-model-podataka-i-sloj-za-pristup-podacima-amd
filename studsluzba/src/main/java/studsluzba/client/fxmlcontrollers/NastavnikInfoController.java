@@ -29,6 +29,7 @@ import studsluzba.model.SkolskaGodina;
 import studsluzba.model.Zvanje;
 import studsluzba.services.DrziPredmetService;
 import studsluzba.services.NastavnikService;
+import studsluzba.services.NastavnikZvanjaService;
 import studsluzba.services.PredmetService;
 import studsluzba.services.SkolskaGodinaService;
 
@@ -46,6 +47,8 @@ public class NastavnikInfoController {
 	DrziPredmetService dpService;
 	@Autowired
 	SkolskaGodinaService sgService;
+	@Autowired
+	NastavnikZvanjaService nzService;
 	
 	@FXML private Label nL;
 	@FXML private TableView<Zvanje> zvanjaTv;
@@ -102,7 +105,7 @@ public class NastavnikInfoController {
 	}
 	
 	private void populateZvanja(){
-		List<Zvanje> zvanja = nastavnikService.findZvanjaByNastavnik(nastavnik);
+		List<Zvanje> zvanja = nzService.findZvanjaByNastavnik(nastavnik);
 		zvanjaTv.setItems(FXCollections.observableArrayList(zvanja));
 	}
 	

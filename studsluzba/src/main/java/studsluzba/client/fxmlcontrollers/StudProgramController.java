@@ -19,16 +19,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import studsluzba.client.MainViewManager;
 import studsluzba.model.Nastavnik;
 import studsluzba.model.Studprogram;
 import studsluzba.model.VrstaStudija;
 import studsluzba.services.StudProgramService;
+import studsluzba.services.VrstaStudijaService;
 
 @Component
 public class StudProgramController {
 
 	@Autowired
 	StudProgramService studProgramService;
+	@Autowired
+	VrstaStudijaService vss;
+	@Autowired
+	MainViewManager mainViewManager;
 
 	@FXML private TableView<Studprogram> spTv;
 	@FXML private TextField nazivTf;
@@ -41,7 +47,7 @@ public class StudProgramController {
 	
 	@FXML
 	public void initialize() {
-		List<VrstaStudija> vs = studProgramService.getVrsteStudija();
+		List<VrstaStudija> vs = vss.getVrsteStudija();
 		vrstaStudijaCb.setItems(FXCollections.observableArrayList(vs));
 		
 		List<Studprogram> res = studProgramService.getAllPrograms();
@@ -90,7 +96,7 @@ public class StudProgramController {
 	}
 	
 	public void openAddVrstaStudija() {
-		
+		mainViewManager.changeRoot("vrstaStudija");
 	}
 
 

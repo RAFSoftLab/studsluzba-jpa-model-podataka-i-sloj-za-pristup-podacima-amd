@@ -13,13 +13,13 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import studsluzba.client.CustomValidator;
 import studsluzba.model.Predmet;
 import studsluzba.model.PredmetStudprogram;
 import studsluzba.model.Studprogram;
 import studsluzba.services.PredmetService;
 import studsluzba.services.PredmetStudprogramService;
 import studsluzba.services.StudProgramService;
+import studsluzba.tools.CustomValidator;
 
 @Component
 public class PredmetController {

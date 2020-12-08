@@ -25,6 +25,10 @@ public class SkolskaGodinaService {
 	public SkolskaGodina saveSkolskaGodina(SkolskaGodina sg) {
 		return sgRepo.save(sg);
 	}
+
+	public SkolskaGodina getAktivna() {
+		return sgRepo.getAktivna();
+	}
 	
 //	public SkolskaGodina updateSkolskaGodina(SkolskaGodina sg) {
 //		sgRepo.updateSkolskaGodina(sg.getIdSkolskeGodine());

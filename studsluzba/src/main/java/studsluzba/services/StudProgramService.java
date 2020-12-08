@@ -20,8 +20,6 @@ public class StudProgramService {
 
 	@Autowired
 	StudProgramRepository studProgramRepo;
-	@Autowired
-	VrstaStudijaRepository vsRepo;
 
 	public Studprogram saveStudProgram(String naziv, String skraceniNaziv, String zvanje, Year godina, int trajanje, VrstaStudija vs) {
 		Studprogram sp = new Studprogram();
@@ -37,13 +35,6 @@ public class StudProgramService {
 	public List<Studprogram> getAllPrograms() {
 		Iterable<Studprogram> iter = studProgramRepo.findAll();
 		List<Studprogram> rez = new ArrayList<Studprogram>();
-		iter.forEach(rez::add);
-		return rez;
-	}
-	
-	public List<VrstaStudija> getVrsteStudija() {
-		Iterable<VrstaStudija> iter = vsRepo.findAll();
-		List<VrstaStudija> rez = new ArrayList<VrstaStudija>();
 		iter.forEach(rez::add);
 		return rez;
 	}

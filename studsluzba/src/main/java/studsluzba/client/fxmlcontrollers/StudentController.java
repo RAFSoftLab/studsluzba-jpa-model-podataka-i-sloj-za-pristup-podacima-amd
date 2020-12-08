@@ -199,6 +199,4 @@ public class StudentController {
 				Integer.parseInt(brojIndexTf.getText()), true, Integer.parseInt(godinaUpisaTf.getText()), s,
 				studProgramCb.getSelectionModel().getSelectedItem());
 	}
-
-	
 }

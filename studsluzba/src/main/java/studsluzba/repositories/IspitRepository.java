@@ -32,12 +32,12 @@ public interface IspitRepository extends CrudRepository<Ispit, Integer> {
 			+ " order by s.idstudProgram, s.godinaUpisa, s.broj", nativeQuery = true)
 	List<Object[]> findRezultatiIspita(int idIspita);
 	
-	@Query("select spo.poeni from StudentPredispitneObaveze spo"
-			+ " join DrziPredmet dp on (spo.drziPredmet.idDrziPremet = dp.idDrziPremet)"
-			+ " join StudIndex s on (dp.studIndex.idIndex = s.idIndex)"
-			+ " where dp.sg.idSkolskeGodine = :idSkolskeGodine and s.idIndex = :idIndex and dp.predmet.idPredmeta = :idPredmeta")
-	Double findPoeniStudentPredmet(int idIndex, int idPredmeta, int idSkolskeGodine);
-	
+//	@Query("select spo.poeni from StudentPredispitneObaveze spo"
+//			+ " join DrziPredmet dp on (spo.drziPredmet.idDrziPremet = dp.idDrziPremet)"
+//			+ " join StudIndex s on (dp.studIndex.idIndex = s.idIndex)"
+//			+ " where dp.sg.idSkolskeGodine = :idSkolskeGodine and s.idIndex = :idIndex and dp.predmet.idPredmeta = :idPredmeta")
+//	Double findPoeniStudentPredmet(int idIndex, int idPredmeta, int idSkolskeGodine);
+//	
 	@Query("select count(ini.idIzlazakNaIspit) from Ispit i"
 			+ " join IzlazakNaIspit ini on (i.idIspit = ini.ispit.idIspit)"
 			+ " join StudIndex si on (si.idIndex = ini.studIndex.idIndex)"

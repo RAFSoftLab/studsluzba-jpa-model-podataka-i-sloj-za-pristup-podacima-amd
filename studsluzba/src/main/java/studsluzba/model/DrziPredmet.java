@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,9 +32,8 @@ public class DrziPredmet {
 	@JoinColumn(name = "idNastavnika")
 	private Nastavnik nastavnik;
 	
-	@ManyToOne
-	@JoinColumn(name = "idIndex")
-	private StudIndex studIndex;
+	@ManyToMany(mappedBy = "drziPredmet")
+	private List<StudentDrziPredmet> studentDrziPredmet;
 	
 	@OneToMany(mappedBy = "drziPredmet")
 	private List<StudentPredispitneObaveze> spo;
@@ -42,14 +42,7 @@ public class DrziPredmet {
 	public DrziPredmet() {
 		
 	}
-	
-	public DrziPredmet( SkolskaGodina sg, Predmet predmet,  Nastavnik nastavnik, StudIndex student) {
-		this.nastavnik = nastavnik;
-		this.predmet = predmet;
-		this.sg = sg;
-		this.studIndex = student;
-	}
-	
+
 	public DrziPredmet(SkolskaGodina sg, Predmet p, Nastavnik n) {
 		this.nastavnik = n;
 		this.sg = sg;
@@ -88,13 +81,6 @@ public class DrziPredmet {
 		this.nastavnik = nastavnik;
 	}
 
-	public StudIndex getStudIndex() {
-		return studIndex;
-	}
-
-	public void setStudIndex(StudIndex student) {
-		this.studIndex = student;
-	}
 	
 	@Override
 	public boolean equals(Object obj) {

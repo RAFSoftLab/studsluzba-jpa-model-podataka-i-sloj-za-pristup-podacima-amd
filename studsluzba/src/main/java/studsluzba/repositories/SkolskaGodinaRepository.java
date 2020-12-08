@@ -16,5 +16,8 @@ public interface SkolskaGodinaRepository extends CrudRepository<SkolskaGodina, I
 
 	@Query("select sg from SkolskaGodina sg where sg.id = :id")
 	SkolskaGodina findSkolskaGodina(int id);
+	
+	@Query("select sg from SkolskaGodina sg where sg.aktivna = 1")
+	SkolskaGodina getAktivna();
 
 }
