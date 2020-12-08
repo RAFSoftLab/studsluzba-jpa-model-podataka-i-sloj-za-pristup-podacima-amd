@@ -120,9 +120,7 @@ public class Nastavnik implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Nastavnik [ime=" + ime + ", prezime=" + prezime + ", srednjeIme=" + srednjeIme + ", email=" + email
-				+ ", obrazovanje=" + obrazovanje + ", drziPredmet=" + drziPredmet
-				+ "]";
+		return this.ime + " " + this.prezime;
 	}
 	
 	@Override

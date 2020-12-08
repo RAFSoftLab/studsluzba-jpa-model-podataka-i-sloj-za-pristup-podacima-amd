@@ -22,10 +22,6 @@ public class NastavnikService {
 	
 	@Autowired
 	NastavnikRepository nastavnikRepo;
-	@Autowired
-	NastavnikZvanjaRepository nzRepo;
-	@Autowired
-	ZvanjeRepository zvanjeRepo;
 	
 	public Nastavnik saveNastavnik(Nastavnik n) {
 		return nastavnikRepo.save(n);
@@ -33,14 +29,6 @@ public class NastavnikService {
 	
 	public void delete(Nastavnik n) {
 		nastavnikRepo.delete(n);
-	}
-	
-	public NastavnikZvanja saveNastavnikZvanja(NastavnikZvanja nz) {
-		return nzRepo.save(nz);
-	}
-	
-	public void deleteNastavnikZvanja(NastavnikZvanja nz) {
-		nzRepo.delete(nz);
 	}
 	
 	public List<Nastavnik> findAll() {
@@ -53,11 +41,5 @@ public class NastavnikService {
 	public List<Nastavnik> findNastavnici(String ime, String prezime, String srednje, String obrazovanje, String email) {
 		return nastavnikRepo.findAllByParams(ime, prezime, srednje, obrazovanje, email);
 	}
-	
-	public List<Zvanje> findZvanjaByNastavnik(Nastavnik n) {
-		Integer i = n.getIdNastavnik();
-		return nzRepo.findZvanjeByNastavnik(i);
-	}
-	
 	
 }

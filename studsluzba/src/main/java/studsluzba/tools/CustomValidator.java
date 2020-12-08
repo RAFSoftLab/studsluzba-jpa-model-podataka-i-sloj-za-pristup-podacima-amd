@@ -1,4 +1,4 @@
-package studsluzba.client;
+package studsluzba.tools;
 
 /**
  * 

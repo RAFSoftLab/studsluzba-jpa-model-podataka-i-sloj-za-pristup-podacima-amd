@@ -13,12 +13,13 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import studsluzba.client.CustomValidator;
 import studsluzba.model.Nastavnik;
 import studsluzba.model.NastavnikZvanja;
 import studsluzba.model.Zvanje;
 import studsluzba.services.NastavnikService;
+import studsluzba.services.NastavnikZvanjaService;
 import studsluzba.services.ZvanjaService;
+import studsluzba.tools.CustomValidator;
 
 @Component
 public class NastavnikController {
@@ -27,6 +28,8 @@ public class NastavnikController {
 	NastavnikService nastavnikService;
 	@Autowired
 	ZvanjaService zvanjaService;
+	@Autowired
+	NastavnikZvanjaService nzService;
 	
 	private List<Zvanje> svaZvanja = new ArrayList<Zvanje>();
 	private List<Zvanje> izabranaZvanja = new ArrayList<Zvanje>();
@@ -91,13 +94,13 @@ public class NastavnikController {
 			for (Zvanje z : izabranaZvanja) {
 				NastavnikZvanja nz = new NastavnikZvanja(n, z);
 				temp.add(nz);
-				if (nastavnikService.saveNastavnikZvanja(nz) == null) {
+				if (nzService.saveNastavnikZvanja(nz) == null) {
 					flag = true;
 				}
 			}
 			if (flag) {
 				for (NastavnikZvanja nz : temp) {
-					nastavnikService.deleteNastavnikZvanja(nz);
+					nzService.deleteNastavnikZvanja(nz);
 				}
 				nastavnikService.delete(n);
 				errorL.setText("Greska kod cuvanja zvanja za datog nastavnika. Nastavnik nece biti sacuvan!");
