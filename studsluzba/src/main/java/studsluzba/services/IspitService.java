@@ -11,6 +11,7 @@ import studsluzba.model.IspitniRok;
 import studsluzba.model.Nastavnik;
 import studsluzba.model.Predmet;
 import studsluzba.model.SkolskaGodina;
+import studsluzba.model.Student;
 import studsluzba.repositories.IspitRepository;
 
 @Service
@@ -25,5 +26,13 @@ public class IspitService {
 		Ispit i = new Ispit(datumOdrzavanja, vremePocetka, vremeZavrsetka, nastavnik, predmet, ir, zakljucen);
 
 		return ispitRepo.save(i);
+	}
+	
+	public List<Student> findStudentiByIspit(Ispit i) {
+		return ispitRepo.findPrijavljeni(i);
+	}
+	
+	public List<Object[]> findfindRezultatiIspitaPoIspitu(Ispit i) {
+		return ispitRepo.findRezultatiIspitaPoIspitu(i);
 	}
 }

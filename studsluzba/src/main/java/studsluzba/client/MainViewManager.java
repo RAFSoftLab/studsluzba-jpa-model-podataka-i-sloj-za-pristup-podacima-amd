@@ -68,6 +68,22 @@ public class MainViewManager {
 				e.printStackTrace();
 			}
 		}
+		
+		public void openModalNoWait(String fxml) {
+			FXMLLoader loader = appFXMLLoader.getLoader(MainViewManager.class.getResource("/fxml/"+fxml+".fxml"));
+			try {
+				Parent parent = loader.load();
+				Scene scene = new Scene(parent, 400, 300);
+		        Stage stage = new Stage();
+		        stage.initModality(Modality.APPLICATION_MODAL);
+		        stage.setScene(scene);
+		        stage.show();
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 }
 
 

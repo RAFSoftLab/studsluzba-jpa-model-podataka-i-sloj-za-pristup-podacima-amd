@@ -260,7 +260,12 @@ public class Student implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Student [ime=" + ime + ", prezime=" + prezime + ", srednjeIme=" + srednjeIme + ", jmbg=" + jmbg + "]";
+		StudIndex aktivan = null;
+		for (StudIndex si : indexs) {
+			if (si.getAktivan())
+				aktivan = si;
+		}
+		return ime + " " + prezime + " " + aktivan;
 	}
 
 

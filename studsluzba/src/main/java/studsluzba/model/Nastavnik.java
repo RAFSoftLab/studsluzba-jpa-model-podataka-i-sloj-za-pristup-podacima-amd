@@ -46,6 +46,7 @@ public class Nastavnik implements Serializable {
 	public Nastavnik() {
 
 	}
+	
 
 	public Nastavnik(String ime, String prezime, String srednjeIme, String email, String obrazovanje) {
 
@@ -119,9 +120,15 @@ public class Nastavnik implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Nastavnik [ime=" + ime + ", prezime=" + prezime + ", srednjeIme=" + srednjeIme + ", email=" + email
-				+ ", obrazovanje=" + obrazovanje + ", drziPredmet=" + drziPredmet
-				+ "]";
+		return this.ime + " " + this.prezime;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null)
+			return this.idNastavnik == ((Nastavnik)obj).idNastavnik;
+		return false;
+			
 	}
 
 }

@@ -17,4 +17,7 @@ public interface PredmetRepository extends CrudRepository<Predmet, Integer> {
 			+ " where (p.idPredmeta = :predmetId) and ((SUBSTRING_INDEX(sg.godina, '-', 1)+0) between :start and :end)")
 	double findProsecnaOcenaURasponu(int predmetId, int start, int end);
 
+	@Query("select p from Predmet p where naziv like lower(CONCAT('%',:s, '%')) or sifra like lower(:s)")
+	List<Predmet> findByNazivOrSifra(String s);
+	
 }

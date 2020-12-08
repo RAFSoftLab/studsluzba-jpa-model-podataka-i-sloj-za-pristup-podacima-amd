@@ -59,8 +59,12 @@ public class MenuBarController {
 		mainViewManager.changeRoot("prikazPrijavljenihStudenataZaIspit");
 	}
 
+	public void openNewPredmet(ActionEvent event) {
+		mainViewManager.changeRoot("newPredmet");
+	}
 	
-
-	
+	public void openPregledPredmeta(ActionEvent event) {
+		mainViewManager.changeRoot("predmetSearch");
+	}
 		
 }

@@ -1,6 +1,9 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Year;
+
 import javax.persistence.*;
 
 import java.util.Date;
@@ -23,20 +26,20 @@ public class Studprogram implements Serializable {
 	private String naziv;
 	private String skraceniNaziv;
 	private String nazivZvanja;
-	private Date godinaAkreditovanja;
+	private Year godinaAkreditovanja;
 	private int semestriTrajanje;
 	
 	@ManyToOne
 	@JoinColumn(name = "idVrstaStudija")
 	private VrstaStudija vrstaStudija;
 
-	@OneToMany(mappedBy = "studProgram", fetch = FetchType.EAGER)
-	private List<Predmet> predmeti;
+	@ManyToMany(mappedBy = "studProgram")
+	private List<PredmetStudprogram> predmetStudprogram;
 	
 	public Studprogram() {
 	}
 	
-	public Studprogram(String naziv,String skraceniNaziv, String nazivZvanja, Date godinaAkreditovanja, int semestriTrajanje, VrstaStudija vrstaStudija) {
+	public Studprogram(String naziv,String skraceniNaziv, String nazivZvanja, Year godinaAkreditovanja, int semestriTrajanje, VrstaStudija vrstaStudija) {
 
 		this.naziv = naziv;
 		this.skraceniNaziv = skraceniNaziv;
@@ -72,25 +75,20 @@ public class Studprogram implements Serializable {
 
 
 	public Predmet addPredmet(Predmet predmet) {
-		getPredmeti().add(predmet);
-		predmet.setStudProgram(this);
+		predmet.getPredmetStudprogram().add(new PredmetStudprogram(predmet, this));
 
 		return predmet;
 	}
 
 	public Predmet removePredmet(Predmet predmet) {
-		getPredmeti().remove(predmet);
-		predmet.setStudProgram(null);
-
+		PredmetStudprogram temp = null;
+		for (PredmetStudprogram psp : getPredmetStudprogram()) {
+			if (psp.getPredmet().equals(predmet))
+				temp = psp;
+		}
+		getPredmetStudprogram().remove(temp);
+		
 		return predmet;
-	}
-	
-	public List<Predmet> getPredmeti() {
-		return predmeti;
-	}
-
-	public void setPredmeti(List<Predmet> predmeti) {
-		this.predmeti = predmeti;
 	}
 
 	public String getNazivZvanja() {
@@ -101,11 +99,11 @@ public class Studprogram implements Serializable {
 		this.nazivZvanja = nazivZvanja;
 	}
 
-	public Date getGodinaAkreditovanja() {
+	public Year getGodinaAkreditovanja() {
 		return godinaAkreditovanja;
 	}
 
-	public void setGodinaAkreditovanja(Date godinaAkreditovanja) {
+	public void setGodinaAkreditovanja(Year godinaAkreditovanja) {
 		this.godinaAkreditovanja = godinaAkreditovanja;
 	}
 
@@ -123,6 +121,14 @@ public class Studprogram implements Serializable {
 
 	public void setVrstaStudija(VrstaStudija vrstaStudija) {
 		this.vrstaStudija = vrstaStudija;
+	}
+	
+	public List<PredmetStudprogram> getPredmetStudprogram() {
+		return predmetStudprogram;
+	}
+
+	public void setPredmetStudprogram(List<PredmetStudprogram> predmetStudprogram) {
+		this.predmetStudprogram = predmetStudprogram;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package studsluzba.client.fxmlcontrollers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -17,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import studsluzba.client.MainViewManager;
 import studsluzba.model.StudIndex;
@@ -81,6 +85,14 @@ public class FindStudentController {
 		List<Studprogram> sviStudProgrami = studProgramService.getAllPrograms();
 		ObservableList<Studprogram> sviStudProgramiObservableList = FXCollections.observableArrayList(sviStudProgrami);
 		studProgramCb2.setItems(sviStudProgramiObservableList);
+		
+		List<Student> svi = studentService.findAll();
+		imeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("ime"));
+		prezimeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("prezime"));
+		srednjeImeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("srednjeIme"));
+		godinaUpisaTc.setCellValueFactory(new PropertyValueFactory<Student, Integer>("godinaUpisa"));
+		telefonTc.setCellValueFactory(new PropertyValueFactory<Student, String>("brTel"));
+		table.setItems(FXCollections.observableArrayList(svi));
 	}
 
 	public void handleFindStudentByIndex(ActionEvent event) {
@@ -167,5 +179,19 @@ public class FindStudentController {
 		studentIndexService.deleteIndexForStudent(siStari);
 
 	}
-
+	
+	public void upisiNaPredmete() {
+		Student s = table.getSelectionModel().getSelectedItem();
+		if (s == null) {
+			//error
+			Alert a = new Alert(AlertType.ERROR, "Niste izabrali studenta!", ButtonType.CLOSE);
+			a.show();
+			return;
+		}
+		StudIndex si = studentIndexService.getActiveIndexForStudent(s.getIme(), s.getPrezime(), s.getJmbg());
+		List<Object> o = new ArrayList<Object>();
+		o.add(si);
+		MainViewManager.setParameters(o);
+		mainViewManager.changeRoot("studentPredmet");
+	}
 }

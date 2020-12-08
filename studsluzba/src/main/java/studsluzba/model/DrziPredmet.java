@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,23 +32,17 @@ public class DrziPredmet {
 	@JoinColumn(name = "idNastavnika")
 	private Nastavnik nastavnik;
 	
-	@ManyToOne
-	@JoinColumn(name = "idIndex")
-	private StudIndex studIndex;
-	
-	@OneToMany(mappedBy = "drziPredmet")
-	private List<StudentPredispitneObaveze> spo;
-	
+	@ManyToMany(mappedBy = "drziPredmet")
+	private List<StudentDrziPredmet> studentDrziPredmet;
 
 	public DrziPredmet() {
 		
 	}
-	
-	public DrziPredmet( SkolskaGodina sg, Predmet predmet,  Nastavnik nastavnik, StudIndex student) {
-		this.nastavnik = nastavnik;
-		this.predmet = predmet;
+
+	public DrziPredmet(SkolskaGodina sg, Predmet p, Nastavnik n) {
+		this.nastavnik = n;
 		this.sg = sg;
-		this.studIndex = student;
+		this.predmet = p;
 	}
 
 	public int getIdDrziPremet() {
@@ -82,14 +77,14 @@ public class DrziPredmet {
 		this.nastavnik = nastavnik;
 	}
 
-	public StudIndex getStudIndex() {
-		return studIndex;
-	}
-
-	public void setStudIndex(StudIndex student) {
-		this.studIndex = student;
-	}
 	
-	
+	@Override
+	public boolean equals(Object obj) {
+		DrziPredmet dp = (DrziPredmet) obj;
+		if (this.nastavnik.equals(dp.nastavnik) && this.sg.equals(dp.sg) && this.predmet.equals(dp.predmet)) {
+			return true;
+		}
+		return false;
+	}
 	
 }

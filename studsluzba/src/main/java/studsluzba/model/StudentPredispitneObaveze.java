@@ -25,14 +25,14 @@ public class StudentPredispitneObaveze implements Serializable {
 	private PredispitnaObaveza obaveza;
 
 	@ManyToOne
-	@JoinColumn(name = "idDrziPremet")
-	private DrziPredmet drziPredmet;
+	@JoinColumn(name = "idIndex")
+	private StudIndex studIndex;
 
 	
-	public StudentPredispitneObaveze(double poeni, PredispitnaObaveza obaveza, DrziPredmet drziPredmet) {
+	public StudentPredispitneObaveze(double poeni, PredispitnaObaveza obaveza, StudIndex si) {
 		this.poeni = poeni;
 		this.obaveza = obaveza;
-		this.drziPredmet = drziPredmet;
+		this.studIndex = si;
 	}
 	
 	public double getPoeni() {

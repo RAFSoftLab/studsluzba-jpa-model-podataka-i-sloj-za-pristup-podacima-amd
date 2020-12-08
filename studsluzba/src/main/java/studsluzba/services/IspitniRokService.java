@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import studsluzba.model.Ispit;
 import studsluzba.model.IspitniRok;
 import studsluzba.model.SkolskaGodina;
+import studsluzba.model.Student;
 import studsluzba.model.Studprogram;
 import studsluzba.repositories.IspitniRokRepository;
 import studsluzba.repositories.StudentRepository;

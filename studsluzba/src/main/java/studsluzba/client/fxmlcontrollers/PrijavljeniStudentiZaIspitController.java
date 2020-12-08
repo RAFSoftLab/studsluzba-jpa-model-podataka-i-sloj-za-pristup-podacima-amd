@@ -1,6 +1,5 @@
 package studsluzba.client.fxmlcontrollers;
 
-import java.awt.desktop.PrintFilesEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +22,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import studsluzba.client.MainViewManager;
 import studsluzba.model.Ispit;
 import studsluzba.model.IspitniRok;
-import studsluzba.model.IzlazakNaIspit;
 import studsluzba.model.Nastavnik;
-import studsluzba.model.PredispitnaObaveza;
 import studsluzba.model.Predmet;
 import studsluzba.model.SkolskaGodina;
+import studsluzba.model.StudIndex;
 import studsluzba.model.Student;
-import studsluzba.model.StudentPredispitneObaveze;
-import studsluzba.repositories.IspitRepository;
 import studsluzba.services.IspitService;
 import studsluzba.services.IspitniRokService;
 import studsluzba.services.SkolskaGodinaService;
+import studsluzba.services.StudentService;
+import studsluzba.tools.RezultatiClass;
 
 @Component
 public class PrijavljeniStudentiZaIspitController {
@@ -42,13 +40,9 @@ public class PrijavljeniStudentiZaIspitController {
 	@Autowired
 	IspitService ispitService;
 	@Autowired
-	IspitRepository ispitRepo;
-	@Autowired
 	MainViewManager mainViewManager;
 	@FXML
 	private Button btnPrikaziIspite;
-	@FXML
-	private Button btnRezultati;
 	@FXML
 	private Button btnStudenti;
 	@FXML
@@ -57,99 +51,79 @@ public class PrijavljeniStudentiZaIspitController {
 	ListView<Ispit> lvIspitaZaIspitniRok;
 	@FXML
 	ListView<Student> lvStudentiZaIspit;
+	@FXML
+	Label lblIspit;
+	@FXML
+	Label lblRezultati;
+	@FXML private TableView<RezultatiClass> tvRezultati;
+	@FXML private TableColumn<RezultatiClass, StudIndex> tcindex;
+	@FXML private TableColumn<RezultatiClass, String> tcime;
+	@FXML private TableColumn<RezultatiClass, String> tcprezime;
+	@FXML private TableColumn<RezultatiClass, Double> tcpoeni;
+	@FXML private TableColumn<RezultatiClass, Integer> tcocena;
 
-//REZULTATI
-	@FXML
-	private Label lblRezultati;
-	@FXML
-	private TableView<Object> tvRezultati = new TableView();
-	@FXML
-	private TableColumn tcIme = new TableColumn();
-	@FXML
-	private TableColumn tcPrezime = new TableColumn();
-	@FXML
-	private TableColumn tcPredispitne = new TableColumn();
-	@FXML
-	private TableColumn tcIspit = new TableColumn();
-	@FXML
-	private TableColumn tcPoeni = new TableColumn();
-	@FXML
-	private TableColumn tcOcena = new TableColumn();
-	@FXML
-	private TableColumn tcNapomena = new TableColumn();
-
-	private Ispit ispitAktivan;
-	private IspitniRok ispitniRokAktivan;
-	private List<Ispit> ispitiZaRok = new ArrayList<Ispit>();
-	private List<IspitniRok> ispitniRokovi = new ArrayList<IspitniRok>();
-	private ObservableList<Object> data = FXCollections.observableArrayList();
+	Ispit ispitAktivan;
+	IspitniRok ispitniRokAktivan;
+	List<Ispit> ispitiZaRok = new ArrayList<Ispit>();
+	List<IspitniRok> ispitniRokovi = new ArrayList<IspitniRok>();
 
 	@FXML
 	public void initialize() {
-
+		
 		List<IspitniRok> ir = ispitniRokService.getAll();
 		ObservableList<IspitniRok> ispitniRokoviO = FXCollections.observableArrayList(ir);
-
 		lvIspitnihRokova.setItems(ispitniRokoviO);
 
 	}
 
-	public void handleOpenModaStudentiZaIspit(ActionEvent ae) {
+	public void handleOpenModalStudentiZaIspit(ActionEvent ae) {
 		ispitAktivan = lvIspitaZaIspitniRok.getSelectionModel().getSelectedItem();
 
-		if (ispitAktivan != null) {
-			List<Student> s = ispitRepo.findPrijavljeni(ispitAktivan.getIdIspit());
-			if (!(s.isEmpty())) {
-				ObservableList<Student> studentiO = FXCollections.observableArrayList(s);
+		mainViewManager.openModalNoWait("studentiZaIspit");
+		
+		lblIspit.setText("Prijavljeni studenti za ispit: " + ispitAktivan.toString());
+		List<Student> prijavljeniZaIspit = ispitService.findStudentiByIspit(ispitAktivan);
+		lvStudentiZaIspit.setItems(FXCollections.observableArrayList(prijavljeniZaIspit));
+		
+	}
+	
+	public void handleOpenModalRezultatiZaIspit(ActionEvent ae) {
+		ispitAktivan = lvIspitaZaIspitniRok.getSelectionModel().getSelectedItem();
 
-				lvStudentiZaIspit.setItems(studentiO);
-			}
-
+		mainViewManager.openModalNoWait("rezultati");
+		lblRezultati.setText("Rezultati ispita: " + ispitAktivan.toString());
+		
+		List<Object[]> rez = ispitService.findfindRezultatiIspitaPoIspitu(ispitAktivan);
+		
+		List<RezultatiClass> svi = new ArrayList<RezultatiClass>();
+		for (Object[] os : rez) {
+			RezultatiClass rc = new RezultatiClass((StudIndex)os[0], (String)os[1], (String)os[2], (double)os[3], (int)os[4]);
+			svi.add(rc);
 		}
+		
+		tcindex.setCellValueFactory(new PropertyValueFactory<RezultatiClass, StudIndex>("si"));
+		tcime.setCellValueFactory(new PropertyValueFactory<RezultatiClass, String>("ime"));
+		tcprezime.setCellValueFactory(new PropertyValueFactory<RezultatiClass, String>("prezime"));
+		tcpoeni.setCellValueFactory(new PropertyValueFactory<RezultatiClass, Double>("poeni"));
+		tcocena.setCellValueFactory(new PropertyValueFactory<RezultatiClass, Integer>("ocena"));
 
-		mainViewManager.openModal("studentiZaIspit");
+		tvRezultati.getColumns().setAll(tcindex, tcime, tcprezime, tcpoeni, tcocena);
 
+		tvRezultati.setItems(FXCollections.observableArrayList(svi));
+		
+		
 	}
 
 	public void handleOpenModalIspitZaIspitniRok(ActionEvent ae) {
-
+		
 		ispitAktivan = lvIspitaZaIspitniRok.getSelectionModel().getSelectedItem();
-
-		if (ispitAktivan != null) {
+		
+		if(ispitAktivan!=null) {
 			mainViewManager.openModal("studentiZaIspit");
-
+			
 		}
 	}
-
-	public void handleOpenModalRezultati(ActionEvent ae) {
-
-		ispitAktivan = lvIspitaZaIspitniRok.getSelectionModel().getSelectedItem();
-
-		if (ispitAktivan != null) {
-			List<Object> s = ispitRepo.findRezultatiIspita(ispitAktivan.getIdIspit());
-
-			for (Object st : s) {
-				System.out.println(st);
-			}
-
-			tcIme.setCellValueFactory(new PropertyValueFactory<Student, String>("ime"));
-			tcPrezime.setCellValueFactory(new PropertyValueFactory<Student, String>("prezime"));
-			tcPredispitne.setCellValueFactory(new PropertyValueFactory<StudentPredispitneObaveze, Double>("poeni"));
-			tcIspit.setCellValueFactory(new PropertyValueFactory<Ispit, String>("datumOdrzavanja" + "vremePocetka"+ "vremeZavrsetka"));
-			tcPoeni.setCellValueFactory(new PropertyValueFactory<IzlazakNaIspit, Double>("brPoena"));
-			tcOcena.setCellValueFactory(new PropertyValueFactory<IzlazakNaIspit, Integer>("ocena"));
-			tcNapomena.setCellValueFactory(new PropertyValueFactory<IzlazakNaIspit, String>("napomena"));
-
-			data.clear();
-			data.addAll(s);
-
-			tvRezultati.setItems(data);
-
-			mainViewManager.openModal("rezultati");
-
-		}
-	}
-
+	
 	public void handlePrikaziIspite(ActionEvent ae) {
 		ispitniRokAktivan = lvIspitnihRokova.getSelectionModel().getSelectedItem();
 

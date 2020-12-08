@@ -1,6 +1,7 @@
 package studsluzba.client.fxmlcontrollers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
@@ -24,7 +27,11 @@ import studsluzba.model.Nastavnik;
 import studsluzba.model.Predmet;
 import studsluzba.model.SkolskaGodina;
 import studsluzba.model.Zvanje;
+import studsluzba.services.DrziPredmetService;
 import studsluzba.services.NastavnikService;
+import studsluzba.services.NastavnikZvanjaService;
+import studsluzba.services.PredmetService;
+import studsluzba.services.SkolskaGodinaService;
 
 @Component
 public class NastavnikInfoController {
@@ -34,19 +41,30 @@ public class NastavnikInfoController {
 	
 	@Autowired
 	NastavnikService nastavnikService;
+	@Autowired
+	PredmetService predmetService;
+	@Autowired
+	DrziPredmetService dpService;
+	@Autowired
+	SkolskaGodinaService sgService;
+	@Autowired
+	NastavnikZvanjaService nzService;
 	
 	@FXML private Label nL;
 	@FXML private TableView<Zvanje> zvanjaTv;
 	@FXML private TableView<DrziPredmet> psgTv;
+	@FXML private ComboBox<Predmet> predmetList;
+	@FXML private ComboBox<SkolskaGodina> sgCb;
 	
 	private List<Object> passed;
 	private Nastavnik nastavnik;
+	private List<DrziPredmet> nastavnikPredmeti;
 	
 	@FXML
 	public void initialize() {
 		passed = MainViewManager.getParameters();
 		if (passed == null || passed.isEmpty()) {
-			Alert a = new Alert(AlertType.ERROR, "Neuspesno ocitavanje informacija o nastavniku!", ButtonType.CLOSE);
+			Alert a = new Alert(AlertType.ERROR, "Neuspesno ocitavanje informacija o nastavniku ili niste izabrali nastavnika!", ButtonType.CLOSE);
 			a.show();
 			a.setOnCloseRequest(new EventHandler<DialogEvent>() {
 				@Override
@@ -76,15 +94,23 @@ public class NastavnikInfoController {
 		 
 		psgTv.getColumns().setAll(pc, sgc);
 		populateDrziPredmet();
+		
+		List<Predmet> predmeti = predmetService.findAll();
+		predmetList.setItems(FXCollections.observableArrayList(predmeti));
+		
+		List<SkolskaGodina> sg = sgService.getSkolskeGodine();
+		sgCb.setItems(FXCollections.observableArrayList(sg)); 
+		
+		nastavnikPredmeti = dpService.findInfoByNastavnik(nastavnik);
 	}
 	
 	private void populateZvanja(){
-		List<Zvanje> zvanja = nastavnikService.findZvanjaByNastavnik(nastavnik);
+		List<Zvanje> zvanja = nzService.findZvanjaByNastavnik(nastavnik);
 		zvanjaTv.setItems(FXCollections.observableArrayList(zvanja));
 	}
 	
 	private void populateDrziPredmet() {
-		List<DrziPredmet> dp = nastavnikService.findInfoByNastavnik(nastavnik);
+		List<DrziPredmet> dp = dpService.findInfoByNastavnik(nastavnik);
 		for (DrziPredmet d : dp) {
 			System.out.println(d.getPredmet().getNaziv());
 			System.out.println(d.getSg().getGodina());
@@ -95,6 +121,49 @@ public class NastavnikInfoController {
 	public void backToNastavnik(ActionEvent e) {
 		MainViewManager.setParameters(null);
 		mainViewManager.changeRoot("nastavnikSearch");
+	}
+	
+	public void prikaziPredmet() {
+		// da omogucim da prikaze i predmet iz tabele
+		Predmet p = predmetList.getValue();
+		if (p != null) {
+			List<Object> o = new ArrayList<Object>();
+			o.add(p);		
+			mainViewManager.setParameters(o);
+			mainViewManager.changeRoot("predmetSearch");
+		}
+		else {
+			//nije izabran predmet error
+			Alert a = new Alert(AlertType.ERROR, "Niste izabrali nijedan predmet!", ButtonType.CLOSE);
+			a.show();
+		}
+	}
+	
+	public void dodajPredmetNastavniku() {
+		Predmet p = predmetList.getValue();
+		SkolskaGodina sg = sgCb.getValue();
+		if (p != null && sg != null) {
+			DrziPredmet dp = new DrziPredmet(sg, p, nastavnik);
+			if (nastavnikPredmeti.contains(dp)) {
+				Alert a = new Alert(AlertType.ERROR, "Nastavnik vec drzi ovaj predmet u ovoj skolskoj godini!", ButtonType.CLOSE);
+				a.show();
+				return;
+			}
+			if (dpService.save(dp) == null) {
+				//save error
+				nastavnikPredmeti.add(dp);
+				Alert a = new Alert(AlertType.ERROR, "Neuspesno dodavanje predmeta nastavniku!", ButtonType.CLOSE);
+				a.show();
+			} else {
+				sgCb.setValue(null);
+				psgTv.getItems().add(dp);
+			}
+		}
+		else {
+			//empty error
+			Alert a = new Alert(AlertType.ERROR, "Niste izabrali skolsku godinu ili predmet!", ButtonType.CLOSE);
+			a.show();
+		}
 	}
 
 }

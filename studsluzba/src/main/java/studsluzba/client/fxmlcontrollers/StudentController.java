@@ -1,6 +1,7 @@
 package studsluzba.client.fxmlcontrollers;
 
 import java.util.Date;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +60,8 @@ public class StudentController {
 	private Text actionTarget;
 	@FXML
 	private ToggleGroup polGroup;
-
 	@FXML
 	private RadioButton radioButton;
-
 	@FXML
 	private RadioButton radioButton2;
 	@FXML
@@ -199,6 +198,4 @@ public class StudentController {
 				Integer.parseInt(brojIndexTf.getText()), true, Integer.parseInt(godinaUpisaTf.getText()), s,
 				studProgramCb.getSelectionModel().getSelectedItem());
 	}
-
-	
 }

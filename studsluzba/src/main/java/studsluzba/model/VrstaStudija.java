@@ -56,4 +56,9 @@ public class VrstaStudija implements Serializable{
 		this.skracenNaziv = skracenNaziv;
 	}
 
+	@Override
+	public String toString() {
+		return skracenNaziv;
+	}
+	
 }

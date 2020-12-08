@@ -81,4 +81,12 @@ public class SkolskaGodina implements Serializable {
 		return this.godina + "";
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj != null) {
+			if (this.idSkolskeGodine == ((SkolskaGodina)obj).idSkolskeGodine)
+				return true;			
+		}
+		return false;
+	}
 }

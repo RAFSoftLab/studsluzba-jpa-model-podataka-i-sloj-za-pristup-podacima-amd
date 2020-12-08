@@ -1,12 +1,14 @@
 package studsluzba.services;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import studsluzba.model.DrziPredmet;
 import studsluzba.model.Student;
 import studsluzba.repositories.StudentRepository;
 
@@ -26,7 +28,13 @@ public class StudentService {
 		return studentRepo.findStudentbyName(ime, prezime);
 	}
 
-
+	public List<Student> findAll() {
+		Iterable<Student> iter = studentRepo.findAll();
+		List<Student> rez = new ArrayList<Student>();
+		iter.forEach(rez::add);
+		return rez;
+	}
+	
 	public Student saveStudent(String ime, String prezime, String srednjeIme, String jmbg, LocalDate datumRodj,
 			String mestoRodj, String drzavaRodj, String pol, String drzavljanstvo, String nacionalnost, String brLK,
 			String brTel, String izdavacLk, String adresa, String emFax, String emPers, int godinaUpisa) {

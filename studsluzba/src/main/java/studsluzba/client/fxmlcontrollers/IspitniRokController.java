@@ -11,10 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import studsluzba.client.MainViewManager;
 import studsluzba.model.Ispit;
 import studsluzba.model.IspitniRok;
@@ -26,6 +29,8 @@ import studsluzba.model.Student;
 import studsluzba.model.Studprogram;
 import studsluzba.services.IspitService;
 import studsluzba.services.IspitniRokService;
+import studsluzba.services.NastavnikService;
+import studsluzba.services.PredmetService;
 import studsluzba.services.SkolskaGodinaService;
 
 @Component
@@ -35,6 +40,10 @@ public class IspitniRokController {
 	IspitniRokService ispitniRokService;
 	@Autowired
 	IspitService ispitService;
+	@Autowired
+	NastavnikService nastavnikService;
+	@Autowired
+	PredmetService predmetService;
 	@Autowired
 	SkolskaGodinaService skolskaGodinaService;
 	@Autowired
@@ -64,13 +73,16 @@ public class IspitniRokController {
 	@FXML
 	private Button btnSacuvajIspit;
 
+	@FXML
+	private CheckBox zakCb;
+
 	// IspitniRok
 	@FXML
 	private DatePicker dpDatumPocetka;
 	@FXML
 	private DatePicker dpDatumZavrsetka;
 	@FXML
-	private ComboBox<SkolskaGodina> cbSkolskaGodina = new ComboBox<SkolskaGodina>();
+	private ComboBox<SkolskaGodina> cbSkolskaGodina;
 	@FXML
 	private Button btnSacuvajIspitniRok;
 	@FXML
@@ -83,22 +95,19 @@ public class IspitniRokController {
 
 	@FXML
 	public void initialize() {
-		/*
-		 * List<Studprogram> sviStudProgrami = studProgramService.getAllPrograms();
-		 * ObservableList<Studprogram> sviStudProgramiObservableList =
-		 * FXCollections.observableArrayList(sviStudProgrami);
-		 * studProgramCb.setItems(sviStudProgramiObservableList);
-		 */
-
-		List<SkolskaGodina> sveSkolskeGodine = skolskaGodinaService.getSkolskeGodine();
-		ObservableList<SkolskaGodina> sveSkolskeGodineObservableList = FXCollections
-				.observableArrayList(sveSkolskeGodine);
-		cbSkolskaGodina.setItems(sveSkolskeGodineObservableList);
+	
+	
 
 	}
 
 	public void handleOpenModalIspitniRok(ActionEvent ae) {
-		mainViewManager.openModal("ispitniRok");
+		mainViewManager.openModalNoWait("ispitniRok");
+		
+		List<SkolskaGodina> sveSkolskeGodine = skolskaGodinaService.getSkolskeGodine();
+		ObservableList<SkolskaGodina> sveSkolskeGodineObservableList = FXCollections
+				.observableArrayList(sveSkolskeGodine);
+		cbSkolskaGodina.setItems(sveSkolskeGodineObservableList);
+			
 	}
 
 	public void handleOpenModalIspitZaIspitniRok(ActionEvent ae) {
@@ -107,18 +116,36 @@ public class IspitniRokController {
 		ispitniRokAktivan = lvIspitnihRokova.getSelectionModel().getSelectedItem();
 		
 		if(ispitniRokAktivan!=null) {
-			mainViewManager.openModal("ispit");
+			mainViewManager.openModalNoWait("ispit");
 			
+			List<Predmet> sviPredmeti =  predmetService.findAll();
+			ObservableList<Predmet> sviPredmetiObservableList = FXCollections
+					.observableArrayList(sviPredmeti);
+			cbPredmet.setItems(sviPredmetiObservableList);
+			
+			List<Nastavnik> sviNastavnici =  nastavnikService.findAll();
+			ObservableList<Nastavnik> sviNastavniciObservableList = FXCollections
+					.observableArrayList(sviNastavnici);
+			cbNastavnik.setItems(sviNastavniciObservableList);
 		}
 	}
 
 	public void handleSaveIspitZaIspitniRok(ActionEvent ae) {
 
 		ispitniRokAktivan = lvIspitnihRokova.getSelectionModel().getSelectedItem();
-		// !!!!!!!!!!!
+		
+		
+		boolean zakljucen = false;
+		if (zakCb.isSelected()) {
+			zakljucen = true;
+
+		} else {
+			zakljucen = false;
+		}
+		
 		Ispit ispit = ispitService.saveIspit(dpDatumOdrzavanja.getValue(), tfVremePocetka.getText(),
 				tfVremeZavrsetka.getText(), cbNastavnik.getSelectionModel().getSelectedItem(),
-				cbPredmet.getSelectionModel().getSelectedItem(), ispitniRokAktivan, true);
+				cbPredmet.getSelectionModel().getSelectedItem(), ispitniRokAktivan, zakljucen);
 
 		ispitiZaRok.add(ispit);
 		ispitniRokAktivan.setIspiti(ispitiZaRok);
@@ -144,6 +171,9 @@ public class IspitniRokController {
 				ObservableList<Ispit> ispitiO = FXCollections.observableArrayList(i);
 
 				lvIspitaZaIspitniRok.setItems(ispitiO);
+			}
+			else {
+				lvIspitaZaIspitniRok.setItems(null);
 			}
 
 		}

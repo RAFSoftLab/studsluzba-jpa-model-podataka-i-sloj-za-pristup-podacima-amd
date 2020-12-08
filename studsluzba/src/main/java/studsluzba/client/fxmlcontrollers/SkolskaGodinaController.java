@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import studsluzba.model.SkolskaGodina;
 import studsluzba.services.SkolskaGodinaService;
+import studsluzba.tools.Stored;
 
 @Component
 public class SkolskaGodinaController {
@@ -36,12 +37,9 @@ public class SkolskaGodinaController {
 		List<SkolskaGodina> sgs = sgService.getSkolskeGodine();
 		aktivnaCb.setItems(FXCollections.observableArrayList(sgs));
 		
-		for (SkolskaGodina sg : sgs) {
-			if (sg.isAktivna()) {
-				aktivnaLabel.setText("Aktivna godina: " + sg.getGodina());
-				trAktivna = sg;
-			}
-		}
+		SkolskaGodina sg = Stored.getInstance().getAktivnaSkolskaGodina();
+		aktivnaLabel.setText("Aktivna godina: " + sg.getGodina());
+		trAktivna = sg;
 	}
  	
 	public void sacuvajNovu(ActionEvent e) {
@@ -74,6 +72,7 @@ public class SkolskaGodinaController {
 		
 		aktivnaLabel.setText("Aktivna godina: " + ak.getGodina());
 		ak.setAktivna(true);
+		Stored.getInstance().setAktivnaSkolskaGodina(ak);
 		if (trAktivna != null) {
 			trAktivna.setAktivna(false);
 			sgService.saveSkolskaGodina(trAktivna);

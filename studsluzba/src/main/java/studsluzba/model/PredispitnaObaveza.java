@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name = "PredispitnaObaveza.findAll", query = "SELECT spo FROM PredispitnaObaveza spo")
-public class PredispitnaObaveza implements Serializable {
+@NamedQuery(name = "PredispitnaObaveza.findAll", query = "SELECT i FROM PredispitnaObaveza i")
+public class PredispitnaObaveza implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,16 +20,13 @@ public class PredispitnaObaveza implements Serializable {
 
 	private String vrsta;
 	private int maxPoeni;
-
-	public PredispitnaObaveza() {
-	}
-
-	public PredispitnaObaveza(String vrsta, int maxPoeni) {
+	
+	public PredispitnaObaveza () {}
+	
+	public PredispitnaObaveza (String vrsta, int maxPoeni) {
 		this.vrsta = vrsta;
 		this.maxPoeni = maxPoeni;
-		
 	}
-
 
 	public String getVrsta() {
 		return vrsta;
@@ -46,5 +43,5 @@ public class PredispitnaObaveza implements Serializable {
 	public void setMaxPoeni(int maxPoeni) {
 		this.maxPoeni = maxPoeni;
 	}
-
+	
 }

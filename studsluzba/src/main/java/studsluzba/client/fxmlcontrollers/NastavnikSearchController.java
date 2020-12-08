@@ -91,7 +91,8 @@ public class NastavnikSearchController {
 	public void openNastavnikInfo(ActionEvent e) {
 		List<Object> params = new ArrayList<Object>();
 		Nastavnik n = nastavnikTv.getSelectionModel().getSelectedItem();
-		params.add(n);
+		if (n != null)
+			params.add(n);
 		MainViewManager.setParameters(params);
 		mainViewManager.changeRoot("nastavnikInfo");
 	}

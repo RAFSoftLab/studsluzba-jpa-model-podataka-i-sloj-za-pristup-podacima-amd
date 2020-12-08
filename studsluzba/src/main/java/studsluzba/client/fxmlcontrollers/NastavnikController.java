@@ -17,7 +17,9 @@ import studsluzba.model.Nastavnik;
 import studsluzba.model.NastavnikZvanja;
 import studsluzba.model.Zvanje;
 import studsluzba.services.NastavnikService;
+import studsluzba.services.NastavnikZvanjaService;
 import studsluzba.services.ZvanjaService;
+import studsluzba.tools.CustomValidator;
 
 @Component
 public class NastavnikController {
@@ -26,12 +28,14 @@ public class NastavnikController {
 	NastavnikService nastavnikService;
 	@Autowired
 	ZvanjaService zvanjaService;
+	@Autowired
+	NastavnikZvanjaService nzService;
 	
 	private List<Zvanje> svaZvanja = new ArrayList<Zvanje>();
 	private List<Zvanje> izabranaZvanja = new ArrayList<Zvanje>();
 	
-//	VALIDACIJE ZA TF DA DODAM??
-	
+	private List<Nastavnik> svi;
+		
 	@FXML private TextField imeTf;
 	@FXML private TextField prezimeTf;
 	@FXML private TextField srednjeImeTf;
@@ -46,6 +50,7 @@ public class NastavnikController {
 	
 	@FXML
 	public void initialize() {
+		svi = nastavnikService.findAll();
 		svaZvanja = zvanjaService.getZvanja();
 		
 		for (Zvanje z : svaZvanja) {
@@ -65,34 +70,40 @@ public class NastavnikController {
 		
 	}
 
-	
 	public void saveNastavnik(ActionEvent event) {
-		Nastavnik n = new Nastavnik();
-		n.setIme(imeTf.getText());
-		n.setPrezime(prezimeTf.getText());
-		n.setSrednjeIme(srednjeImeTf.getText());
-		n.setEmail(emailTf.getText());
-		n.setObrazovanje(obrazovanjeTf.getText());
-		if (imeTf.getText().isEmpty() || prezimeTf.getText().isEmpty() || emailTf.getText().isEmpty() || obrazovanjeTf.getText().isEmpty() || izabranaZvanja.isEmpty()) {
+		String ime = imeTf.getText();
+		String prezime = prezimeTf.getText();
+		String srednjeIme = srednjeImeTf.getText();
+		String email = emailTf.getText();
+		String obrazovanje = obrazovanjeTf.getText();
+		Nastavnik n = new Nastavnik(ime, prezime, srednjeIme, email, obrazovanje);
+		
+		if (svi.contains(n)) {
+			errorL.setText("Nastavnik vec postoji!");
+			return;
+		}
+		
+		if (CustomValidator.emptyString(ime, prezime, email, obrazovanje)) {
 			errorL.setText("Sva polja osim \"Srednje ime\" moraju biti popunjena!");
 			return;
 		}
-		Nastavnik ret = nastavnikService.saveNastavnik(n);
-		if (ret != null) {
+		n = nastavnikService.saveNastavnik(n);
+		if (n != null) {
 			boolean flag = false;
 			List<NastavnikZvanja> temp = new ArrayList<NastavnikZvanja>();
 			for (Zvanje z : izabranaZvanja) {
 				NastavnikZvanja nz = new NastavnikZvanja(n, z);
 				temp.add(nz);
-				if (nastavnikService.saveNastavnikZvanja(nz) == null) {
+				if (nzService.saveNastavnikZvanja(nz) == null) {
 					flag = true;
 				}
 			}
 			if (flag) {
 				for (NastavnikZvanja nz : temp) {
-					nastavnikService.deleteNastavnikZvanja(nz);
+					nzService.deleteNastavnikZvanja(nz);
 				}
-				errorL.setText("Neuspesno dodavanje, pokusajte ponovo.");
+				nastavnikService.delete(n);
+				errorL.setText("Greska kod cuvanja zvanja za datog nastavnika. Nastavnik nece biti sacuvan!");
 				return;
 			}
 			imeTf.setText("");

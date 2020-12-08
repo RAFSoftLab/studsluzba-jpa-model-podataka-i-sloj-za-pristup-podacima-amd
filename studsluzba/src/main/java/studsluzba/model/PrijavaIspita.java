@@ -1,6 +1,5 @@
 package studsluzba.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -21,7 +20,7 @@ public class PrijavaIspita {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idPrijavaIpita;
-	private LocalDate datumPrijave;
+	private Date datumPrijave;
 
 	@ManyToOne
 	@JoinColumn(name = "idIspit")
@@ -37,7 +36,7 @@ public class PrijavaIspita {
 
 	}
 
-	public PrijavaIspita(LocalDate datumPrijave, Ispit ispit, StudIndex prijavljuje_student, boolean izlazak) {
+	public PrijavaIspita(Date datumPrijave, Ispit ispit, StudIndex prijavljuje_student, boolean izlazak) {
 		this.datumPrijave = datumPrijave;
 		this.ispit = ispit;
 		this.student = prijavljuje_student;
@@ -53,11 +52,11 @@ public class PrijavaIspita {
 		this.idPrijavaIpita = idPrijavaIpita;
 	}
 
-	public LocalDate getDatumPrijave() {
+	public Date getDatumPrijave() {
 		return datumPrijave;
 	}
 
-	public void setDatumPrijave(LocalDate datumPrijave) {
+	public void setDatumPrijave(Date datumPrijave) {
 		this.datumPrijave = datumPrijave;
 	}
 

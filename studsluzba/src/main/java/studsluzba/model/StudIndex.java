@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -55,8 +56,11 @@ public class StudIndex implements Serializable {
 	@OneToMany(mappedBy = "studIndex")
 	private List<PriznatPredmet> priznatiPredmeti;
 	
+	@ManyToMany(mappedBy = "studIndex")
+	private List<StudentDrziPredmet> studentDrziPredmet;
+	
 	@OneToMany(mappedBy = "studIndex")
-	private List<DrziPredmet> drziPredmet;
+	private List<StudentPredispitneObaveze> spo;
 
 	public StudIndex() {
 
@@ -152,8 +156,7 @@ public class StudIndex implements Serializable {
 
 	@Override
 	public String toString() {
-		return "StudIndex [godinaUpisa=" + godinaUpisa + ", broj=" + broj + ", studProgram=" + studProgram
-				+ ", aktivan=" + aktivan + ", datumaktivnosti=" + datumaktivnosti + ", student=" + student + "]";
+		return broj + "/" + godinaUpisa + " " + studProgram.getSkraceniNaziv();
 	}
 
 	public List<IzlazakNaIspit> getIzlazakNaIspit() {

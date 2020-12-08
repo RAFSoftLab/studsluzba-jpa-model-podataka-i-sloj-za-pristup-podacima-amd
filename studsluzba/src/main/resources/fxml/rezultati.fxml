@@ -25,13 +25,11 @@
       </Label>
       <TableView fx:id="tvRezultati" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
         <columns>
-          <TableColumn fx:id="tcIme" prefWidth="101.0" text="ime" />
-          <TableColumn fx:id="tcPrezime" prefWidth="99.0" text="prezime" />
-            <TableColumn fx:id="tcPredispitne" prefWidth="92.0" text="predispitne" />
-            <TableColumn fx:id="tcIspit" prefWidth="42.0" text="ispit" />
-            <TableColumn fx:id="tcPoeni" prefWidth="76.0" text="poeni" />
-            <TableColumn fx:id="tcOcena" prefWidth="70.0" text="ocena" />
-            <TableColumn fx:id="tcNapomena" prefWidth="75.0" text="napomena" />
+            <TableColumn fx:id="tcindex" prefWidth="42.0" text="Indeks" />
+          <TableColumn fx:id="tcime" prefWidth="101.0" text="Ime" />
+          <TableColumn fx:id="tcprezime" prefWidth="99.0" text="Prezime" />
+            <TableColumn fx:id="tcpoeni" prefWidth="76.0" text="Poeni" />
+            <TableColumn fx:id="tcocena" prefWidth="70.0" text="Ocena" />
         </columns>
       </TableView>
    </children>
