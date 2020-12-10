@@ -30,7 +30,7 @@
             </Menu>
             <Menu text="Administracija">
                 <items>
-                    <MenuItem text="Šifarnici" />   
+                    <MenuItem text="Šifarnici" onAction="#openSifarnici" />   
                     <MenuItem text="Studijski programi" onAction="#openStudProgrami"/>              
                     <MenuItem text="Školska godina" onAction="#openSkolskaGodina" />               
                     <MenuItem text="Korisnici" />

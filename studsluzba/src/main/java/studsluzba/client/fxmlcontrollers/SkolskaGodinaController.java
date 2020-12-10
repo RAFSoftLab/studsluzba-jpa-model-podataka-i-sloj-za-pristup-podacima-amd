@@ -38,7 +38,8 @@ public class SkolskaGodinaController {
 		aktivnaCb.setItems(FXCollections.observableArrayList(sgs));
 		
 		SkolskaGodina sg = Stored.getInstance().getAktivnaSkolskaGodina();
-		aktivnaLabel.setText("Aktivna godina: " + sg.getGodina());
+		if (sg != null)
+			aktivnaLabel.setText("Aktivna godina: " + sg.getGodina());
 		trAktivna = sg;
 	}
  	

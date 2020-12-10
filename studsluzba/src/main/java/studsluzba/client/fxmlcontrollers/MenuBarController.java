@@ -66,5 +66,9 @@ public class MenuBarController {
 	public void openPregledPredmeta(ActionEvent event) {
 		mainViewManager.changeRoot("predmetSearch");
 	}
+	
+	public void openSifarnici(ActionEvent event) {
+		mainViewManager.changeRoot("sifarnici");
+	}
 		
 }

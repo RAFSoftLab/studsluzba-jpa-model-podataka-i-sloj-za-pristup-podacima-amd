@@ -1,5 +1,6 @@
 package studsluzba.client.fxmlcontrollers;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
@@ -27,6 +28,8 @@ import studsluzba.services.SifarniciService;
 import studsluzba.services.StudProgramService;
 import studsluzba.services.StudentIndexService;
 import studsluzba.services.StudentService;
+import studsluzba.sifarnici.DrzavaGradovi;
+import studsluzba.tools.Stored;
 
 @Component
 public class StudentController {
@@ -149,14 +152,17 @@ public class StudentController {
 
 	@FXML
 	public void initialize() {
-		List<String> drzavaCodes = List.of("Republika Srbija", "Crna Gora", "Hrvatska");
+		List<String> drzavaCodes = new ArrayList<String>();
+		List<String> mestaCodes = new ArrayList<String>();
+		List<DrzavaGradovi> dg = Stored.getInstance().getDrzavaList();
+		for (DrzavaGradovi d : dg) {
+			drzavaCodes.add(d.getDrzava());
+			mestaCodes.addAll(List.of(d.getGradovi()));
+		}
 		drzavaRodjenjaCb.setItems(FXCollections.observableArrayList(drzavaCodes));
-		drzavaRodjenjaCb.setValue(new String("Republika Srbija"));
 		drzavljanstvoCb.setItems(FXCollections.observableArrayList(drzavaCodes));
-		drzavljanstvoCb.setValue(new String("Republika Srbija"));
-		List<String> mestaCodes = List.of("Beograd", "Leskovac", "Vranje");
-		ObservableList<String> mestaCodesObservableList = FXCollections.observableArrayList(mestaCodes);
 		
+		ObservableList<String> mestaCodesObservableList = FXCollections.observableArrayList(mestaCodes);
 		mestoRodjenjaCb.setItems(mestaCodesObservableList);
 		List<SrednjaSkola> srednjeSkole = sifarniciService.getSrednjeSkole();
 		srednjeSkolaCb.setItems(FXCollections.observableArrayList(srednjeSkole));

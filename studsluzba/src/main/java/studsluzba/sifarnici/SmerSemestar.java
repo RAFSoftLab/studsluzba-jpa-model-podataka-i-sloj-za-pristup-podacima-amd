@@ -1,8 +1,6 @@
 package studsluzba.sifarnici;
 
-import java.util.List;
-
-public class SmerSemestar {
+public class SmerSemestar{
 
 	private String smer;
 	private String semestar;
@@ -18,24 +16,12 @@ public class SmerSemestar {
 		return smer;
 	}
 
-	public void setSmer(String smer) {
-		this.smer = smer;
-	}
-
 	public String getSemestar() {
 		return semestar;
 	}
 
-	public void setSemestar(String semestar) {
-		this.semestar = semestar;
-	}
-
 	public String[] getPredmeti() {
 		return predmeti;
-	}
-
-	public void setPredmeti(String[] predmeti) {
-		this.predmeti = predmeti;
 	}
 	
 	@Override
