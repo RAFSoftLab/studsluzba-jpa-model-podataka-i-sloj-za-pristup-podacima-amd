@@ -42,7 +42,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="novaTf" prefWidth="76.0" GridPane.halignment="CENTER" />
+                  <TextField fx:id="novaTf" prefWidth="76.0" GridPane.halignment="CENTER" promptText=":godina:/:godina:" />
                   <Button mnemonicParsing="false" onAction="#sacuvajNovu" prefHeight="25.0" prefWidth="56.0" text="Sacuvaj" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
                </children>
             </GridPane>

@@ -32,6 +32,7 @@ import studsluzba.services.IspitniRokService;
 import studsluzba.services.NastavnikService;
 import studsluzba.services.PredmetService;
 import studsluzba.services.SkolskaGodinaService;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class IspitniRokController {
@@ -160,6 +161,7 @@ public class IspitniRokController {
 		ispitniRokovi.add(ir);
 		ObservableList<IspitniRok> ispitniRokoviO = FXCollections.observableArrayList(ispitniRokovi);
 		lvIspitnihRokova.setItems(ispitniRokoviO);
+		FXSetter.emptyElements(dpDatumPocetka, dpDatumZavrsetka, cbSkolskaGodina);
 	}
 
 	public void handlePrikaziIspite(ActionEvent ae) {
@@ -167,7 +169,7 @@ public class IspitniRokController {
 
 		if (ir != null) {
 			List<Ispit> i = ir.getIspiti();
-			if (!(i.isEmpty())) {
+			if (i != null && !(i.isEmpty())) {
 				ObservableList<Ispit> ispitiO = FXCollections.observableArrayList(i);
 
 				lvIspitaZaIspitniRok.setItems(ispitiO);

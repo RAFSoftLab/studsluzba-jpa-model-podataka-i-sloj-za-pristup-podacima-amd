@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import studsluzba.model.SkolskaGodina;
 import studsluzba.services.SkolskaGodinaService;
+import studsluzba.tools.FXSetter;
 import studsluzba.tools.Stored;
 
 @Component
@@ -45,13 +46,15 @@ public class SkolskaGodinaController {
  	
 	public void sacuvajNovu(ActionEvent e) {
 		String godina = novaTf.getText();
-		int god = -1;
+		int g1 = -1, g2 = -1;
 		try {
-			god = Integer.parseInt(godina);
+			String[] split = godina.split("/");
+			g1 = Integer.parseInt(split[0]);
+			g2 = Integer.parseInt(split[1]);
 		} catch (Exception e2) {
 			errorNovaLabel.setText("Pogresno ste uneli godinu!");
 		}
-		if (god > -1) {
+		if (g1 > -1 && g2 > -1) {
 			errorNovaLabel.setText("");
 			SkolskaGodina sg = new SkolskaGodina();
 			sg.setAktivna(false);
@@ -67,9 +70,6 @@ public class SkolskaGodinaController {
 			errorAktivnaLabel.setText("Niste izabrali novu aktivnu godinu!");
 			return;
 		}
-		else {
-			errorAktivnaLabel.setText("");			
-		}
 		
 		aktivnaLabel.setText("Aktivna godina: " + ak.getGodina());
 		ak.setAktivna(true);
@@ -80,7 +80,7 @@ public class SkolskaGodinaController {
 		}
 		sgService.saveSkolskaGodina(ak);
 		trAktivna = ak;
-		novaTf.setText("");
+		FXSetter.emptyElements(novaTf, errorAktivnaLabel);
 	}
 
 }

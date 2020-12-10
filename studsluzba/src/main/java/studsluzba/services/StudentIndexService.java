@@ -32,9 +32,9 @@ public class StudentIndexService {
 		return studentIndexRepo.save(si);
 	}
 
-	public StudIndex getActiveIndexForStudent(String ime, String prezime, String jmbg) {
+	public StudIndex getActiveIndexForStudent(Student s) {
 
-		return studentIndexRepo.getActiveIndexForStud(ime, prezime, jmbg);
+		return studentIndexRepo.getActiveIndexForStud(s);
 	}
 
 	public void deleteIndexForStudent(StudIndex studIndexStari) {

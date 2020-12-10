@@ -166,8 +166,7 @@ public class FindStudentController {
 
 	public void handlePromeniIndex(ActionEvent event) {
 
-		StudIndex siStari = studentIndexService.getActiveIndexForStudent(selektovaniStudent.getIme(),
-				selektovaniStudent.getPrezime(), selektovaniStudent.getJmbg());
+		StudIndex siStari = studentIndexService.getActiveIndexForStudent(selektovaniStudent);
 
 		StudIndex siNStari = studentIndexService.saveStudentIndex(siStari.getDatumaktivnosti(), siStari.getBroj(),
 				false, siStari.getGodinaUpisa(), selektovaniStudent, siStari.getStudProgram());
@@ -188,7 +187,7 @@ public class FindStudentController {
 			a.show();
 			return;
 		}
-		StudIndex si = studentIndexService.getActiveIndexForStudent(s.getIme(), s.getPrezime(), s.getJmbg());
+		StudIndex si = studentIndexService.getActiveIndexForStudent(s);
 		List<Object> o = new ArrayList<Object>();
 		o.add(si);
 		MainViewManager.setParameters(o);

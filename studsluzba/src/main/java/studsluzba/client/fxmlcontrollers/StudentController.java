@@ -29,6 +29,7 @@ import studsluzba.services.StudProgramService;
 import studsluzba.services.StudentIndexService;
 import studsluzba.services.StudentService;
 import studsluzba.sifarnici.DrzavaGradovi;
+import studsluzba.tools.FXSetter;
 import studsluzba.tools.Stored;
 
 @Component
@@ -199,9 +200,21 @@ public class StudentController {
 				drzavaRodjenjaCb.getSelectionModel().getSelectedItem(), pol,
 				drzavljanstvoCb.getSelectionModel().getSelectedItem(), nacionalnostTf.getText(),
 				brojLicneKarteTf.getText(), brojTelefonaTf.getText(), licnuKartuIzdaoTf.getText(),adresaStanovanjaTf.getText(), emailFaxTf.getText(), emailPersTf.getText(), 2);
+		if (s == null) {
+			// student save error
+			return;
+		}
 
 		StudIndex si = studentIndexService.saveStudentIndex(datumAktivnostiDp.getValue(),
 				Integer.parseInt(brojIndexTf.getText()), true, Integer.parseInt(godinaUpisaTf.getText()), s,
 				studProgramCb.getSelectionModel().getSelectedItem());
+		if (si == null) {
+			//si save error ne moze da se napravi index
+			studentService.delete(s);
+			return;
+		}
+		
+		FXSetter.emptyElements(brojIndexTf, godinaUpisaTf, studProgramCb, srednjeSkolaCb, imeTf, prezimeTf, srednjeImeTf, jmbgTf, datumRodjenjaDp, datumAktivnostiDp, mestoRodjenjaCb, drzavaRodjenjaCb, drzavljanstvoCb, nacionalnostTf, brojLicneKarteTf, brojTelefonaTf, licnuKartuIzdaoTf, adresaStanovanjaTf, emailFaxTf, emailPersTf);
+		
 	}
 }

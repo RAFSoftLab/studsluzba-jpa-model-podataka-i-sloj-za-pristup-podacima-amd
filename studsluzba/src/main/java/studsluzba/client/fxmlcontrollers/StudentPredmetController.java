@@ -65,6 +65,7 @@ public class StudentPredmetController {
 		
 		if (student != null)
 			studentL.setText("Student: " + student.toString());
+		else return;
 		
 		List<DrziPredmet> dps = dpService.findAllByStudProgram(student.getStudProgram());
 		
@@ -95,7 +96,8 @@ public class StudentPredmetController {
 			s += p.getNaziv();
 			s += ",";
 		}
-		s = s.substring(0, s.length() - 2);
+		if (!s.isEmpty())
+			s = s.substring(0, s.length() - 2);
 		predmetiL.setText("Dodati predmeti: " + s);
 	}
 	

@@ -1,15 +1,11 @@
 package studsluzba.client.fxmlcontrollers;
 
-import java.time.LocalDate;
 import java.time.Year;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Component;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,11 +16,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import studsluzba.client.MainViewManager;
-import studsluzba.model.Nastavnik;
 import studsluzba.model.Studprogram;
 import studsluzba.model.VrstaStudija;
 import studsluzba.services.StudProgramService;
 import studsluzba.services.VrstaStudijaService;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class StudProgramController {
@@ -45,6 +41,7 @@ public class StudProgramController {
 	@FXML private ComboBox<VrstaStudija> vrstaStudijaCb;
 	@FXML private Label errorL;	
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@FXML
 	public void initialize() {
 		List<VrstaStudija> vs = vss.getVrsteStudija();
@@ -70,8 +67,6 @@ public class StudProgramController {
 		spTv.setItems(FXCollections.observableArrayList(res));
 	}
 	
-//	private static List<Studprogram> sviProgrami = new ArrayList();
-
 	public void handleSaveStudProgram(ActionEvent event) {
 		VrstaStudija vs = vrstaStudijaCb.getValue();
 		if (vs != null) {
@@ -81,13 +76,7 @@ public class StudProgramController {
 				errorL.setText("Neuspesno cuvanje!");
 				return;
 			}
-			errorL.setText("");
-			nazivTf.setText("");
-			skraceniNazivTf.setText("");
-			nazivZvanjaTf.setText("");
-			godAkrTf.setText("");
-			trajanjeTf.setText("");
-			vrstaStudijaCb.setValue(null);
+			FXSetter.emptyElements(errorL, nazivTf, skraceniNazivTf, nazivZvanjaTf, godAkrTf, trajanjeTf, vrstaStudijaCb);
 			spTv.getItems().add(sp);
 		}
 		else {

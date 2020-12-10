@@ -42,4 +42,8 @@ public class NastavnikService {
 		return nastavnikRepo.findAllByParams(ime, prezime, srednje, obrazovanje, email);
 	}
 	
+	public List<Nastavnik> findByEmail(String email) {
+		return nastavnikRepo.findByEmail(email);
+	}
+	
 }

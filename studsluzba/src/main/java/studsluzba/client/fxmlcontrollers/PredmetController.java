@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ import studsluzba.services.PredmetService;
 import studsluzba.services.PredmetStudprogramService;
 import studsluzba.services.StudProgramService;
 import studsluzba.tools.CustomValidator;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class PredmetController {
@@ -108,16 +111,7 @@ public class PredmetController {
 				 errorL.setText("Greska kod cuvanja studijskog programa za dati predmet. Predmet nece biti sacuvan!");
 				 return;
 			 }
-			 nazivTf.setText("");
-			 espbTf.setText("");
-			 fcpTf.setText("");
-			 fcvTf.setText("");
-			 opisTf.setText("");
-			 semestarTf.setText("");
-			 sifraTf.setText("");
-			 for (Object c : spContainer.getChildren()) {
-				 ((CheckBox)c).setSelected(false);
-			 }
+			 FXSetter.emptyElements(errorL, nazivTf, espbTf, fcpTf, fcvTf, opisTf, semestarTf, sifraTf, spContainer.getChildren().toArray());
 		 }
 		 else {
 			 //save error
