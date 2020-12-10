@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import studsluzba.client.MainViewManager;
 import studsluzba.model.VrstaStudija;
 import studsluzba.services.VrstaStudijaService;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class VrstaStudijaController {
@@ -32,8 +33,7 @@ public class VrstaStudijaController {
 			errorL.setText("Greska u cuvanju!");
 			return;
 		}
-		punTf.setText("");
-		skrTf.setText("");
+		FXSetter.emptyElements(punTf, skrTf, errorL);
 	}
 	
 	public void nazad() {

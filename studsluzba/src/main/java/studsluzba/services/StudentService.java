@@ -62,5 +62,9 @@ public class StudentService {
 
 		return studentRepo.save(s);
 	}
+	
+	public void delete(Student s) {
+		studentRepo.delete(s);
+	}
 
 }

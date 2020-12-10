@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import studsluzba.client.MainViewManager;
@@ -55,6 +57,7 @@ public class NastavnikInfoController {
 	@FXML private TableView<DrziPredmet> psgTv;
 	@FXML private ComboBox<Predmet> predmetList;
 	@FXML private ComboBox<SkolskaGodina> sgCb;
+	@FXML private TextField predmetTf;
 	
 	private List<Object> passed;
 	private Nastavnik nastavnik;
@@ -101,6 +104,13 @@ public class NastavnikInfoController {
 		List<SkolskaGodina> sg = sgService.getSkolskeGodine();
 		sgCb.setItems(FXCollections.observableArrayList(sg)); 
 		
+		predmetTf.textProperty().addListener((obs, oldVal, newVal) -> {
+			if (newVal.isEmpty())
+				predmetList.setItems(FXCollections.observableArrayList(predmetService.findAll()));
+			else 
+				predmetList.setItems(FXCollections.observableArrayList(predmetService.findByNazivOrSifra(newVal)));
+		});
+		
 		nastavnikPredmeti = dpService.findInfoByNastavnik(nastavnik);
 	}
 	
@@ -111,10 +121,10 @@ public class NastavnikInfoController {
 	
 	private void populateDrziPredmet() {
 		List<DrziPredmet> dp = dpService.findInfoByNastavnik(nastavnik);
-		for (DrziPredmet d : dp) {
-			System.out.println(d.getPredmet().getNaziv());
-			System.out.println(d.getSg().getGodina());
-		}
+//		for (DrziPredmet d : dp) {
+//			System.out.println(d.getPredmet().getNaziv());
+//			System.out.println(d.getSg().getGodina());
+//		}
 		psgTv.setItems(FXCollections.observableArrayList(dp));
 	}
 	
@@ -122,22 +132,7 @@ public class NastavnikInfoController {
 		MainViewManager.setParameters(null);
 		mainViewManager.changeRoot("nastavnikSearch");
 	}
-	
-	public void prikaziPredmet() {
-		// da omogucim da prikaze i predmet iz tabele
-		Predmet p = predmetList.getValue();
-		if (p != null) {
-			List<Object> o = new ArrayList<Object>();
-			o.add(p);		
-			mainViewManager.setParameters(o);
-			mainViewManager.changeRoot("predmetSearch");
-		}
-		else {
-			//nije izabran predmet error
-			Alert a = new Alert(AlertType.ERROR, "Niste izabrali nijedan predmet!", ButtonType.CLOSE);
-			a.show();
-		}
-	}
+
 	
 	public void dodajPredmetNastavniku() {
 		Predmet p = predmetList.getValue();

@@ -1,5 +1,6 @@
 package studsluzba.client.fxmlcontrollers;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.List;
@@ -27,6 +28,9 @@ import studsluzba.services.SifarniciService;
 import studsluzba.services.StudProgramService;
 import studsluzba.services.StudentIndexService;
 import studsluzba.services.StudentService;
+import studsluzba.sifarnici.DrzavaGradovi;
+import studsluzba.tools.FXSetter;
+import studsluzba.tools.Stored;
 
 @Component
 public class StudentController {
@@ -94,11 +98,44 @@ public class StudentController {
 	@FXML
 	TextField licnuKartuIzdaoTf;
 
-	// SS
+	// prvi upis
 
 	@FXML
 	ComboBox<SrednjaSkola> srednjeSkolaCb;
-	
+
+	@FXML
+	TextField strucnaSpremaTf;
+
+	@FXML
+	TextField uspehSrednjaSkolaTf;
+
+	@FXML
+	TextField uspehPrijemniTf;
+
+	@FXML
+	TextField godinaZavrsetkaSrednjeSkoleTf;
+
+	@FXML
+	TextField prelazSaVisokoskolskeUstanoveTf;
+
+	@FXML
+	TextField prethodnoZavrseneStudijeTf;
+
+	@FXML
+	TextField visokoskolskaUstanovaPrethodnihStudijaTf;
+
+	@FXML
+	TextField stecenoZvanjeTf;
+
+	@FXML
+	TextField prosecnaOcenaTf;
+
+	@FXML
+	DatePicker datumUpisaDp;
+
+	@FXML
+	TextArea napomenaTa;
+
 	// INDEX
 
 	@Autowired
@@ -116,14 +153,17 @@ public class StudentController {
 
 	@FXML
 	public void initialize() {
-		List<String> drzavaCodes = List.of("Republika Srbija", "Crna Gora", "Hrvatska");
+		List<String> drzavaCodes = new ArrayList<String>();
+		List<String> mestaCodes = new ArrayList<String>();
+		List<DrzavaGradovi> dg = Stored.getInstance().getDrzavaList();
+		for (DrzavaGradovi d : dg) {
+			drzavaCodes.add(d.getDrzava());
+			mestaCodes.addAll(List.of(d.getGradovi()));
+		}
 		drzavaRodjenjaCb.setItems(FXCollections.observableArrayList(drzavaCodes));
-		drzavaRodjenjaCb.setValue(new String("Republika Srbija"));
 		drzavljanstvoCb.setItems(FXCollections.observableArrayList(drzavaCodes));
-		drzavljanstvoCb.setValue(new String("Republika Srbija"));
-		List<String> mestaCodes = List.of("Beograd", "Leskovac", "Vranje");
-		ObservableList<String> mestaCodesObservableList = FXCollections.observableArrayList(mestaCodes);
 		
+		ObservableList<String> mestaCodesObservableList = FXCollections.observableArrayList(mestaCodes);
 		mestoRodjenjaCb.setItems(mestaCodesObservableList);
 		List<SrednjaSkola> srednjeSkole = sifarniciService.getSrednjeSkole();
 		srednjeSkolaCb.setItems(FXCollections.observableArrayList(srednjeSkole));
@@ -134,8 +174,8 @@ public class StudentController {
 	}
 
 	public void handleOpenModalSrednjeSkole(ActionEvent ae) {
-		
-		
+		// TODO kreirati modal window za dodavanje nove srednje skole, mozda i brisanje
+		// i promena postojećih ?? strani ključ
 		mainViewManager.openModal("addSrednjaSkola");
 	}
 
@@ -159,11 +199,22 @@ public class StudentController {
 				jmbgTf.getText(), datumRodjenjaDp.getValue(), mestoRodjenjaCb.getSelectionModel().getSelectedItem(),
 				drzavaRodjenjaCb.getSelectionModel().getSelectedItem(), pol,
 				drzavljanstvoCb.getSelectionModel().getSelectedItem(), nacionalnostTf.getText(),
-				brojLicneKarteTf.getText(), brojTelefonaTf.getText(), licnuKartuIzdaoTf.getText(),adresaStanovanjaTf.getText(), emailFaxTf.getText(), emailPersTf.getText(),
-				2, srednjeSkolaCb.getSelectionModel().getSelectedItem());
+				brojLicneKarteTf.getText(), brojTelefonaTf.getText(), licnuKartuIzdaoTf.getText(),adresaStanovanjaTf.getText(), emailFaxTf.getText(), emailPersTf.getText(), 2);
+		if (s == null) {
+			// student save error
+			return;
+		}
 
 		StudIndex si = studentIndexService.saveStudentIndex(datumAktivnostiDp.getValue(),
 				Integer.parseInt(brojIndexTf.getText()), true, Integer.parseInt(godinaUpisaTf.getText()), s,
 				studProgramCb.getSelectionModel().getSelectedItem());
+		if (si == null) {
+			//si save error ne moze da se napravi index
+			studentService.delete(s);
+			return;
+		}
+		
+		FXSetter.emptyElements(brojIndexTf, godinaUpisaTf, studProgramCb, srednjeSkolaCb, imeTf, prezimeTf, srednjeImeTf, jmbgTf, datumRodjenjaDp, datumAktivnostiDp, mestoRodjenjaCb, drzavaRodjenjaCb, drzavljanstvoCb, nacionalnostTf, brojLicneKarteTf, brojTelefonaTf, licnuKartuIzdaoTf, adresaStanovanjaTf, emailFaxTf, emailPersTf);
+		
 	}
 }

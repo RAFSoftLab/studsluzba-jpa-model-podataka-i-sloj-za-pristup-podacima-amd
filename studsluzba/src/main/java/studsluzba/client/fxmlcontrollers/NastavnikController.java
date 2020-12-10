@@ -20,6 +20,7 @@ import studsluzba.services.NastavnikService;
 import studsluzba.services.NastavnikZvanjaService;
 import studsluzba.services.ZvanjaService;
 import studsluzba.tools.CustomValidator;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class NastavnikController {
@@ -87,6 +88,12 @@ public class NastavnikController {
 			errorL.setText("Sva polja osim \"Srednje ime\" moraju biti popunjena!");
 			return;
 		}
+		
+		if (nastavnikService.findByEmail(n.getEmail()).size() > 0) {
+			errorL.setText("Nastavnik sa ovim mejlom vec postoji!");
+			return;
+		}
+		
 		n = nastavnikService.saveNastavnik(n);
 		if (n != null) {
 			boolean flag = false;
@@ -106,11 +113,9 @@ public class NastavnikController {
 				errorL.setText("Greska kod cuvanja zvanja za datog nastavnika. Nastavnik nece biti sacuvan!");
 				return;
 			}
-			imeTf.setText("");
-			prezimeTf.setText("");
-			srednjeImeTf.setText("");
-			emailTf.setText("");
-			obrazovanjeTf.setText("");
+			
+			FXSetter.emptyElements(imeTf, prezimeTf, srednjeImeTf, emailTf, obrazovanjeTf);
+			
 			for (Object c : zvanjaContainer.getChildren()) {
 				((CheckBox)c).setSelected(false);
 			}

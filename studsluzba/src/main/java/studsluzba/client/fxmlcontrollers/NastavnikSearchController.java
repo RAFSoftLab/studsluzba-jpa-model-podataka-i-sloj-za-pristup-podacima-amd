@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import studsluzba.client.MainViewManager;
 import studsluzba.model.Nastavnik;
 import studsluzba.services.NastavnikService;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class NastavnikSearchController {
@@ -69,7 +70,7 @@ public class NastavnikSearchController {
 		email = emailTf.getText();
 		
 		if (ime.isEmpty() && prezime.isEmpty() && srednje.isEmpty() && obrazovanje.isEmpty() && email.isEmpty()) {
-			nastavnikTv.setItems(FXCollections.observableArrayList(empty));
+			FXSetter.emptyElements(nastavnikTv);
 			return;
 		}
 		
@@ -77,15 +78,11 @@ public class NastavnikSearchController {
 		if (result != null && !result.isEmpty()) {
 			System.out.println(result.size());
 			nastavnikTv.setItems(FXCollections.observableArrayList(result));
-			imeTf.setText("");
-			prezimeTf.setText("");
-			srednjeImeTf.setText("");
-			obrazovanjeTf.setText("");
-			emailTf.setText("");
 		}
 		else {
-			nastavnikTv.setItems(FXCollections.observableArrayList(empty));
+			FXSetter.emptyElements(nastavnikTv);
 		}
+		FXSetter.emptyElements(imeTf, prezimeTf, srednjeImeTf, obrazovanjeTf, emailTf);
 	}
 	
 	public void openNastavnikInfo(ActionEvent e) {

@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import studsluzba.model.Zvanje;
 import studsluzba.services.ZvanjaService;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class ZvanjaController {
@@ -46,10 +47,7 @@ public class ZvanjaController {
 			
 			Zvanje ret = zvanjaService.saveZvanje(z);
 			if (ret != null) {
-				nazivTf.setText("");
-				datumIzboraDp.setValue(null);
-				uzaNaucnaOblastTf.setText("");
-				errorL.setText("");
+				FXSetter.emptyElements(nazivTf, datumIzboraDp, uzaNaucnaOblastTf, errorL);
 				zvanjaCb.getItems().add(z);
 			}
 			else errorL.setText("Neuspesno cuvanje!");
