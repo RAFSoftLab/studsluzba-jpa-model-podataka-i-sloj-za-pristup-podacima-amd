@@ -38,7 +38,7 @@
       
 			<HBox alignment="center"  GridPane.columnIndex="0" GridPane.rowIndex="1">
    					<padding><Insets top="20" right="0" bottom="10" left="0"/></padding>
-					<Button text="Otovri dosije"  GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+					<Button text="Otovri dosije" onAction="#handleOpenModalOtvoriDosije" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
 				    <Button text="Promeni index" onAction="#handleOpenModalPromeniIndex" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 					<Button text="Upisi na predmete" onAction="#upisiNaPredmete" GridPane.columnIndex="2" GridPane.rowIndex="0" />
 			</HBox>      

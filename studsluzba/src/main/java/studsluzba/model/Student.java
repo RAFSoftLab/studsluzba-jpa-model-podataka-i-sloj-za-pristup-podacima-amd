@@ -257,6 +257,8 @@ public class Student implements Serializable {
 	public void setIndexs(List<StudIndex> indexs) {
 		this.indexs = indexs;
 	}
+	
+	
 
 	@Override
 	public String toString() {

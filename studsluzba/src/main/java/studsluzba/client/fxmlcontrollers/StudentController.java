@@ -94,44 +94,11 @@ public class StudentController {
 	@FXML
 	TextField licnuKartuIzdaoTf;
 
-	// prvi upis
+	// SS
 
 	@FXML
 	ComboBox<SrednjaSkola> srednjeSkolaCb;
-
-	@FXML
-	TextField strucnaSpremaTf;
-
-	@FXML
-	TextField uspehSrednjaSkolaTf;
-
-	@FXML
-	TextField uspehPrijemniTf;
-
-	@FXML
-	TextField godinaZavrsetkaSrednjeSkoleTf;
-
-	@FXML
-	TextField prelazSaVisokoskolskeUstanoveTf;
-
-	@FXML
-	TextField prethodnoZavrseneStudijeTf;
-
-	@FXML
-	TextField visokoskolskaUstanovaPrethodnihStudijaTf;
-
-	@FXML
-	TextField stecenoZvanjeTf;
-
-	@FXML
-	TextField prosecnaOcenaTf;
-
-	@FXML
-	DatePicker datumUpisaDp;
-
-	@FXML
-	TextArea napomenaTa;
-
+	
 	// INDEX
 
 	@Autowired
@@ -167,8 +134,8 @@ public class StudentController {
 	}
 
 	public void handleOpenModalSrednjeSkole(ActionEvent ae) {
-		// TODO kreirati modal window za dodavanje nove srednje skole, mozda i brisanje
-		// i promena postojećih ?? strani ključ
+		
+		
 		mainViewManager.openModal("addSrednjaSkola");
 	}
 
@@ -192,7 +159,8 @@ public class StudentController {
 				jmbgTf.getText(), datumRodjenjaDp.getValue(), mestoRodjenjaCb.getSelectionModel().getSelectedItem(),
 				drzavaRodjenjaCb.getSelectionModel().getSelectedItem(), pol,
 				drzavljanstvoCb.getSelectionModel().getSelectedItem(), nacionalnostTf.getText(),
-				brojLicneKarteTf.getText(), brojTelefonaTf.getText(), licnuKartuIzdaoTf.getText(),adresaStanovanjaTf.getText(), emailFaxTf.getText(), emailPersTf.getText(), 2);
+				brojLicneKarteTf.getText(), brojTelefonaTf.getText(), licnuKartuIzdaoTf.getText(),adresaStanovanjaTf.getText(), emailFaxTf.getText(), emailPersTf.getText(),
+				2, srednjeSkolaCb.getSelectionModel().getSelectedItem());
 
 		StudIndex si = studentIndexService.saveStudentIndex(datumAktivnostiDp.getValue(),
 				Integer.parseInt(brojIndexTf.getText()), true, Integer.parseInt(godinaUpisaTf.getText()), s,

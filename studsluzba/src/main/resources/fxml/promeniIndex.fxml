@@ -9,7 +9,7 @@
 
 <GridPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" vgap="10" fx:controller="studsluzba.client.fxmlcontrollers.FindStudentController">
 			
-			<Label text="Promena index-a za studenta:" fx:id="labelStudent"  GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" style="-fx-text-fill: #FF0000;" />
+			<Label text="Promena index-a za studenta:" fx:id="lblStudent"  GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.halignment="CENTER" GridPane.valignment="CENTER"  />
 			<HBox GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
 				<ComboBox fx:id="studProgramCb2" maxWidth="10"/>
 				<TextField fx:id="brojIndexTf2" />

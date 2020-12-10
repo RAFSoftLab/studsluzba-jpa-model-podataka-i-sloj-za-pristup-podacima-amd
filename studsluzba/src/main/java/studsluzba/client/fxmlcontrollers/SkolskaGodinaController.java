@@ -36,10 +36,12 @@ public class SkolskaGodinaController {
 	public void initialize() {
 		List<SkolskaGodina> sgs = sgService.getSkolskeGodine();
 		aktivnaCb.setItems(FXCollections.observableArrayList(sgs));
-		
+		/*
 		SkolskaGodina sg = Stored.getInstance().getAktivnaSkolskaGodina();
+	
 		aktivnaLabel.setText("Aktivna godina: " + sg.getGodina());
 		trAktivna = sg;
+		*/
 	}
  	
 	public void sacuvajNovu(ActionEvent e) {

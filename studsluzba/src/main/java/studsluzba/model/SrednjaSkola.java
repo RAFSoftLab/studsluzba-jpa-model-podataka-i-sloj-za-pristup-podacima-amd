@@ -89,7 +89,7 @@ public class SrednjaSkola implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SrednjaSkola [imeSkole=" + imeSkole + ", mesto=" + mesto + "]";
+		return  imeSkole + ", " + mesto ;
 	}
 
 }

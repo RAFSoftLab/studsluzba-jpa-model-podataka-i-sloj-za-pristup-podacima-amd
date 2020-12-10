@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import studsluzba.model.DrziPredmet;
+import studsluzba.model.SrednjaSkola;
 import studsluzba.model.Student;
 import studsluzba.repositories.StudentRepository;
 
@@ -37,7 +38,7 @@ public class StudentService {
 	
 	public Student saveStudent(String ime, String prezime, String srednjeIme, String jmbg, LocalDate datumRodj,
 			String mestoRodj, String drzavaRodj, String pol, String drzavljanstvo, String nacionalnost, String brLK,
-			String brTel, String izdavacLk, String adresa, String emFax, String emPers, int godinaUpisa) {
+			String brTel, String izdavacLk, String adresa, String emFax, String emPers, int godinaUpisa, SrednjaSkola srednjaSkola) {
 		
 		Student s = new Student();
 		s.setIme(ime);
@@ -57,6 +58,7 @@ public class StudentService {
 		s.setEmFax(emFax);
 		s.setEmPers(emPers);
 		s.setGodinaUpisa(godinaUpisa);
+		s.setSrednjaSkola(srednjaSkola);
 
 		return studentRepo.save(s);
 	}

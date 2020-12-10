@@ -92,6 +92,12 @@ public class VisokaSkola implements Serializable{
 
 		return student;
 	}
+
+	@Override
+	public String toString() {
+		return  imeUstanove + ", "
+				+ mestoUstanove + ", " + smer;
+	}
 	
 	
 }
