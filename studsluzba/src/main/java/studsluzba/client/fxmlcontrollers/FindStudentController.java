@@ -224,6 +224,22 @@ public class FindStudentController {
 
 	}
 
+	public void handleOpenModalUpis(ActionEvent ae) {
+		List<Object> l = new ArrayList<Object>();
+		l.add(selektovaniStudent);
+		mainViewManager.setParameters(l);
+		mainViewManager.openModalNoWait("noviUpis");
+
+	}
+
+	public void handleOpenModalObnova(ActionEvent ae) {
+		List<Object> l = new ArrayList<Object>();
+		l.add(selektovaniStudent);
+		mainViewManager.setParameters(l);
+		mainViewManager.openModalNoWait("novaObnova");
+
+	}
+
 	public void handlePromeniIndex(ActionEvent event) {
 
 		StudIndex siStari = studentIndexService.getActiveIndexForStudent(selektovaniStudent);
@@ -251,7 +267,7 @@ public class FindStudentController {
 			lblSrednjeIme.setText(selektovaniStudent.getSrednjeIme());
 			String aktivanIndex = studentIndexService.getActiveIndexForStudent(selektovaniStudent).toString();
 			lblIndex.setText(aktivanIndex);
-			lblDatumRodjenja.setText(selektovaniStudent.getDatumRodj().toString()+"");
+			lblDatumRodjenja.setText(selektovaniStudent.getDatumRodj().toString() + "");
 			lblAdresa.setText(selektovaniStudent.getAdresa());
 			lblDrzavaRodjenja.setText(selektovaniStudent.getDrzavaRodj());
 			lblDrzavljanstvo.setText(selektovaniStudent.getDrzavljanstvo());
@@ -262,13 +278,11 @@ public class FindStudentController {
 			lblTelefon.setText(selektovaniStudent.getBrTel());
 			lblFaxEmail.setText(selektovaniStudent.getEmFax());
 			lblPersEmail.setText(selektovaniStudent.getEmPers());
-			
+
 			// Predmeti
 
-			
-		//Lsit<Predmet> polozeniPredmeti = ;
+			// Lsit<Predmet> polozeniPredmeti = ;
 
-			
 			// lvPolozeniPredmeti.setItems(FXCollections.observableArrayList(polozeniPredmeti));;
 			// lvSlusaPredmete;
 

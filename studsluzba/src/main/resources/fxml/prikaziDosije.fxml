@@ -174,7 +174,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnDodajNoviUpis" mnemonicParsing="false" text="Dodaj Novi Upis" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                        <Button fx:id="btnDodajNoviUpis" onAction="#handleOpenModalUpis" mnemonicParsing="false" text="Dodaj Novi Upis" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
@@ -191,7 +191,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnDodajNovuObnovu" mnemonicParsing="false" text="Dodaj Novu Obnovu" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                        <Button fx:id="btnDodajNovuObnovu" onAction="#handleOpenModalObnova" mnemonicParsing="false" text="Dodaj Novu Obnovu" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                      </children>
                   </GridPane>
                </children>
