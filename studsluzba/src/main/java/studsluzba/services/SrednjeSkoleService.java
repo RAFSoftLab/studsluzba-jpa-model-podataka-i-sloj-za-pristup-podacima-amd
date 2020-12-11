@@ -11,7 +11,7 @@ import studsluzba.model.SrednjaSkola;
 import studsluzba.repositories.SrednjeSkoleRepository;
 
 @Service
-public class SifarniciService {
+public class SrednjeSkoleService {
 	
 	@Autowired
 	SrednjeSkoleRepository srednjeSkoleRepo;

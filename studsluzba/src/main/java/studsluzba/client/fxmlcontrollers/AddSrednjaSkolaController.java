@@ -1,9 +1,7 @@
 package studsluzba.client.fxmlcontrollers;
 
+import java.util.ArrayList;
 import java.util.List;
-
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,17 +11,17 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import studsluzba.model.SrednjaSkola;
-import studsluzba.services.SifarniciService;
+import studsluzba.services.SrednjeSkoleService;
+import studsluzba.sifarnici.DrzavaGradovi;
+import studsluzba.tools.Stored;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 
 @Component
 public class AddSrednjaSkolaController {
 	
-	
-	
 	@Autowired
-	SifarniciService sifarniciService;
+	SrednjeSkoleService srednjeSkoleService;
 	
 	@Autowired
 	StudentController  studentController;
@@ -39,18 +37,16 @@ public class AddSrednjaSkolaController {
 		if(mestoNoveSrednjeSkoleCb.getValue()!=null) ss.setMesto(mestoNoveSrednjeSkoleCb.getValue());
 		ss.setImeSkole(nazivNoveSrednjeSkoleTf.getText());
 		if(tipNoveSrednjeSkoleCb.getValue()!=null) ss.setVrsta(tipNoveSrednjeSkoleCb.getValue());
-		sifarniciService.saveSrednjaSkola(ss);		
+		srednjeSkoleService.saveSrednjaSkola(ss);		
 		studentController.updateSrednjeSkole();
-		closeStage(event);
-		
-		
+		closeStage(event);		
 	}
 	
 	@FXML
     	public void initialize() {		
-		List<String> tipSrednjeSkoleCodes = List.of("gimnazija","srednje strucna skola");
+		List<String> tipSrednjeSkoleCodes = Stored.getInstance().getSrednjeSkoleList();
 		tipNoveSrednjeSkoleCb.setItems(FXCollections.observableArrayList(tipSrednjeSkoleCodes));
-		List<String> mestaCodes = List.of("Beograd", "Kruševac", "Niš");
+		List<String> mestaCodes = Stored.getInstance().getAllGradovi();
 		mestoNoveSrednjeSkoleCb.setItems(FXCollections.observableArrayList(mestaCodes));
 	}
 	

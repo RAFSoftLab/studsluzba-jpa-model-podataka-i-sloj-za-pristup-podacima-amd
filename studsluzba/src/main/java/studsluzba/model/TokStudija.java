@@ -1,6 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class TokStudija implements Serializable {
 	@JoinColumn(name = "idStudIndex")
 	private StudIndex studIndex;
 
-	private Date datum;
+	private LocalDate datum;
 
 	private String napomena;
 
@@ -40,7 +41,7 @@ public class TokStudija implements Serializable {
 
 	}
 
-	public TokStudija(String napomena, Date datum, StudIndex studIndex) {
+	public TokStudija(String napomena, LocalDate datum, StudIndex studIndex) {
 
 		this.datum = datum;
 		this.napomena = napomena;
@@ -71,11 +72,11 @@ public class TokStudija implements Serializable {
 		this.idTokStudija = idTokStudija;
 	}
 
-	public Date getDatum() {
+	public LocalDate getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDate datum) {
 		this.datum = datum;
 	}
 

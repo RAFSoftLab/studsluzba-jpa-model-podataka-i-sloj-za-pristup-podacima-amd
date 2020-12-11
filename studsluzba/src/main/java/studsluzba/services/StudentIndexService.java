@@ -41,4 +41,8 @@ public class StudentIndexService {
 		studentIndexRepo.delete(studIndexStari);
 
 	}
+	
+	public List<StudIndex> findIndexByParams(int broj, int godina, Studprogram sp) {
+		return studentIndexRepo.findByParams(sp, godina, broj);
+	}
 }

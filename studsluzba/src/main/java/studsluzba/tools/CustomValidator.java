@@ -1,5 +1,7 @@
 package studsluzba.tools;
 
+import java.util.List;
+
 /**
  * 
  * @author Aleksa Dacic 92/19RN
@@ -22,6 +24,9 @@ public class CustomValidator {
 				return true;
 			if (s instanceof String)
 				if (((String) s).isEmpty())
+					return true;
+			if (s instanceof List<?>)
+				if (((List<?>) s).isEmpty())
 					return true;
 		}
 		return false;

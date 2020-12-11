@@ -1,10 +1,13 @@
 package studsluzba.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import studsluzba.model.StudIndex;
 import studsluzba.model.Student;
+import studsluzba.model.Studprogram;
 
 public interface StudIndexRepository extends CrudRepository<StudIndex, Integer>{
 	
@@ -15,4 +18,7 @@ public interface StudIndexRepository extends CrudRepository<StudIndex, Integer>{
 			+ "(:prezime is null or lower(s.prezime) like :prezime))")
 	StudIndex updateStudentIndex(String ime, String prezime);
 */
+	
+	@Query("select si from StudIndex si where si.studProgram = :sp and si.godinaUpisa = :god and si.broj = :broj")
+	List<StudIndex> findByParams(Studprogram sp, int god, int broj);
 }

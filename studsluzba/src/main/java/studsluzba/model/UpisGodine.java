@@ -1,6 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,15 +26,14 @@ public class UpisGodine implements Serializable {
 
 	public int godina;
 
-	@ManyToOne
-	@JoinColumn(name = "idPrenetogPredmeta")
-	private Predmet prenetiPredmeti;
+	@ManyToMany(mappedBy = "upisGodine")
+	private List<UpisGodinePredmet> upisGodinePredmet;
 
 	@ManyToOne
 	@JoinColumn(name = "tokStudija")
 	private TokStudija tokStudija;
 
-	private Date datum;
+	private LocalDate datum;
 
 	private String napomena;
 
@@ -41,10 +41,9 @@ public class UpisGodine implements Serializable {
 
 	}
 
-	public UpisGodine(int godina, Predmet p5, String napomena, Date datum, TokStudija tokStudija) {
+	public UpisGodine(int godina, String napomena, LocalDate datum, TokStudija tokStudija) {
 
 		this.godina = godina;
-		this.prenetiPredmeti = p5;
 		this.datum = datum;
 		this.napomena = napomena;
 		this.tokStudija = tokStudija;
@@ -58,11 +57,11 @@ public class UpisGodine implements Serializable {
 		this.godina = godina;
 	}
 
-	public Date getDatum() {
+	public LocalDate getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDate datum) {
 		this.datum = datum;
 	}
 
@@ -73,13 +72,14 @@ public class UpisGodine implements Serializable {
 	public void setNapomena(String napomena) {
 		this.napomena = napomena;
 	}
-
-	public Predmet getPrenetiPredmeti() {
-		return prenetiPredmeti;
+	
+	
+	public List<UpisGodinePredmet> getUpisGodinePredmet() {
+		return upisGodinePredmet;
 	}
 
-	public void setPrenetiPredmeti(Predmet prenetiPredmeti) {
-		this.prenetiPredmeti = prenetiPredmeti;
+	public void setUpisGodinePredmet(List<UpisGodinePredmet> upisGodinePredmet) {
+		this.upisGodinePredmet = upisGodinePredmet;
 	}
 
 	@Override

@@ -36,29 +36,8 @@ public class StudentService {
 		return rez;
 	}
 	
-	public Student saveStudent(String ime, String prezime, String srednjeIme, String jmbg, LocalDate datumRodj,
-			String mestoRodj, String drzavaRodj, String pol, String drzavljanstvo, String nacionalnost, String brLK,
-			String brTel, String izdavacLk, String adresa, String emFax, String emPers, int godinaUpisa, SrednjaSkola srednjaSkola) {
+	public Student saveStudent(Student s) {
 		
-		Student s = new Student();
-		s.setIme(ime);
-		s.setPrezime(prezime);
-		s.setSrednjeIme(srednjeIme);
-		s.setJmbg(jmbg);
-		s.setDatumRodj(datumRodj);
-		s.setMestoRodj(mestoRodj);
-		s.setDrzavaRodj(drzavaRodj);
-		s.setPol(pol);
-		s.setDrzavljanstvo(drzavljanstvo);
-		s.setNacionalnost(nacionalnost);
-		s.setBrLK(brLK);
-		s.setBrTel(brTel);
-		s.setIzdavacLk(izdavacLk);
-		s.setAdresa(adresa);
-		s.setEmFax(emFax);
-		s.setEmPers(emPers);
-		s.setGodinaUpisa(godinaUpisa);
-		s.setSrednjaSkola(srednjaSkola);
 
 		return studentRepo.save(s);
 	}

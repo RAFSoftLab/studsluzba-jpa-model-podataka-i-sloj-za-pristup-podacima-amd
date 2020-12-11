@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SifarniciManager {
-	
-	public static boolean refreshFlag = false;
-	
+		
 	public static String getPath(Sifarnik s) {
 		URL url = null;
 		if (s == Sifarnik.DRZAVA_GRADOVI) {
@@ -21,7 +19,32 @@ public class SifarniciManager {
 			url = SifarniciManager.class.getResource("/sifarnici/semestarSmer.txt");
 			return url.getPath();
 		}
+		if (s == Sifarnik.SREDNJE_SKOLE) {
+			url = SifarniciManager.class.getResource("/sifarnici/srednjeSkole.txt");
+			return url.getPath();
+		}
 		return "";
+	}
+	
+	public List<String> getSrednjeSkoleData() {
+		String path = getPath(Sifarnik.SREDNJE_SKOLE);
+		
+		List<String> res = new ArrayList<String>();
+		System.out.println("SREDNJA SKOLA LOADER");
+		try {
+			Scanner scanner = new Scanner(new File(path));
+			String line;
+			while (scanner.hasNextLine()) {
+				line = scanner.nextLine();
+				res.add(line);
+			}
+			scanner.close();
+			return res;
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public List<DrzavaGradovi> getDrzavaData() {

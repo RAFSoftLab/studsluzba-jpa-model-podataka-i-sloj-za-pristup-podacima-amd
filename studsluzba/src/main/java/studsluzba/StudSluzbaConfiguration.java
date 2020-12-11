@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import studsluzba.services.NastavnikService;
-import studsluzba.services.SifarniciService;
+import studsluzba.services.SrednjeSkoleService;
 import studsluzba.services.SkolskaGodinaService;
 import studsluzba.services.StudProgramService;
 import studsluzba.services.StudentService;

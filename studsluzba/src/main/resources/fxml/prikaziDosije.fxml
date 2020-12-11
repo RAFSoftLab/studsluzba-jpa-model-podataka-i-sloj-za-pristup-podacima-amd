@@ -38,15 +38,14 @@
                   <Label text="Ime:" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                   <Label text="Prezime:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Label text="Srednje Ime:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Label text="Datum Rodjenja:" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                  <Label text="Drzava Rodjenja:" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
-                  <Label text="Drzavljanstvo:" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                  <Label text="Datum Rodjenja:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <Label text="Drzava Rodjenja:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                  <Label text="Drzavljanstvo:" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
                   <Label text="Broj Licne Karte:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Label text="Broj Telefona:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
                   <Label text="Personalni eMail:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
                   <Label text="Fakultet eMail:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-                  <Label text="Adresa:" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
-                  <Label text="Godina:" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <Label text="Adresa:" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
                   <Label text="JMBG:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
                   <Label text="Izdavalac Licne Karte:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <Label text="Index:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -67,23 +66,19 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <Label fx:id="lblGodina" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <Label fx:id="lblDatumRodjenja" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <Label fx:id="lblDatumRodjenja" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Label fx:id="lblAdresa" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <Label fx:id="lblAdresa" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <Label fx:id="lblDrzavaRodjenja" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <Label fx:id="lblDrzavaRodjenja" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <Label fx:id="lblDrzavljanstvo" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                  <Label fx:id="lblDrzavljanstvo" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>

@@ -197,11 +197,8 @@ public class FindStudentController {
 
 		List<Student> studenti = studentService.findStudentByName(ime, prezime);
 		data.clear();
-
-		for (Student s : studenti) {
-			System.out.println(s);
-			data.add(s);
-		}
+		if (studenti != null)
+			data.addAll(studenti);
 
 		imeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("ime"));
 		prezimeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("prezime"));
@@ -249,15 +246,12 @@ public class FindStudentController {
 			mainViewManager.openModalNoWait("prikaziDosije");
 
 			// OP
-			
 			lblIme.setText(selektovaniStudent.getIme());
 			lblPrezime.setText(selektovaniStudent.getPrezime());
 			lblSrednjeIme.setText(selektovaniStudent.getSrednjeIme());
-			String aktivanIndex = studentIndexService.getActiveIndexForStudent(selektovaniStudent.getIme(),
-					selektovaniStudent.getPrezime(), selektovaniStudent.getJmbg()).toString();
+			String aktivanIndex = studentIndexService.getActiveIndexForStudent(selektovaniStudent).toString();
 			lblIndex.setText(aktivanIndex);
-			lblGodina.setText(selektovaniStudent.getGodinaUpisa()+"");
-			//lblDatumRodjenja.setText(selektovaniStudent.getDatumRodj().toString()+"");
+			lblDatumRodjenja.setText(selektovaniStudent.getDatumRodj().toString()+"");
 			lblAdresa.setText(selektovaniStudent.getAdresa());
 			lblDrzavaRodjenja.setText(selektovaniStudent.getDrzavaRodj());
 			lblDrzavljanstvo.setText(selektovaniStudent.getDrzavljanstvo());

@@ -20,7 +20,6 @@ public class Student implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idstudent;
-	private int godinaUpisa;
 	private String ime;
 	private String prezime;
 	private String srednjeIme;
@@ -39,8 +38,6 @@ public class Student implements Serializable {
 	private String brTel;
 	private float ukupanUspeh;
 
-	
-
 	@ManyToOne
 	@JoinColumn(name = "idSkole")
 	private SrednjaSkola srednjaSkola;
@@ -51,17 +48,15 @@ public class Student implements Serializable {
 
 	@OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
 	private List<StudIndex> indexs;
-		
 
 	public Student() {
 	}
 
-	public Student(int godinaUpisa, String ime, String prezime, String srednjeIme, String jmbg,
-			LocalDate datumRodjenja, String mestoRodj, String drzavaRodj, String drzavljanstvo,
-			String nacionalnost, String pol, String emFax, String emPers, String brLk, String adresa, String izdavacLk,
-			String brTel, SrednjaSkola srednjaSkola, float ukupanUspeh) {
+	public Student(String ime, String prezime, String srednjeIme, String jmbg, LocalDate datumRodjenja,
+			String mestoRodj, String drzavaRodj, String drzavljanstvo, String nacionalnost, String pol, String emFax,
+			String emPers, String brLk, String adresa, String izdavacLk, String brTel, SrednjaSkola srednjaSkola,
+			float ukupanUspeh) {
 
-		this.godinaUpisa = godinaUpisa;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.srednjeIme = srednjeIme;
@@ -88,14 +83,6 @@ public class Student implements Serializable {
 
 	public void setIdstudent(int idstudent) {
 		this.idstudent = idstudent;
-	}
-
-	public int getGodinaUpisa() {
-		return this.godinaUpisa;
-	}
-
-	public void setGodinaUpisa(int godinaUpisa) {
-		this.godinaUpisa = godinaUpisa;
 	}
 
 	public String getIme() {
@@ -257,8 +244,6 @@ public class Student implements Serializable {
 	public void setIndexs(List<StudIndex> indexs) {
 		this.indexs = indexs;
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -269,7 +254,5 @@ public class Student implements Serializable {
 		}
 		return ime + " " + prezime + " " + aktivan;
 	}
-
-
 
 }

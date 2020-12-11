@@ -34,6 +34,7 @@ import studsluzba.services.NastavnikService;
 import studsluzba.services.NastavnikZvanjaService;
 import studsluzba.services.PredmetService;
 import studsluzba.services.SkolskaGodinaService;
+import studsluzba.tools.CustomValidator;
 
 @Component
 public class NastavnikInfoController {
@@ -66,7 +67,7 @@ public class NastavnikInfoController {
 	@FXML
 	public void initialize() {
 		passed = MainViewManager.getParameters();
-		if (passed == null || passed.isEmpty()) {
+		if (CustomValidator.emptyOrNull(passed)) {
 			Alert a = new Alert(AlertType.ERROR, "Neuspesno ocitavanje informacija o nastavniku ili niste izabrali nastavnika!", ButtonType.CLOSE);
 			a.show();
 			a.setOnCloseRequest(new EventHandler<DialogEvent>() {
@@ -121,10 +122,6 @@ public class NastavnikInfoController {
 	
 	private void populateDrziPredmet() {
 		List<DrziPredmet> dp = dpService.findInfoByNastavnik(nastavnik);
-//		for (DrziPredmet d : dp) {
-//			System.out.println(d.getPredmet().getNaziv());
-//			System.out.println(d.getSg().getGodina());
-//		}
 		psgTv.setItems(FXCollections.observableArrayList(dp));
 	}
 	
@@ -137,7 +134,7 @@ public class NastavnikInfoController {
 	public void dodajPredmetNastavniku() {
 		Predmet p = predmetList.getValue();
 		SkolskaGodina sg = sgCb.getValue();
-		if (p != null && sg != null) {
+		if (!CustomValidator.emptyOrNull(p,sg)) {
 			DrziPredmet dp = new DrziPredmet(sg, p, nastavnik);
 			if (nastavnikPredmeti.contains(dp)) {
 				Alert a = new Alert(AlertType.ERROR, "Nastavnik vec drzi ovaj predmet u ovoj skolskoj godini!", ButtonType.CLOSE);

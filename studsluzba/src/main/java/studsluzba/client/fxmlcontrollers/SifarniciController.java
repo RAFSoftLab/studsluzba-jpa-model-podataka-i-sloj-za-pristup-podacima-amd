@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert.AlertType;
 import studsluzba.sifarnici.SifarniciManager;
 import studsluzba.sifarnici.Sifarnik;
+import studsluzba.tools.Stored;
 
 @Component
 public class SifarniciController {
@@ -40,7 +41,7 @@ public class SifarniciController {
 		try {
 			ProcessBuilder pb = new ProcessBuilder("Notepad.exe", new File(path).getAbsolutePath());
 			pb.start();
-			SifarniciManager.refreshFlag = true;
+			Stored.getInstance().refreshAll();
 		} catch (Exception e) {
 			Alert a = new Alert(AlertType.ERROR, "Niste izabrali sifarnik!", ButtonType.CANCEL);
 			a.show();
