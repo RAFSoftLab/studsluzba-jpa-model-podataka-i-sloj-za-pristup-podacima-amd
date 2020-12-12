@@ -6,9 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,6 +21,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -146,6 +151,9 @@ public class FindStudentController {
 	ListView<UpisGodine> lvSviUpisi;
 	@FXML
 	ListView<ObnovaGodine> lvSveObnove;
+	
+	@FXML TabPane tabovi;
+	@FXML Tab predmetiTab;
 
 	@FXML
 	public void initialize() {
@@ -160,6 +168,7 @@ public class FindStudentController {
 		srednjeImeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("srednjeIme"));
 		telefonTc.setCellValueFactory(new PropertyValueFactory<Student, String>("brTel"));
 		table.setItems(FXCollections.observableArrayList(svi));
+	
 	}
 
 	public void handleFindStudentByIndex(ActionEvent event) {
@@ -231,16 +240,20 @@ public class FindStudentController {
 	}
 
 	public void handleOpenModalUpis(ActionEvent ae) {
+		StudIndex si = studentIndexService.getActiveIndexForStudent(selektovaniStudent);
+		
 		List<Object> l = new ArrayList<Object>();
-		l.add(selektovaniStudent);
+		l.add(si);
 		mainViewManager.setParameters(l);
 		mainViewManager.openModalNoWait("noviUpis");
 
 	}
 
 	public void handleOpenModalObnova(ActionEvent ae) {
+		StudIndex si = studentIndexService.getActiveIndexForStudent(selektovaniStudent);
+
 		List<Object> l = new ArrayList<Object>();
-		l.add(selektovaniStudent);
+		l.add(si);
 		mainViewManager.setParameters(l);
 		mainViewManager.openModalNoWait("novaObnova");
 
@@ -286,18 +299,19 @@ public class FindStudentController {
 			lblTelefon.setText(selektovaniStudent.getBrTel());
 			lblFaxEmail.setText(selektovaniStudent.getEmFax());
 			lblPersEmail.setText(selektovaniStudent.getEmPers());
-
-			// Predmeti
-
-			 List<Predmet> polozeniPredmeti = ppService.findPredmetiByStudent(si);
-			 List<Predmet> slusaPredmete = tsdpService.findPredmetiByStudent(si);
-			 
-			 lvPolozeniPredmeti.setItems(FXCollections.observableArrayList(polozeniPredmeti));
-			 lvSlusaPredmete.setItems(FXCollections.observableArrayList(slusaPredmete));
-
-			// Tok Studija
-			// lvSviUpisi;
-			// lvSveObnove;
+			
+			predmetiTab.setOnSelectionChanged(new EventHandler<Event>() {
+	            public void handle(Event t) {
+	            	if (predmetiTab.isSelected()) {
+						StudIndex si = studentIndexService.getActiveIndexForStudent(selektovaniStudent);
+						 List<Predmet> polozeniPredmeti = ppService.findPredmetiByStudent(si);
+						 List<Predmet> slusaPredmete = tsdpService.findPredmetiByStudent(si);
+						 
+						 lvPolozeniPredmeti.setItems(FXCollections.observableArrayList(polozeniPredmeti));
+						 lvSlusaPredmete.setItems(FXCollections.observableArrayList(slusaPredmete));
+	            	}
+	            }
+	        });
 
 		} else {
 			Alert a = new Alert(AlertType.ERROR, "Niste izabrali studenta!", ButtonType.CLOSE);

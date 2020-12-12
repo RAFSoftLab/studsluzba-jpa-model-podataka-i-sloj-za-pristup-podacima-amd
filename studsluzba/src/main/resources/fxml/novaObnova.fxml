@@ -34,12 +34,9 @@
       <Label text="Godina" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <Label text="Datum" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
       <Label text="Napomena" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-      <Label text="Izabrati predmete koje prenosi" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
       <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField prefHeight="59.0" prefWidth="177.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <ListView fx:id="lvPredmeti" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <Button mnemonicParsing="false" onAction="#handleSaveObnovljenePredmete" text="Dodaj Predmete" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <Button mnemonicParsing="false" onAction="#handleSaveObnova" text="Sacuvaj Obnovu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#handleSaveObnova" text="Sacuvaj Obnovu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
       <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
    <padding>

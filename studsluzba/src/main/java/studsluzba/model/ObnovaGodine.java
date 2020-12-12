@@ -1,6 +1,7 @@
 package studsluzba.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -29,13 +30,8 @@ public class ObnovaGodine implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "tokStudija")
 	private TokStudija tokStudija;
-	
-	@ManyToOne
-	@JoinColumn(name = "idPredmeta")
-	private Predmet ponovljeniPredmeti;
 
-	
-	private Date datum;
+	private LocalDate datum;
 	
 	private String napomena;
 
@@ -43,10 +39,9 @@ public class ObnovaGodine implements Serializable {
 		
 	}
 
-	public ObnovaGodine(int godina, Predmet ponovljeniPredmeti, String napomena, Date datum, TokStudija tokStudija) {
+	public ObnovaGodine(int godina, String napomena, LocalDate datum, TokStudija tokStudija) {
 
 		this.godina = godina;
-		this.ponovljeniPredmeti =  ponovljeniPredmeti;
 		this.datum = datum;
 		this.napomena = napomena;
 		this.tokStudija = tokStudija;
@@ -58,14 +53,6 @@ public class ObnovaGodine implements Serializable {
 
 	public void setGodina(int godina) {
 		this.godina = godina;
-	}
-
-	public Predmet getPonovljeniPredmeti() {
-		return ponovljeniPredmeti;
-	}
-
-	public void setPonovljeniPredmeti(Predmet ponovljeniPredmeti) {
-		this.ponovljeniPredmeti = ponovljeniPredmeti;
 	}
 
 	public int getIdObnovaGodine() {
@@ -86,11 +73,11 @@ public class ObnovaGodine implements Serializable {
 		this.tokStudija = tokStudija;
 	}
 
-	public Date getDatum() {
+	public LocalDate getDatum() {
 		return datum;
 	}
 
-	public void setDatum(Date datum) {
+	public void setDatum(LocalDate datum) {
 		this.datum = datum;
 	}
 

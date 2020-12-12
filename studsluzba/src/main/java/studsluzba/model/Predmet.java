@@ -35,10 +35,6 @@ public class Predmet implements Serializable {
 	@OneToMany(mappedBy = "predmet", fetch = FetchType.EAGER)
 	private List<DrziPredmet> drziPredmet;
 
-	@OneToMany(mappedBy = "ponovljeniPredmeti")
-	private List<ObnovaGodine> og;
-	
-
 	@OneToMany(mappedBy = "predmet")
 	private List<PriznatPredmet> priznatPredmet;
 	

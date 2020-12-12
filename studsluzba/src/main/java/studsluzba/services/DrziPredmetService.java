@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import studsluzba.model.DrziPredmet;
 import studsluzba.model.Nastavnik;
 import studsluzba.model.Predmet;
+import studsluzba.model.SkolskaGodina;
 import studsluzba.model.Studprogram;
 import studsluzba.repositories.DrziPredmetRepository;
 
@@ -37,8 +38,8 @@ public class DrziPredmetService {
 		return rez;
 	}
 	
-	public List<DrziPredmet> findAllByStudProgram(Studprogram sp) {
-		return dpRepo.findAllByStudProgram(sp);
+	public List<DrziPredmet> findAllByStudProgram(Studprogram sp, SkolskaGodina sg) {
+		return dpRepo.findAllByStudProgram(sp, sg);
 	}
 	
 	public DrziPredmet findBySifraPredmeta(String sifra) {

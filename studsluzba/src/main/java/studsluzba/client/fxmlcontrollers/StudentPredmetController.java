@@ -71,7 +71,8 @@ public class StudentPredmetController {
 			studentL.setText("Student: " + student.toString());
 		else return;
 		
-		List<DrziPredmet> dps = dpService.findAllByStudProgram(student.getStudProgram());
+		List<DrziPredmet> dps = dpService.findAllByStudProgram(student.getStudProgram(), sgService.getAktivna());
+		System.out.println(dps.size());
 		
 		TableColumn<DrziPredmet, Nastavnik> nc = new TableColumn<DrziPredmet,Nastavnik>("Nastavnik");
 		nc.setCellValueFactory(new PropertyValueFactory("nastavnik"));
@@ -83,10 +84,8 @@ public class StudentPredmetController {
 		dpTv.getColumns().setAll(nc, dic, unoc);
 
 		List<DrziPredmet> set = new ArrayList<DrziPredmet>();
-		SkolskaGodina aktivna = Stored.getInstance().getAktivnaSkolskaGodina();
 		for (DrziPredmet dp : dps) {
-			if(dp.getSg().equals(aktivna))
-				set.add(dp);
+			set.add(dp);
 		}
 		dpTv.setItems(FXCollections.observableArrayList(set));
 		
