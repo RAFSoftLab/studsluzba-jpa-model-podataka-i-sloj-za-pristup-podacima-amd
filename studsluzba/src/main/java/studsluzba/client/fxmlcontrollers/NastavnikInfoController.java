@@ -67,7 +67,7 @@ public class NastavnikInfoController {
 	@FXML
 	public void initialize() {
 		passed = MainViewManager.getParameters();
-		if (CustomValidator.emptyOrNull(passed)) {
+		if (passed != null) {
 			Alert a = new Alert(AlertType.ERROR, "Neuspesno ocitavanje informacija o nastavniku ili niste izabrali nastavnika!", ButtonType.CLOSE);
 			a.show();
 			a.setOnCloseRequest(new EventHandler<DialogEvent>() {

@@ -81,7 +81,7 @@ public class PredmetSearchController {
 			};
 		});
 		
-		if(CustomValidator.emptyOrNull(MainViewManager.getParameters())) {
+		if(MainViewManager.getParameters() == null || MainViewManager.getParameters().isEmpty()) {
 			return;
 		}
 		else {

@@ -25,11 +25,16 @@ public class CustomValidator {
 			if (s instanceof String)
 				if (((String) s).isEmpty())
 					return true;
-			if (s instanceof List<?>)
-				if (((List<?>) s).isEmpty())
-					return true;
 		}
 		return false;
+	}
+	
+	public static boolean allEmpty(String...strings) {
+		for (String s : strings) {
+			if (!s.isEmpty())
+				return false;
+		}
+		return true;
 	}
 	
 	public static boolean isNumeric(String s) {

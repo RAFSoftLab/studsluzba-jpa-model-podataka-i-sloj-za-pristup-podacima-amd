@@ -70,14 +70,13 @@ public class NastavnikSearchController {
 		obrazovanje = obrazovanjeTf.getText();
 		email = emailTf.getText();
 		
-		if (CustomValidator.emptyString(ime, prezime, srednje, obrazovanje, email)) {
+		if (CustomValidator.allEmpty(ime, prezime, srednje, obrazovanje, email)) {
 			FXSetter.emptyElements(nastavnikTv);
 			return;
 		}
 		
 		List<Nastavnik> result = nastavnikService.findNastavnici(ime, prezime, srednje, obrazovanje, email);
-		if (CustomValidator.emptyOrNull(result)) {
-			System.out.println(result.size());
+		if (!result.isEmpty()) {
 			nastavnikTv.setItems(FXCollections.observableArrayList(result));
 		}
 		else {
