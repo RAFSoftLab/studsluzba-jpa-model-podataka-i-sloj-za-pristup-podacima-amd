@@ -29,10 +29,15 @@ import studsluzba.model.Predmet;
 import studsluzba.model.StudIndex;
 import studsluzba.model.Student;
 import studsluzba.model.Studprogram;
+import studsluzba.model.TokStudija;
 import studsluzba.model.UpisGodine;
+import studsluzba.services.PolozenPredmetService;
 import studsluzba.services.StudProgramService;
 import studsluzba.services.StudentIndexService;
 import studsluzba.services.StudentService;
+import studsluzba.services.TokStudijaDrziPredmetService;
+import studsluzba.services.TokStudijaService;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class FindStudentController {
@@ -40,7 +45,13 @@ public class FindStudentController {
 	@Autowired
 	StudentService studentService;
 	@Autowired
+	PolozenPredmetService ppService;
+	@Autowired
 	StudentIndexService studentIndexService;
+	@Autowired
+	TokStudijaDrziPredmetService tsdpService;
+	@Autowired
+	TokStudijaService tsService;
 	@Autowired
 	MainViewManager mainViewManager;
 	@FXML
@@ -61,8 +72,6 @@ public class FindStudentController {
 	private TableColumn prezimeTc = new TableColumn();
 	@FXML
 	private TableColumn srednjeImeTc = new TableColumn();
-	@FXML
-	private TableColumn godinaUpisaTc = new TableColumn();
 	@FXML
 	private TableColumn telefonTc = new TableColumn();
 
@@ -149,7 +158,6 @@ public class FindStudentController {
 		imeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("ime"));
 		prezimeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("prezime"));
 		srednjeImeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("srednjeIme"));
-		godinaUpisaTc.setCellValueFactory(new PropertyValueFactory<Student, Integer>("godinaUpisa"));
 		telefonTc.setCellValueFactory(new PropertyValueFactory<Student, String>("brTel"));
 		table.setItems(FXCollections.observableArrayList(svi));
 	}
@@ -173,7 +181,6 @@ public class FindStudentController {
 		imeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("ime"));
 		prezimeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("prezime"));
 		srednjeImeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("srednjeIme"));
-		godinaUpisaTc.setCellValueFactory(new PropertyValueFactory<Student, Integer>("godinaUpisa"));
 		telefonTc.setCellValueFactory(new PropertyValueFactory<Student, String>("brTel"));
 
 		data.clear();
@@ -203,7 +210,6 @@ public class FindStudentController {
 		imeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("ime"));
 		prezimeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("prezime"));
 		srednjeImeTc.setCellValueFactory(new PropertyValueFactory<Student, String>("srednjeIme"));
-		godinaUpisaTc.setCellValueFactory(new PropertyValueFactory<Student, Integer>("godinaUpisa"));
 		telefonTc.setCellValueFactory(new PropertyValueFactory<Student, String>("brTel"));
 
 		table.setItems(data);
@@ -243,20 +249,22 @@ public class FindStudentController {
 	public void handlePromeniIndex(ActionEvent event) {
 
 		StudIndex siStari = studentIndexService.getActiveIndexForStudent(selektovaniStudent);
-
-		StudIndex siNStari = studentIndexService.saveStudentIndex(siStari.getDatumaktivnosti(), siStari.getBroj(),
-				false, siStari.getGodinaUpisa(), selektovaniStudent, siStari.getStudProgram());
-
-		StudIndex siN = studentIndexService.saveStudentIndex(datumAktivnostiDp2.getValue(),
-				Integer.parseInt(brojIndexTf2.getText()), true, Integer.parseInt(godinaUpisaTf2.getText()),
-				selektovaniStudent, studProgramCb2.getSelectionModel().getSelectedItem());
-
-		studentIndexService.deleteIndexForStudent(siStari);
-
+		siStari.setAktivan(false);
+		StudIndex si = new StudIndex(Integer.parseInt(brojIndexTf2.getText()), Integer.parseInt(godinaUpisaTf2.getText()), studProgramCb2.getSelectionModel().getSelectedItem(), selektovaniStudent, true, datumAktivnostiDp2.getValue());
+		TokStudija ts = new TokStudija("Promena indeksa", datumAktivnostiDp2.getValue(), si);
+		try {
+			siStari = studentIndexService.save(siStari);
+			si = studentIndexService.save(si);
+			ts = tsService.save(ts);
+			FXSetter.emptyElements(brojIndexTf2, godinaUpisaTf2, studProgramCb2, datumAktivnostiDp2);
+		} catch (Exception e) {
+			//neuspesno cuvanje alert
+		}
 	}
 
 	public void handleOpenModalOtvoriDosije(ActionEvent ae) {
 		selektovaniStudent = table.getSelectionModel().getSelectedItem();
+		StudIndex si = studentIndexService.getActiveIndexForStudent(selektovaniStudent);
 
 		if (selektovaniStudent != null) {
 			mainViewManager.openModalNoWait("prikaziDosije");
@@ -281,10 +289,11 @@ public class FindStudentController {
 
 			// Predmeti
 
-			// Lsit<Predmet> polozeniPredmeti = ;
-
-			// lvPolozeniPredmeti.setItems(FXCollections.observableArrayList(polozeniPredmeti));;
-			// lvSlusaPredmete;
+			 List<Predmet> polozeniPredmeti = ppService.findPredmetiByStudent(si);
+			 List<Predmet> slusaPredmete = tsdpService.findPredmetiByStudent(si);
+			 
+			 lvPolozeniPredmeti.setItems(FXCollections.observableArrayList(polozeniPredmeti));
+			 lvSlusaPredmete.setItems(FXCollections.observableArrayList(slusaPredmete));
 
 			// Tok Studija
 			// lvSviUpisi;

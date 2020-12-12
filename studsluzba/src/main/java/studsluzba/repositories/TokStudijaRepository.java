@@ -11,6 +11,6 @@ import studsluzba.model.TokStudija;
 public interface TokStudijaRepository extends CrudRepository<TokStudija, Integer> {
 
 	@Query("select a from TokStudija a where a.studIndex = :si")
-	List<TokStudija> getTokStudijaZaIndex(StudIndex si);
+	TokStudija getTokStudijaZaIndex(StudIndex si);
 
 }

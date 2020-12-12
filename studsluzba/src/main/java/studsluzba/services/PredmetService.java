@@ -34,4 +34,8 @@ public class PredmetService {
 	public List<Predmet> findByNazivOrSifra(String s) {
 		return predmetRepo.findByNazivOrSifra(s);
 	}
+	
+	public Predmet findBySifra(String s) {
+		return predmetRepo.findBySifra(s);
+	}
 }

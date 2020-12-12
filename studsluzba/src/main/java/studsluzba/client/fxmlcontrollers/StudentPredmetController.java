@@ -19,11 +19,13 @@ import studsluzba.model.Nastavnik;
 import studsluzba.model.Predmet;
 import studsluzba.model.SkolskaGodina;
 import studsluzba.model.StudIndex;
-import studsluzba.model.StudentDrziPredmet;
+import studsluzba.model.TokStudija;
+import studsluzba.model.TokStudijaDrziPredmet;
 import studsluzba.services.DrziPredmetService;
 import studsluzba.services.SkolskaGodinaService;
-import studsluzba.services.StudentDrziPredmetService;
 import studsluzba.services.StudentService;
+import studsluzba.services.TokStudijaDrziPredmetService;
+import studsluzba.services.TokStudijaService;
 import studsluzba.sifarnici.SmerSemestar;
 import studsluzba.tools.Stored;
 
@@ -37,13 +39,15 @@ public class StudentPredmetController {
 	MainViewManager mainViewManager;
 	
 	@Autowired
-	StudentDrziPredmetService sdpService;
+	TokStudijaDrziPredmetService tsdpService;
 	@Autowired
 	StudentService studentService;
 	@Autowired
 	DrziPredmetService dpService;
 	@Autowired
 	SkolskaGodinaService sgService;
+	@Autowired
+	TokStudijaService tsService;
 	
 	@FXML private Label errorL;
 	@FXML private Label studentL;
@@ -89,13 +93,14 @@ public class StudentPredmetController {
 		List<SmerSemestar> ss = Stored.getInstance().getSmerSemestarList();
 		semestarCb.setItems(FXCollections.observableArrayList(ss));
 		
-		List<Predmet> trPredmeti = sdpService.findPredmetiByStudent(student);
+		List<Predmet> trPredmeti = tsdpService.findPredmetiByStudent(student);
 		String s = "";
 		for (Predmet p : trPredmeti) {
-			svi.add(p);
 			s += p.getNaziv();
 			s += ",";
 		}
+		svi = trPredmeti;
+		System.out.println("svi updated");
 		if (!s.isEmpty())
 			s = s.substring(0, s.length() - 2);
 		predmetiL.setText("Dodati predmeti: " + s);
@@ -104,18 +109,19 @@ public class StudentPredmetController {
 	
 	public void dodajPojedinacno() {
 		DrziPredmet dp = dpTv.getSelectionModel().getSelectedItem();
-		if (dp != null) {
-			StudentDrziPredmet sdp = new StudentDrziPredmet(dp, student);
+		TokStudija ts = tsService.findByStudIndex(student);
+		if (dp != null && ts != null) {
+			TokStudijaDrziPredmet tsdp = new TokStudijaDrziPredmet(ts, dp);
 			if (svi.contains(dp.getPredmet())) {
 				//ima vec
 				errorL.setText("Postoji predmet koji je vec dodeljen!");
 			}
-			else if (sdpService.save(sdp) == null) {
+			else if (tsdpService.save(tsdp) == null) {
 				errorL.setText("Neuspesno cuvanje predmeta za studenta!");
 			}
 			else {
 				svi.add(dp.getPredmet());
-				predmetiL.setText(predmetiL.getText() + ", " + sdp.getDrziPredmet().getPredmet().getNaziv());
+				predmetiL.setText(predmetiL.getText() + ", " + tsdp.getDrziPredmet().getPredmet().getNaziv());
 			}
 		}
 		else {
@@ -127,28 +133,36 @@ public class StudentPredmetController {
 	public void dodajSve() {
 		SmerSemestar s = semestarCb.getValue();
 		String predmeti = "";
+		errorL.setText("");
 		boolean flag = false;
+		TokStudija ts = tsService.findByStudIndex(student);
+		if (ts == null) {
+			errorL.setText("Student sa ovim indeksom nema svoj tok studija!");
+			return;
+		}
 		if (s != null) {
 			for (String i : s.getPredmeti()) {
 				DrziPredmet dps = dpService.findBySifraPredmeta(i);
-				StudentDrziPredmet sdp = new StudentDrziPredmet(dps, student);
-				if (dps == null && !flag) {
+				if (dps == null) {
 					//find error
-					errorL.setText("Neuspesno cuvanje predmeta za studenta!");
+					continue;
 				}
-				else if (svi.contains(dps.getPredmet())) {
+				if (dps == null)
+					continue;
+				if (svi.contains(dps.getPredmet())) {
 					//ima vec
 					errorL.setText("Postoji predmet koji je vec dodeljen!");
+					continue;
 				}
-				else if (sdpService.save(sdp) == null) {
+				
+				TokStudijaDrziPredmet sdp = new TokStudijaDrziPredmet(ts, dps);
+				if (tsdpService.save(sdp) == null) {
 					//save error
-					errorL.setText("Neuspesno cuvanje predmeta za studenta!");
+					continue;
 				}
-				else {
-					flag = true;
-					svi.add(dps.getPredmet());
-					predmeti += dps.getPredmet().getNaziv() + ",";
-				}
+				svi.add(dps.getPredmet());
+				predmeti += dps.getPredmet().getNaziv() + ",";
+				
 			}
 			if (!predmeti.isEmpty()) {
 				predmeti = predmeti.substring(0, predmeti.length()-2);

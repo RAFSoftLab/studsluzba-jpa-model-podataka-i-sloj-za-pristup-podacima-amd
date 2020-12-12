@@ -31,7 +31,6 @@
 		          	<TableColumn prefWidth="75.0" fx:id="imeTc" text="Ime " />
 		          	<TableColumn prefWidth="75.0" fx:id="prezimeTc" text="Prezime" />
 		            <TableColumn prefWidth="93.0" fx:id="srednjeImeTc" text="Srednje Ime" />
-		            <TableColumn prefWidth="91.0" fx:id="godinaUpisaTc" text="Godina Upisa" />
 		            <TableColumn prefWidth="107.0" fx:id="telefonTc" text="Broj Telefona" />
 		    	</columns>
 		 	</TableView>

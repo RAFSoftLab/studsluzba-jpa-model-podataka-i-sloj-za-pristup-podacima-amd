@@ -20,4 +20,7 @@ public interface PredmetRepository extends CrudRepository<Predmet, Integer> {
 	@Query("select p from Predmet p where naziv like lower(CONCAT('%',:s, '%')) or sifra like lower(:s)")
 	List<Predmet> findByNazivOrSifra(String s);
 	
+	@Query("select p from Predmet p where sifra like lower(:s)")
+	Predmet findBySifra(String s);
+	
 }

@@ -20,7 +20,7 @@ public class FXSetter {
 				((TextField) o).setText("");
 			}
 			else if (o instanceof ComboBox) {
-				((ComboBox) o).setItems(null);
+				((ComboBox) o).setValue(null);
 			}
 			else if (o instanceof TableView) {
 				((TableView) o).setItems(null);

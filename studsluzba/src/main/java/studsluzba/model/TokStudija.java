@@ -28,6 +28,9 @@ public class TokStudija implements Serializable {
 
 	@ManyToMany(mappedBy = "tokStudija")
 	private List<ObnovaGodine> obnovaGodine;
+	
+	@ManyToMany(mappedBy = "tokStudija")
+	private List<TokStudijaDrziPredmet> tokStudijaDrziPredmet;
 
 	@ManyToOne
 	@JoinColumn(name = "idStudIndex")

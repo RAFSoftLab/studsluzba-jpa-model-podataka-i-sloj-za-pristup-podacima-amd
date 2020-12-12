@@ -3,6 +3,7 @@ package studsluzba.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import studsluzba.model.StudIndex;
 import studsluzba.model.TokStudija;
 import studsluzba.repositories.TokStudijaRepository;
 
@@ -19,6 +20,10 @@ public class TokStudijaService {
 	
 	public void delete(TokStudija ts) {
 		tsRepo.delete(ts);
+	}
+	
+	public TokStudija findByStudIndex(StudIndex si) {
+		return tsRepo.getTokStudijaZaIndex(si);
 	}
 	
 }

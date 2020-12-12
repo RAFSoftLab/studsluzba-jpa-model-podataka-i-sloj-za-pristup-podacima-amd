@@ -25,6 +25,7 @@ import studsluzba.model.Studprogram;
 import studsluzba.services.PredmetService;
 import studsluzba.services.PredmetStudprogramService;
 import studsluzba.services.StudProgramService;
+import studsluzba.tools.CustomValidator;
 
 @Component
 public class PredmetSearchController {
@@ -80,7 +81,10 @@ public class PredmetSearchController {
 			};
 		});
 		
-		if (!MainViewManager.getParameters().isEmpty()) {
+		if(CustomValidator.emptyOrNull(MainViewManager.getParameters())) {
+			return;
+		}
+		else {
 			if (MainViewManager.getParameters().get(0) instanceof Predmet) {
 				List<Predmet> p = new ArrayList<Predmet>();
 				Predmet predmet = (Predmet) MainViewManager.getParameters().get(0);

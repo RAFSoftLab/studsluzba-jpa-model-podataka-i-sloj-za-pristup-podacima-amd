@@ -26,9 +26,6 @@ public class UpisGodine implements Serializable {
 
 	public int godina;
 
-	@ManyToMany(mappedBy = "upisGodine")
-	private List<UpisGodinePredmet> upisGodinePredmet;
-
 	@ManyToOne
 	@JoinColumn(name = "tokStudija")
 	private TokStudija tokStudija;
@@ -73,15 +70,6 @@ public class UpisGodine implements Serializable {
 		this.napomena = napomena;
 	}
 	
-	
-	public List<UpisGodinePredmet> getUpisGodinePredmet() {
-		return upisGodinePredmet;
-	}
-
-	public void setUpisGodinePredmet(List<UpisGodinePredmet> upisGodinePredmet) {
-		this.upisGodinePredmet = upisGodinePredmet;
-	}
-
 	@Override
 	public String toString() {
 		return "UpisGodine [godina=" + godina + ", datum=" + datum + ", napomena=" + napomena + "]";

@@ -32,6 +32,14 @@ public class CustomValidator {
 		return false;
 	}
 	
+	public static boolean isNumeric(String s) {
+		for (char c : s.toCharArray()) {
+			if (c < '0' || c > '9')
+				return false;
+		}
+		return true;
+	}
+	
 //	public static boolean expectedType(Object...objs) {
 //		// u izgradnji
 //		

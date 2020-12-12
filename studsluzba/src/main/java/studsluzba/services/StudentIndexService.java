@@ -19,15 +19,7 @@ public class StudentIndexService {
 	@Autowired
 	StudIndexRepository studentIndexRepo;
 
-	public StudIndex saveStudentIndex(LocalDate datum, int broj, Boolean aktivan, int godinaUpisa, Student student,
-			Studprogram studProgram) {
-		StudIndex si = new StudIndex();
-		si.setDatumaktivnosti(datum);
-		si.setBroj(broj);
-		si.setAktivan(aktivan);
-		si.setGodinaUpisa(godinaUpisa);
-		si.setStudent(student);
-		si.setStudProgram(studProgram);
+	public StudIndex save(StudIndex si) {
 
 		return studentIndexRepo.save(si);
 	}
@@ -37,7 +29,7 @@ public class StudentIndexService {
 		return studentIndexRepo.getActiveIndexForStud(s);
 	}
 
-	public void deleteIndexForStudent(StudIndex studIndexStari) {
+	public void delete(StudIndex studIndexStari) {
 		studentIndexRepo.delete(studIndexStari);
 
 	}
@@ -45,4 +37,5 @@ public class StudentIndexService {
 	public List<StudIndex> findIndexByParams(int broj, int godina, Studprogram sp) {
 		return studentIndexRepo.findByParams(sp, godina, broj);
 	}
+	
 }

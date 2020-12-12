@@ -33,7 +33,7 @@ public class DrziPredmet {
 	private Nastavnik nastavnik;
 	
 	@ManyToMany(mappedBy = "drziPredmet")
-	private List<StudentDrziPredmet> studentDrziPredmet;
+	private List<TokStudijaDrziPredmet> tokStudijaDrziPredmet;
 
 	public DrziPredmet() {
 		

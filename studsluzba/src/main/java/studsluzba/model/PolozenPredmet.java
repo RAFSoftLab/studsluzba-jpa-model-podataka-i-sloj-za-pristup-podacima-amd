@@ -17,7 +17,7 @@ public class PolozenPredmet {
 	private int idPolozenogPredmet;
 
 	@ManyToOne
-	@JoinColumn(name = "idSudIndex")
+	@JoinColumn(name = "idStudIndex")
 	private StudIndex studIndex;
 
 	@ManyToOne

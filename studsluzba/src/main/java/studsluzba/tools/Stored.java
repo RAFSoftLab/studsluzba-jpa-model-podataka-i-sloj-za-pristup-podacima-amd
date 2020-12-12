@@ -43,6 +43,14 @@ public class Stored {
 		aktivna = a;
 	}
 	
+	public SmerSemestar getSmerSemestarBySmerSemestar(String smer, int semestar) {
+		for (SmerSemestar ss : getSmerSemestarList()) {
+			if (ss.getSemestar().equals(semestar+"") && ss.getSmer().equalsIgnoreCase(smer))
+				return ss;
+		}
+		return null;
+	}
+	
 	public List<SmerSemestar> getSmerSemestarList() {
 		if (smerSemestarList == null) {
 			smerSemestarList = sifarniciManager.getSmerSemestarData();

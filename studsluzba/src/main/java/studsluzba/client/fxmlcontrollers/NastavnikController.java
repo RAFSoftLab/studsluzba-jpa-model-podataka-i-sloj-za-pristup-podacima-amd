@@ -78,7 +78,7 @@ public class NastavnikController {
 		String email = emailTf.getText();
 		String obrazovanje = obrazovanjeTf.getText();
 		Nastavnik n = new Nastavnik(ime, prezime, srednjeIme, email, obrazovanje);
-		
+				
 		if (svi.contains(n)) {
 			errorL.setText("Nastavnik vec postoji!");
 			return;

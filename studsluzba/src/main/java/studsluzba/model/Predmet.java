@@ -47,9 +47,6 @@ public class Predmet implements Serializable {
 	
 	@ManyToMany(mappedBy = "predmet")
 	private List<PredmetStudprogram> predmetStudprogram;
-	
-	@ManyToMany(mappedBy = "predmet")
-	private List<UpisGodinePredmet> upisGodinePredmet;
 
 	public Predmet() {
 	}
