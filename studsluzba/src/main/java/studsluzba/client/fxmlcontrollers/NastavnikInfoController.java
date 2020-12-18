@@ -35,6 +35,7 @@ import studsluzba.services.NastavnikZvanjaService;
 import studsluzba.services.PredmetService;
 import studsluzba.services.SkolskaGodinaService;
 import studsluzba.tools.CustomValidator;
+import studsluzba.tools.FXSetter;
 
 @Component
 public class NastavnikInfoController {
@@ -67,15 +68,7 @@ public class NastavnikInfoController {
 	@FXML
 	public void initialize() {
 		passed = MainViewManager.getParameters();
-		if (passed != null) {
-			Alert a = new Alert(AlertType.ERROR, "Neuspesno ocitavanje informacija o nastavniku ili niste izabrali nastavnika!", ButtonType.CLOSE);
-			a.show();
-			a.setOnCloseRequest(new EventHandler<DialogEvent>() {
-				@Override
-				public void handle(DialogEvent event) {					
-					mainViewManager.changeRoot("nastavnikSearch");
-				}
-			});
+		if (passed == null && passed.isEmpty()) {
 			return;
 		}
 		nastavnik = (Nastavnik) passed.get(0);
@@ -147,7 +140,7 @@ public class NastavnikInfoController {
 				Alert a = new Alert(AlertType.ERROR, "Neuspesno dodavanje predmeta nastavniku!", ButtonType.CLOSE);
 				a.show();
 			} else {
-				sgCb.setValue(null);
+				FXSetter.emptyElements(predmetList, sgCb);
 				psgTv.getItems().add(dp);
 			}
 		}

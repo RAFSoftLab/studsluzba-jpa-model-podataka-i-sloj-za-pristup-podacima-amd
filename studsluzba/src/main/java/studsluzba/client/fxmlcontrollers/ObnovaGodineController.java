@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -47,16 +49,15 @@ public class ObnovaGodineController {
 	TextField tfNapomena;
 	@FXML
 	DatePicker dpDatum;
+	private ListView<ObnovaGodine> lvSveObnove;
 	
 	private StudIndex student = null;
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	public void initialize() {
 		student = (StudIndex) MainViewManager.getParameters().get(0);
-	}
-
-	public void handleSaveObnovljenePredmete(ActionEvent ae) {
-
+		lvSveObnove = (ListView<ObnovaGodine>)MainViewManager.getParameters().get(1);
 	}
 
 	public void handleSaveObnova(ActionEvent ae) {
@@ -67,7 +68,10 @@ public class ObnovaGodineController {
 		List<TokStudijaDrziPredmet> tsList = new ArrayList<TokStudijaDrziPredmet>();
 		try {
 			og = ogService.save(og);
-		
+			
+			List<ObnovaGodine> ogs = ogService.findByStudIndex(student);
+			lvSveObnove.setItems(FXCollections.observableArrayList(ogs));
+
 		} catch (Exception e) {
 			ogService.delete(og);
 			return;

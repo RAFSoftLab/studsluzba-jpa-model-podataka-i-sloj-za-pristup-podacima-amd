@@ -2,6 +2,7 @@ package studsluzba.client.fxmlcontrollers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,12 +37,14 @@ import studsluzba.model.Student;
 import studsluzba.model.Studprogram;
 import studsluzba.model.TokStudija;
 import studsluzba.model.UpisGodine;
+import studsluzba.services.ObnovaGodineService;
 import studsluzba.services.PolozenPredmetService;
 import studsluzba.services.StudProgramService;
 import studsluzba.services.StudentIndexService;
 import studsluzba.services.StudentService;
 import studsluzba.services.TokStudijaDrziPredmetService;
 import studsluzba.services.TokStudijaService;
+import studsluzba.services.UpisGodineService;
 import studsluzba.tools.FXSetter;
 
 @Component
@@ -55,6 +58,10 @@ public class FindStudentController {
 	StudentIndexService studentIndexService;
 	@Autowired
 	TokStudijaDrziPredmetService tsdpService;
+	@Autowired
+	UpisGodineService ugService;
+	@Autowired
+	ObnovaGodineService ogService;
 	@Autowired
 	TokStudijaService tsService;
 	@Autowired
@@ -154,6 +161,7 @@ public class FindStudentController {
 	
 	@FXML TabPane tabovi;
 	@FXML Tab predmetiTab;
+	@FXML Tab tokStudijaTab;
 
 	@FXML
 	public void initialize() {
@@ -175,11 +183,11 @@ public class FindStudentController {
 		Integer broj = null;
 		Integer godina = null;
 		String studprogram = null;
-
-		if ((!brojTf.getText().isEmpty())) {
+		Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+		if ((!brojTf.getText().isEmpty()) && pattern.matcher(brojTf.getText()).matches()) {
 			broj = Integer.parseInt(brojTf.getText());
 		}
-		if ((!godinaTf.getText().isEmpty())) {
+		if ((!godinaTf.getText().isEmpty()) && pattern.matcher(godinaTf.getText()).matches()) {
 			godina = Integer.parseInt(godinaTf.getText());
 		}
 		if (!studProgTf.getText().isEmpty()) {
@@ -244,6 +252,7 @@ public class FindStudentController {
 		
 		List<Object> l = new ArrayList<Object>();
 		l.add(si);
+		l.add(lvSviUpisi);
 		mainViewManager.setParameters(l);
 		mainViewManager.openModalNoWait("noviUpis");
 
@@ -254,6 +263,7 @@ public class FindStudentController {
 
 		List<Object> l = new ArrayList<Object>();
 		l.add(si);
+		l.add(lvSveObnove);
 		mainViewManager.setParameters(l);
 		mainViewManager.openModalNoWait("novaObnova");
 
@@ -303,7 +313,6 @@ public class FindStudentController {
 			predmetiTab.setOnSelectionChanged(new EventHandler<Event>() {
 	            public void handle(Event t) {
 	            	if (predmetiTab.isSelected()) {
-						StudIndex si = studentIndexService.getActiveIndexForStudent(selektovaniStudent);
 						 List<Predmet> polozeniPredmeti = ppService.findPredmetiByStudent(si);
 						 List<Predmet> slusaPredmete = tsdpService.findPredmetiByStudent(si);
 						 
@@ -312,6 +321,19 @@ public class FindStudentController {
 	            	}
 	            }
 	        });
+			
+			tokStudijaTab.setOnSelectionChanged(new EventHandler<Event>() {
+				@Override
+				public void handle(Event event) {
+					if (tokStudijaTab.isSelected()) {
+						List<UpisGodine> ugs = ugService.findByStudIndex(si);
+						List<ObnovaGodine> ogs = ogService.findByStudIndex(si);
+			
+						lvSviUpisi.setItems(FXCollections.observableArrayList(ugs));
+						lvSveObnove.setItems(FXCollections.observableArrayList(ogs));
+					}
+				}
+			});
 
 		} else {
 			Alert a = new Alert(AlertType.ERROR, "Niste izabrali studenta!", ButtonType.CLOSE);

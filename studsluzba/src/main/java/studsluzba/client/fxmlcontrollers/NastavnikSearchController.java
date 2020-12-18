@@ -8,10 +8,15 @@ import org.springframework.stereotype.Component;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import studsluzba.client.MainViewManager;
 import studsluzba.model.Nastavnik;
@@ -88,10 +93,14 @@ public class NastavnikSearchController {
 	public void openNastavnikInfo(ActionEvent e) {
 		List<Object> params = new ArrayList<Object>();
 		Nastavnik n = nastavnikTv.getSelectionModel().getSelectedItem();
-		if (n != null)
-			params.add(n);
-		MainViewManager.setParameters(params);
-		mainViewManager.changeRoot("nastavnikInfo");
+		if (n != null) {
+			params.add(n);			
+			MainViewManager.setParameters(params);
+			mainViewManager.changeRoot("nastavnikInfo");
+			return;
+		}
+		Alert a = new Alert(AlertType.ERROR, "Niste izabrali nastavnika!", ButtonType.CLOSE);
+		a.show();
 	}
 	
 }

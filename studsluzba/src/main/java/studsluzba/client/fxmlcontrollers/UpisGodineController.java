@@ -50,12 +50,16 @@ public class UpisGodineController {
 	TextField tfNapomena;
 	@FXML
 	DatePicker dpDatum;
+
+	private ListView<UpisGodine> lvSviUpisi;
 	
 	private StudIndex student = null;
 	
+	@SuppressWarnings("unchecked")
 	@FXML
 	public void initialize() {
 		student = (StudIndex) MainViewManager.getParameters().get(0);
+		lvSviUpisi = (ListView<UpisGodine>) MainViewManager.getParameters().get(1);
 	}
 
 	
@@ -70,6 +74,7 @@ public class UpisGodineController {
 		List<TokStudijaDrziPredmet> tsList = new ArrayList<TokStudijaDrziPredmet>();
 		try {
 			ug = ugService.save(ug);
+			
 			if (ss != null) {
 				for (String p : ss.getPredmeti()) {
 					DrziPredmet pr = dpService.findBySifraPredmeta(p);
@@ -80,6 +85,9 @@ public class UpisGodineController {
 					}
 				}
 			}
+			List<UpisGodine> ugs = ugService.findByStudIndex(student);
+			lvSviUpisi.setItems(FXCollections.observableArrayList(ugs));
+
 		
 		} catch (Exception e) {
 			for (TokStudijaDrziPredmet u : tsList) {

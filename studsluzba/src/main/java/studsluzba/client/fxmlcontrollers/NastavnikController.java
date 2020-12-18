@@ -119,6 +119,7 @@ public class NastavnikController {
 			for (Object c : zvanjaContainer.getChildren()) {
 				((CheckBox)c).setSelected(false);
 			}
+			izabranaZvanja.clear();
 		}
 		else {
 			errorL.setText("Neuspesno dodavanje, pokusajte ponovo.");

@@ -1,8 +1,11 @@
 package studsluzba.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import studsluzba.model.StudIndex;
 import studsluzba.model.UpisGodine;
 import studsluzba.repositories.UpisGodineRepository;
 
@@ -18,5 +21,9 @@ public class UpisGodineService {
 	
 	public void delete(UpisGodine ug) {
 		ugRepo.delete(ug);
+	}
+	
+	public List<UpisGodine> findByStudIndex(StudIndex si) {
+		return ugRepo.findByStudIndex(si);
 	}
 }

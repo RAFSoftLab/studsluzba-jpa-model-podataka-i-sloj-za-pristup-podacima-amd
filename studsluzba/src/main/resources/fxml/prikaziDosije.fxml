@@ -146,7 +146,7 @@
             </GridPane>
          </content>
     </Tab>
-      <Tab text="Tok Studija">
+      <Tab text="Tok Studija" fx:id="tokStudijaTab">
          <content>
             <GridPane hgap="15.0" vgap="15.0">
               <columnConstraints>

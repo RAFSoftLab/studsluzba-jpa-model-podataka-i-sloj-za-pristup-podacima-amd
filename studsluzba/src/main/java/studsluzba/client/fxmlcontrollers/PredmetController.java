@@ -46,10 +46,11 @@ public class PredmetController {
 	@FXML private VBox spContainer;
 	@FXML private Label errorL;
 	
-	private List<Studprogram> izabraniSP = new ArrayList<Studprogram>();
+	private static List<Studprogram> izabraniSP;
 	
 	@FXML
 	public void initialize() {
+		izabraniSP = new ArrayList<Studprogram>();
 		List<Studprogram> sp = spService.getAllPrograms();
 		
 		svi = predmetService.findAll();
@@ -97,7 +98,8 @@ public class PredmetController {
 			 for (Studprogram sp : izabraniSP) {
 				 PredmetStudprogram psp = new PredmetStudprogram(p, sp);
 				 temp.add(psp);
-				 if (pspService.save(psp) == null) {
+				 psp = pspService.save(psp);
+				 if (psp == null) {
 					 // psp error
 					 flag = true;
 				 }				
@@ -112,6 +114,7 @@ public class PredmetController {
 				 return;
 			 }
 			 FXSetter.emptyElements(errorL, nazivTf, espbTf, fcpTf, fcvTf, opisTf, semestarTf, sifraTf, spContainer.getChildren().toArray());
+			 izabraniSP.clear();
 		 }
 		 else {
 			 //save error
