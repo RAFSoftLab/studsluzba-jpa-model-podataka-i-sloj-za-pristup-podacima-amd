@@ -9,6 +9,9 @@ import studsluzba.model.Predmet;
 import studsluzba.model.Studprogram;
 
 public interface StudProgramRepository extends CrudRepository<Studprogram, Integer>{
+
+	@Query("select sp from Studprogram sp where sp.skraceniNaziv like :skraceniNaziv")
+	Studprogram getStudProgramBySkraceniNaziv(String skraceniNaziv);
 	
 //	@Query("select p from Predmet p where p.studProgram.idstudProgram = :id")
 //	List<Predmet> selectSubOnSubProg(Integer id);

@@ -35,7 +35,7 @@ public class StudentIndexService {
 	}
 	
 	public List<StudIndex> findIndexByParams(int broj, int godina, Studprogram sp) {
-		return studentIndexRepo.findByParams(sp, godina, broj);
+		return studentIndexRepo.findByParams(sp.getSkraceniNaziv(), godina, broj);
 	}
 	
 }

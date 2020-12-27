@@ -70,5 +70,9 @@ public class MenuBarController {
 	public void openSifarnici(ActionEvent event) {
 		mainViewManager.changeRoot("sifarnici");
 	}
+	
+	public void openImport(ActionEvent ecent) {		
+		mainViewManager.changeRoot("importData");
+	}
 		
 }

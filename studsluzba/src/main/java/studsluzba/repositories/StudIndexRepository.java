@@ -18,7 +18,7 @@ public interface StudIndexRepository extends CrudRepository<StudIndex, Integer>{
 			+ "(:prezime is null or lower(s.prezime) like :prezime))")
 	StudIndex updateStudentIndex(String ime, String prezime);
 */
-	
-	@Query("select si from StudIndex si where si.studProgram = :sp and si.godinaUpisa = :god and si.broj = :broj")
-	List<StudIndex> findByParams(Studprogram sp, int god, int broj);
+	 
+	@Query("select si from StudIndex si where si.studProgram.skraceniNaziv like :skraceniNazivStudPrograma and si.godinaUpisa = :god and si.broj = :broj")
+	List<StudIndex> findByParams(String skraceniNazivStudPrograma, int god, int broj);
 }

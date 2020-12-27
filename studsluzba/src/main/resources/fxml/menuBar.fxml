@@ -35,6 +35,7 @@
                     <MenuItem text="Školska godina" onAction="#openSkolskaGodina" />               
                     <MenuItem text="Korisnici" />
                     <MenuItem text="Zvanja" onAction="#openZvanja" />
+                     <MenuItem text="Import Poena" onAction="#openImport" />
                 </items>                          
             </Menu>
         </MenuBar>    

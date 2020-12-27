@@ -1,5 +1,6 @@
 package studsluzba.client;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,6 +25,8 @@ public class MainViewManager {
 		ContextFXMLLoader appFXMLLoader; 
 		
 		private Scene scene;
+		
+		private Stage mainStage;
 		
 		public Scene createScene() {	  
 		  try {		  
@@ -83,6 +87,16 @@ public class MainViewManager {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		
+		public void setMainStage(Stage stage) {
+			this.mainStage = stage;
+		}
+
+		public File openFileChooser() {
+			FileChooser fileChooser = new FileChooser();
+			return fileChooser.showOpenDialog(mainStage);
+			
 		}
 }
 

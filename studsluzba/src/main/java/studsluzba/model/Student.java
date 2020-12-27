@@ -77,6 +77,11 @@ public class Student implements Serializable {
 		this.ukupanUspeh = ukupanUspeh;
 	}
 
+	public Student(String ime, String prezime) {
+		this.ime = ime;
+		this.prezime = prezime;
+	}
+
 	public int getIdstudent() {
 		return this.idstudent;
 	}
