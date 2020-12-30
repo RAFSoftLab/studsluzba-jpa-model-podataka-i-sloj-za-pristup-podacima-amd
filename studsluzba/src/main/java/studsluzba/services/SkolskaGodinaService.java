@@ -22,6 +22,10 @@ public class SkolskaGodinaService {
 		return rez;
 	}
 	
+	public SkolskaGodina getByValue(String godina) {
+		return sgRepo.getByValue(godina);
+	}
+	
 	public SkolskaGodina saveSkolskaGodina(SkolskaGodina sg) {
 		return sgRepo.save(sg);
 	}

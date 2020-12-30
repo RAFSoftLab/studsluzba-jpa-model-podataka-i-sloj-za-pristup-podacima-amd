@@ -31,7 +31,9 @@ public class ImportController {
 
 	public void izaberiFajl(ActionEvent ecent) {
 		fajl = mainViewManager.openFileChooser();
-		nazivFajlaLabel.setText(fajl.getName());
+		if(fajl == null) {
+			nazivFajlaLabel.setText(fajl.getName());			
+		}
 
 	}
 

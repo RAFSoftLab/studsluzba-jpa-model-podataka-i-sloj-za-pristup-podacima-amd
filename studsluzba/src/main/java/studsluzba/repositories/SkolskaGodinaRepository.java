@@ -20,4 +20,7 @@ public interface SkolskaGodinaRepository extends CrudRepository<SkolskaGodina, I
 	@Query("select sg from SkolskaGodina sg where sg.aktivna = 1")
 	SkolskaGodina getAktivna();
 
+	@Query("select sg from SkolskaGodina sg where sg.godina like :godina")
+	SkolskaGodina getByValue(String godina);
+	
 }
