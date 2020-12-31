@@ -92,6 +92,10 @@ public class MainViewManager {
 		public void setMainStage(Stage stage) {
 			this.mainStage = stage;
 		}
+		
+		public Stage getMainStage() {
+			return this.mainStage;
+		}
 
 		public File openFileChooser() {
 			FileChooser fileChooser = new FileChooser();

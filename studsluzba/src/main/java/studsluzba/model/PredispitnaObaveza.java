@@ -20,7 +20,7 @@ public class PredispitnaObaveza implements Serializable{
 
 	private String vrsta;
 	private int maxPoeni;
-	
+
 	public PredispitnaObaveza () {}
 	
 	public PredispitnaObaveza (String vrsta, int maxPoeni) {

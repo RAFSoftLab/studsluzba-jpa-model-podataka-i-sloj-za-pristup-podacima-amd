@@ -33,5 +33,9 @@ public class IspitniRokService {
 		iter.forEach(rez::add);
 		return rez;
 	}
+	
+	public SkolskaGodina findSkolskaGodina(IspitniRok ir) {
+		return ispitniRokRepo.findSkolskaGodina(ir);
+	}
 
 }

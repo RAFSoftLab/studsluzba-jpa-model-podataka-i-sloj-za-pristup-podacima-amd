@@ -43,6 +43,9 @@ public class Predmet implements Serializable {
 	
 	@ManyToMany(mappedBy = "predmet")
 	private List<PredmetStudprogram> predmetStudprogram;
+	
+	@OneToMany(mappedBy = "predmet")
+	private List<StudentPredispitneObaveze> studentPredispitneObaveze;
 
 	public Predmet() {
 	}

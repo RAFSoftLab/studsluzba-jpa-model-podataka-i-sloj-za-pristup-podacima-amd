@@ -27,6 +27,18 @@ public class StudentPredispitneObaveze implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "idIndex")
 	private StudIndex studIndex;
+	
+	@ManyToOne
+	@JoinColumn(name = "idPredmeta")
+	private Predmet predmet;
+	
+	public Predmet getPredmet() {
+		return predmet;
+	}
+
+	public void setPredmet(Predmet predmet) {
+		this.predmet = predmet;
+	}
 
 	
 	public StudentPredispitneObaveze(double poeni, PredispitnaObaveza obaveza, StudIndex si) {

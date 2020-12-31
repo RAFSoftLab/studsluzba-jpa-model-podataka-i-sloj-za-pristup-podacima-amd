@@ -38,6 +38,11 @@
                      <MenuItem text="Import Poena" onAction="#openImport" />
                 </items>                          
             </Menu>
+		<Menu text="Izvestaji">
+                <items>
+                    <MenuItem text="Ispiti" onAction="#openIzvestajiIspit" />
+                </items>                          
+            </Menu>
         </MenuBar>    
     
 </VBox>

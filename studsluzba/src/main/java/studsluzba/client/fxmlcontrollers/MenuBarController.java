@@ -74,5 +74,9 @@ public class MenuBarController {
 	public void openImport(ActionEvent ecent) {		
 		mainViewManager.changeRoot("importData");
 	}
+	
+	public void openIzvestajiIspit(ActionEvent ecent) {		
+		mainViewManager.changeRoot("generisanjeIspita");
+	}
 		
 }

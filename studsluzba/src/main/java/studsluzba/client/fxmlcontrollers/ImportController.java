@@ -31,13 +31,15 @@ public class ImportController {
 
 	public void izaberiFajl(ActionEvent ecent) {
 		fajl = mainViewManager.openFileChooser();
-		nazivFajlaLabel.setText(fajl.getName());
-
+		if (fajl != null)
+			nazivFajlaLabel.setText(fajl.getName());
 	}
 
 	public void zapocniImport(ActionEvent ecent) {
-		String poruka = csvPoeniImporter.importCSV(fajl);
-		izvestajImportLabel.setText(poruka);
+		if (fajl != null) {			
+			String poruka = csvPoeniImporter.importCSV(fajl);
+			if (poruka != null)
+				izvestajImportLabel.setText(poruka);
+		}
 	}
-
 }

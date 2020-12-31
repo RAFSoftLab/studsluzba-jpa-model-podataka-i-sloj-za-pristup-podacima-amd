@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import studsluzba.model.Ispit;
 import studsluzba.model.StudIndex;
 import studsluzba.model.Student;
 import studsluzba.model.Studprogram;
@@ -28,6 +29,11 @@ public class StudentIndexService {
 
 		return studentIndexRepo.getActiveIndexForStud(s);
 	}
+	
+	public Student findStudentByIndex(StudIndex si) {
+
+		return studentIndexRepo.findStudentByIndex(si);
+	}
 
 	public void delete(StudIndex studIndexStari) {
 		studentIndexRepo.delete(studIndexStari);
@@ -36,6 +42,10 @@ public class StudentIndexService {
 	
 	public List<StudIndex> findIndexByParams(int broj, int godina, Studprogram sp) {
 		return studentIndexRepo.findByParams(sp.getSkraceniNaziv(), godina, broj);
+	}
+	
+	public List<StudIndex> findByIspit(Ispit i) {
+		return studentIndexRepo.findByIspit(i);
 	}
 	
 }

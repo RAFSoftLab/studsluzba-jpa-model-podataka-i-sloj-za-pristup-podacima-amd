@@ -39,5 +39,5 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 
 	@Query("select s from Student s left join s.indexs i where i.studProgram.skraceniNaziv like :naziv ")
 	List<Student> getStudenteiIndekse(String naziv);
-
+	
 }
