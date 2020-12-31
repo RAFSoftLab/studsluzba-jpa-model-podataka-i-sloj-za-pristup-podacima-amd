@@ -298,14 +298,14 @@ public class FindStudentController {
 			lblSrednjeIme.setText(selektovaniStudent.getSrednjeIme());
 			String aktivanIndex = studentIndexService.getActiveIndexForStudent(selektovaniStudent).toString();
 			lblIndex.setText(aktivanIndex);
-			lblDatumRodjenja.setText(selektovaniStudent.getDatumRodj().toString() + "");
+			lblDatumRodjenja.setText(selektovaniStudent.getDatumRodj() != null? selektovaniStudent.getDatumRodj().toString(): "");
 			lblAdresa.setText(selektovaniStudent.getAdresa());
 			lblDrzavaRodjenja.setText(selektovaniStudent.getDrzavaRodj());
 			lblDrzavljanstvo.setText(selektovaniStudent.getDrzavljanstvo());
 			lblJmbg.setText(selektovaniStudent.getJmbg());
 			lblBrojLK.setText(selektovaniStudent.getBrLK());
 			lblIzdavalacLK.setText(selektovaniStudent.getIzdavacLk());
-			lblSrednjaSkola.setText(selektovaniStudent.getSrednjaSkola().toString());
+			lblSrednjaSkola.setText(selektovaniStudent.getSrednjaSkola() != null? selektovaniStudent.getSrednjaSkola().toString(): "");
 			lblTelefon.setText(selektovaniStudent.getBrTel());
 			lblFaxEmail.setText(selektovaniStudent.getEmFax());
 			lblPersEmail.setText(selektovaniStudent.getEmPers());

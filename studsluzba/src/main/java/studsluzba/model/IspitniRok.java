@@ -30,23 +30,52 @@ public class IspitniRok implements Serializable {
 
 	private LocalDate datumPocetka;
 	private LocalDate datumZavrsetka;
-
+	private String mesec;
+	
+	
 	@OneToMany(mappedBy = "ispitniRok" , fetch = FetchType.EAGER) 
 	private List<Ispit> ispiti;
 
 	@ManyToOne
 	@JoinColumn(name = "idSkolskeGodine")
 	private SkolskaGodina skolskaGodina;
+	
 
 	public IspitniRok() {
 
 	}
 
-	public IspitniRok(LocalDate datumPocetka, LocalDate datumZavrsetka, List<Ispit> ispiti, SkolskaGodina skolskaGodina) {
+	public IspitniRok(LocalDate datumPocetka, LocalDate datumZavrsetka, List<Ispit> ispiti, SkolskaGodina skolskaGodina, String mesec) {
 		super();
 		this.datumPocetka = datumPocetka;
 		this.datumZavrsetka = datumZavrsetka;
 		this.ispiti = ispiti;
+		this.skolskaGodina = skolskaGodina;
+		this.mesec = mesec;
+	}
+	
+
+	public int getIdIspitniRok() {
+		return idIspitniRok;
+	}
+
+	public void setIdIspitniRok(int idIspitniRok) {
+		this.idIspitniRok = idIspitniRok;
+	}
+
+	public String getMesec() {
+		return mesec;
+	}
+
+	public void setMesec(String mesec) {
+		this.mesec = mesec;
+	}
+
+	public SkolskaGodina getSkolskaGodina() {
+		return skolskaGodina;
+	}
+
+	public void setSkolskaGodina(SkolskaGodina skolskaGodina) {
 		this.skolskaGodina = skolskaGodina;
 	}
 

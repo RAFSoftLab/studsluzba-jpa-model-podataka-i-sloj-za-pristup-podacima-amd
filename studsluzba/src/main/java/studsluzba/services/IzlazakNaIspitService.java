@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import studsluzba.client.reports.entities.StudentPoeniOcena;
 import studsluzba.model.Ispit;
+import studsluzba.model.IzlazakNaIspit;
 import studsluzba.model.StudIndex;
 import studsluzba.repositories.IzlazakNaIspitrepository;
 
@@ -21,6 +22,10 @@ public class IzlazakNaIspitService {
 	
 	public StudentPoeniOcena findRezultati(StudIndex si, Ispit i) {
 		return iniRepo.findRezultatiIspita(si, i);
+	}
+	
+	public IzlazakNaIspit save(IzlazakNaIspit ini) {
+		return iniRepo.save(ini);
 	}
 	
 }

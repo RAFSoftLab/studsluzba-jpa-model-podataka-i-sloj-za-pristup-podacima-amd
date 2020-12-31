@@ -38,9 +38,8 @@ public interface IspitRepository extends CrudRepository<Ispit, Integer> {
 //	Double findPoeniStudentPredmet(int idIndex, int idPredmeta, int idSkolskeGodine);
 //
 	
-	@Query("select si, s.ime, s.prezime, ini.brPoena + spo.poeni, ini.ocena from StudIndex si"
+	@Query("select si, s.ime, s.prezime, ini.brPoena, ini.ocena from StudIndex si"
 			+ " join Student s on(s = si.student)"
-			+ " join StudentPredispitneObaveze spo on(si = spo.studIndex)"
 			+ " join IzlazakNaIspit ini on (si = ini.studIndex)"
 			+ " where ini.ispit = :ispit"
 			+ " order by si.studProgram, si.godinaUpisa, si.broj")

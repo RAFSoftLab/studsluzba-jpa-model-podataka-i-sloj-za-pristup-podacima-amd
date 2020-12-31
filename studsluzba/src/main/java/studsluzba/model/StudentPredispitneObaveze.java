@@ -41,10 +41,11 @@ public class StudentPredispitneObaveze implements Serializable {
 	}
 
 	
-	public StudentPredispitneObaveze(double poeni, PredispitnaObaveza obaveza, StudIndex si) {
+	public StudentPredispitneObaveze(double poeni, PredispitnaObaveza obaveza, StudIndex si, Predmet p) {
 		this.poeni = poeni;
 		this.obaveza = obaveza;
 		this.studIndex = si;
+		this.predmet = p;
 	}
 	
 	public double getPoeni() {

@@ -144,9 +144,9 @@ public class IspitniRokController {
 			zakljucen = false;
 		}
 		
-		Ispit ispit = ispitService.saveIspit(dpDatumOdrzavanja.getValue(), tfVremePocetka.getText(),
+		Ispit ispit = ispitService.saveIspit(new Ispit(dpDatumOdrzavanja.getValue(), tfVremePocetka.getText(),
 				tfVremeZavrsetka.getText(), cbNastavnik.getSelectionModel().getSelectedItem(),
-				cbPredmet.getSelectionModel().getSelectedItem(), ispitniRokAktivan, zakljucen);
+				cbPredmet.getSelectionModel().getSelectedItem(), ispitniRokAktivan, zakljucen));
 
 		ispitiZaRok.add(ispit);
 		ispitniRokAktivan.setIspiti(ispitiZaRok);
@@ -155,8 +155,8 @@ public class IspitniRokController {
 	}
 
 	public void handleSaveIspitniRok(ActionEvent ae) {
-		IspitniRok ir = ispitniRokService.saveIspitniRok(dpDatumPocetka.getValue(), dpDatumZavrsetka.getValue(), null,
-				cbSkolskaGodina.getSelectionModel().getSelectedItem());
+		IspitniRok ir = ispitniRokService.saveIspitniRok(new IspitniRok(dpDatumPocetka.getValue(), dpDatumZavrsetka.getValue(), null,
+				cbSkolskaGodina.getSelectionModel().getSelectedItem(), dpDatumPocetka.getValue().getMonth().toString()));  // da se napravi enum za srpske nazive meseci
 
 		ispitniRokovi.add(ir);
 		ObservableList<IspitniRok> ispitniRokoviO = FXCollections.observableArrayList(ispitniRokovi);

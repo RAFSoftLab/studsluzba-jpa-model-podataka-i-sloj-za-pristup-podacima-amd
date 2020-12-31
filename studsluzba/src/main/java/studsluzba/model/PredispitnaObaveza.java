@@ -43,5 +43,13 @@ public class PredispitnaObaveza implements Serializable{
 	public void setMaxPoeni(int maxPoeni) {
 		this.maxPoeni = maxPoeni;
 	}
+
+	public int getIdPredispitnaObaveza() {
+		return idPredispitnaObaveza;
+	}
+
+	public void setIdPredispitnaObaveza(int idPredispitnaObaveza) {
+		this.idPredispitnaObaveza = idPredispitnaObaveza;
+	}
 	
 }

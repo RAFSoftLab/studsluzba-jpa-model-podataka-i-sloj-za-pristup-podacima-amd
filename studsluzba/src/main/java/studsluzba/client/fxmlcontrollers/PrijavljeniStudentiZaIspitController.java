@@ -89,7 +89,9 @@ public class PrijavljeniStudentiZaIspitController {
 	
 	public void handleOpenModalRezultatiZaIspit(ActionEvent ae) {
 		ispitAktivan = lvIspitaZaIspitniRok.getSelectionModel().getSelectedItem();
-
+		if (ispitAktivan == null)
+			return;
+		
 		mainViewManager.openModalNoWait("rezultati");
 		lblRezultati.setText("Rezultati ispita: " + ispitAktivan.toString());
 		

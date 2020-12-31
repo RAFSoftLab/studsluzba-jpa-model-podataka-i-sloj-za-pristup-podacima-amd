@@ -22,11 +22,7 @@ public class IspitService {
 	@Autowired
 	IspitRepository ispitRepo;
 
-	public Ispit saveIspit(LocalDate datumOdrzavanja, String vremePocetka, String vremeZavrsetka, Nastavnik nastavnik,
-			Predmet predmet, IspitniRok ir, boolean zakljucen) {
-
-		Ispit i = new Ispit(datumOdrzavanja, vremePocetka, vremeZavrsetka, nastavnik, predmet, ir, zakljucen);
-
+	public Ispit saveIspit(Ispit i) {
 		return ispitRepo.save(i);
 	}
 	

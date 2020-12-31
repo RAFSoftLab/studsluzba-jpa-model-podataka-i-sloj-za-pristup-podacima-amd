@@ -21,8 +21,7 @@ public class IspitniRokService {
 	@Autowired
 	IspitniRokRepository ispitniRokRepo;
 
-	public IspitniRok saveIspitniRok(LocalDate datumPocetka, LocalDate datumZavrsetka, List<Ispit> ispiti, SkolskaGodina skolskaGodina) {
-		IspitniRok ir = new IspitniRok(datumPocetka, datumZavrsetka, null, skolskaGodina);
+	public IspitniRok saveIspitniRok(IspitniRok ir) {
 		return ispitniRokRepo.save(ir);
 	}
 
@@ -36,6 +35,10 @@ public class IspitniRokService {
 	
 	public SkolskaGodina findSkolskaGodina(IspitniRok ir) {
 		return ispitniRokRepo.findSkolskaGodina(ir);
+	}
+	
+	public IspitniRok findByParams(SkolskaGodina sg, String mesec) {
+		return ispitniRokRepo.findByParams(sg, mesec);
 	}
 
 }
