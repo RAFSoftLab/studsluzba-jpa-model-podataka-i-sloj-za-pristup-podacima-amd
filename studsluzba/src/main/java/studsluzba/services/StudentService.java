@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import studsluzba.model.StudIndex;
 import studsluzba.model.Student;
 import studsluzba.model.Studprogram;
+import studsluzba.repositories.PredmetRepository;
 import studsluzba.repositories.StudIndexRepository;
 import studsluzba.repositories.StudProgramRepository;
 import studsluzba.repositories.StudentRepository;
@@ -18,10 +19,10 @@ public class StudentService {
 
 	@Autowired
 	StudentRepository studentRepo;
-	
+
 	@Autowired
 	StudIndexRepository studentIndeksRepository;
-	
+
 	@Autowired
 	StudProgramRepository studProgramRepository;
 
@@ -35,7 +36,7 @@ public class StudentService {
 		return studentRepo.findStudentbyName(ime, prezime);
 	}
 
-	public List<Student> findAll() { 
+	public List<Student> findAll() {
 		Iterable<Student> iter = studentRepo.findAll();
 		List<Student> rez = new ArrayList<Student>();
 		iter.forEach(rez::add);
@@ -58,7 +59,8 @@ public class StudentService {
 		Studprogram sp = studProgramRepository.getStudProgramBySkraceniNaziv(studProgram);
 		StudIndex si = new StudIndex(broj, godinaUpisa, sp, true);
 		si.setStudent(s);
-		return studentIndeksRepository.save(si);
+		StudIndex si2 = studentIndeksRepository.save(si);
+		return si2;
 
 	}
 
