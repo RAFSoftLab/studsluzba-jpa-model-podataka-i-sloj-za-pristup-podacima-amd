@@ -3,6 +3,8 @@ package studsluzba.client.importer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.time.Year;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.mysql.cj.result.LocalDateValueFactory;
 
+import studsluzba.model.DrziPredmet;
 import studsluzba.model.Ispit;
 import studsluzba.model.IspitniRok;
 import studsluzba.model.IzlazakNaIspit;
@@ -19,10 +22,17 @@ import studsluzba.model.Nastavnik;
 import studsluzba.model.PolozenPredmet;
 import studsluzba.model.PredispitnaObaveza;
 import studsluzba.model.Predmet;
+import studsluzba.model.PrijavaIspita;
 import studsluzba.model.SkolskaGodina;
 import studsluzba.model.StudIndex;
 import studsluzba.model.StudentPredispitneObaveze;
+import studsluzba.model.Studprogram;
+import studsluzba.model.TokStudija;
+import studsluzba.model.TokStudijaDrziPredmet;
+import studsluzba.model.UpisGodine;
+import studsluzba.model.VrstaStudija;
 import studsluzba.repositories.IzlazakNaIspitrepository;
+import studsluzba.services.DrziPredmetService;
 import studsluzba.services.IspitService;
 import studsluzba.services.IspitniRokService;
 import studsluzba.services.IzlazakNaIspitService;
@@ -30,42 +40,34 @@ import studsluzba.services.NastavnikService;
 import studsluzba.services.PolozenPredmetService;
 import studsluzba.services.PredispitnaObavezaService;
 import studsluzba.services.PredmetService;
+import studsluzba.services.PrijavaIspitaService;
 import studsluzba.services.SkolskaGodinaService;
 import studsluzba.services.StudentPredispitneObavezeService;
 import studsluzba.services.StudentService;
+import studsluzba.services.TokStudijaDrziPredmetService;
+import studsluzba.services.TokStudijaService;
+import studsluzba.services.UpisGodineService;
+import studsluzba.services.VrstaStudijaService;
 
 @Component
 public class CSVPoeniImporter {
 	
-	@Autowired
-	StudentService studService;
-	
-	@Autowired
-	PredmetService predmetService;
-	
-	@Autowired
-	SkolskaGodinaService sgservice;
-	
-	@Autowired
-	PredispitnaObavezaService poservice;
-	
-	@Autowired
-	StudentPredispitneObavezeService spoService;
-	
-	@Autowired
-	IspitniRokService irservice;
-	
-	@Autowired
-	NastavnikService nastavnikService;
-	
-	@Autowired
-	IzlazakNaIspitService iniservice;
-	
-	@Autowired
-	IspitService iservice;
-	
-	@Autowired
-	PolozenPredmetService ppservice;
+	@Autowired StudentService studService;
+	@Autowired PredmetService predmetService;
+	@Autowired SkolskaGodinaService sgservice;
+	@Autowired PredispitnaObavezaService poservice;
+	@Autowired StudentPredispitneObavezeService spoService;
+	@Autowired IspitniRokService irservice;
+	@Autowired NastavnikService nastavnikService;
+	@Autowired IzlazakNaIspitService iniservice;
+	@Autowired IspitService iservice;
+	@Autowired PolozenPredmetService ppservice;
+	@Autowired PrijavaIspitaService piservice;
+	@Autowired DrziPredmetService dpservice;
+	@Autowired TokStudijaService tsservice;
+	@Autowired TokStudijaDrziPredmetService tsdpservice;
+	@Autowired UpisGodineService ugservice;
+	@Autowired VrstaStudijaService vsservice;
 	
 	private static final int minimum = 50; //minimum za prolaz sa predispitnim
 	
@@ -88,14 +90,18 @@ public class CSVPoeniImporter {
 				p = temp.get(0);
 			}
 			else {
-				return "Greska pri ucitavanju, ne postoji predmet u bazi!";
+//				return "Greska pri ucitavanju, ne postoji predmet u bazi!";
+				p = new Predmet("0002", "Objektno-orijentisano programiranje", "oop", 8, 2, 2, 2);
+				predmetService.savePredmet(p);
 			}
 			
 			String sgod = sc.nextLine().split(",")[0];
 			SkolskaGodina sg = sgservice.getByValue(sgod);
 			if (sg == null) {
-				return "Greska pri ucitavanju, ne postoji skolska godina u bazi!";
+//				return "Greska pri ucitavanju, ne postoji skolska godina u bazi!";
+				sg = sgservice.saveSkolskaGodina(new SkolskaGodina(sgod, false));
 			}
+			
 			
 			sc.nextLine();
 			
@@ -114,15 +120,21 @@ public class CSVPoeniImporter {
 				kviz = poservice.save(new PredispitnaObaveza("Kviz", 10));
 			}
 			///////////////////////////////////////////////////////////////
-			
-			//ispitni rok preko mysql hardcode, ovde samo hvatamo
-			IspitniRok jun = irservice.findByParams(sg, "jun");
-			IspitniRok jul = irservice.findByParams(sg, "jul");
-			IspitniRok avgust = irservice.findByParams(sg, "avgust");
-			IspitniRok septembar = irservice.findByParams(sg, "septembar");
+	
+			IspitniRok jun = new IspitniRok(LocalDate.of(2019, 6, 1), LocalDate.of(2019, 6, 20), new ArrayList<Ispit>(), sg, "Jun");
+			IspitniRok jul = new IspitniRok(LocalDate.of(2019, 7, 1), LocalDate.of(2019, 7, 20), new ArrayList<Ispit>(), sg, "Jul");
+			IspitniRok avgust = new IspitniRok(LocalDate.of(2019, 8, 1), LocalDate.of(2019, 8, 20), new ArrayList<Ispit>(), sg, "Avgust");
+			IspitniRok septembar = new IspitniRok(LocalDate.of(2019, 9, 1), LocalDate.of(2019, 9, 20), new ArrayList<Ispit>(), sg, "Septembar");
+			irservice.saveIspitniRok(jun);
+			irservice.saveIspitniRok(jul);
+			irservice.saveIspitniRok(avgust);
+			irservice.saveIspitniRok(septembar);
 			
 			Nastavnik n = new Nastavnik("Bojana", "Dimic Surla", "", "bdimicsurla@raf.rs", "");
 			nastavnikService.saveNastavnik(n);
+			DrziPredmet dp = new DrziPredmet(sg, p, n);
+			dpservice.save(dp);
+			
 			LocalDate ldjun = LocalDate.of(2020, 6, 1);
 			LocalDate ldjul = LocalDate.of(2020, 7, 1);
 			LocalDate ldavg = LocalDate.of(2020, 8, 1);
@@ -148,10 +160,25 @@ public class CSVPoeniImporter {
 				int godina = Integer.parseInt(delovi[2]);
 				String prezime = delovi[3];
 				String ime = delovi[4];
+				
+				Studprogram sp = studService.findStudProgramBySkraceniNaziv(studProgram);
+				if (sp == null) {
+					VrstaStudija vs = new VrstaStudija("Osnovne akademske studije", "OAS");
+					vsservice.save(vs);
+					sp = new Studprogram("", studProgram, "", Year.of(2000), 8, vs);
+					studService.saveStudprogram(sp);
+				}
+				
 				StudIndex si = studService.getStudentIndeks(studProgram, broj, godina);
 				if(si==null) {  // student ne postoji dodajemo ga, u realnom sistemu se ovo ne moze desiti
 					si = studService.saveStudentAndIndex(ime, prezime, studProgram, broj, godina);
 					brojSacuvanihStudenata++;
+					TokStudija ts = new TokStudija("", LocalDate.of(2000, 1, 1), si);
+					tsservice.save(ts);
+					TokStudijaDrziPredmet tsdp = new TokStudijaDrziPredmet(ts, dp);
+					tsdpservice.save(tsdp);
+					UpisGodine ug = new UpisGodine(1, "hardcodovan upis", LocalDate.of(2000, 1, 1), ts);
+					ugservice.save(ug);
 				}
 				/// predispitne
 				String klk = delovi[5].equals("")? "0": delovi[5];
@@ -184,6 +211,8 @@ public class CSVPoeniImporter {
 					ocena = (poeniUkupno%100 - 1)/10 + 1 >= 5? poeniUkupno%100 - 1/10 + 1: 5;
 					junini = new IzlazakNaIspit(poeniUkupno, "", false, polozen, ocena, si, ijun);
 					iniservice.save(junini);
+					PrijavaIspita pi = new PrijavaIspita(LocalDate.of(2010, 1, 1), ijun, si, true); // datum prijave ispita ne znamo, ubacujem bilo koji datum
+					piservice.save(pi);
 				}
 				if (!jl.equals("")) {
 					if (junini != null)
@@ -193,6 +222,8 @@ public class CSVPoeniImporter {
 					ocena = (poeniUkupno%100 - 1)/10 + 1 >= 5? (poeniUkupno%100 - 1)/10 + 1: 5;
 					julini = new IzlazakNaIspit(poeniUkupno, "", false, polozen, ocena, si, ijul);
 					iniservice.save(julini);
+					PrijavaIspita pi = new PrijavaIspita(LocalDate.of(2010, 1, 1), ijul, si, true); // datum prijave ispita ne znamo, ubacujem bilo koji datum
+					piservice.save(pi);
 				}
 				if (!av.equals("")) {
 					if (junini != null)
@@ -204,6 +235,8 @@ public class CSVPoeniImporter {
 					ocena = (poeniUkupno%100 - 1)/10 + 1 >= 5? (poeniUkupno%100 - 1)/10 + 1: 5;
 					avgini = new IzlazakNaIspit(poeniUkupno, "", false, polozen, ocena, si, iavg);
 					iniservice.save(avgini);
+					PrijavaIspita pi = new PrijavaIspita(LocalDate.of(2010, 1, 1), iavg, si, true); // datum prijave ispita ne znamo, ubacujem bilo koji datum
+					piservice.save(pi);
 				}
 				if (!se.equals("")) {
 					if (junini != null)
@@ -217,6 +250,8 @@ public class CSVPoeniImporter {
 					ocena = (poeniUkupno%100 - 1)/10 + 1 >= 5? (poeniUkupno%100 - 1)/10 + 1: 5;
 					septini = new IzlazakNaIspit(poeniUkupno, "", false, polozen, ocena, si, isept);
 					iniservice.save(septini);
+					PrijavaIspita pi = new PrijavaIspita(LocalDate.of(2010, 1, 1), isept, si, true); // datum prijave ispita ne znamo, ubacujem bilo koji datum
+					piservice.save(pi);
 				}
 				if (ocena > 5) {
 					PolozenPredmet pp = new PolozenPredmet(si, p, ocena, true);

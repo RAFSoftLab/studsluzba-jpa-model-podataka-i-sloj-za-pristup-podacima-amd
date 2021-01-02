@@ -34,6 +34,11 @@ public class SkolskaGodina implements Serializable {
 	public SkolskaGodina() {
 
 	}
+	
+	public SkolskaGodina(String godina, boolean aktivna) {
+		this.godina = godina;
+		this.aktivna = aktivna;
+	}
 
 	public int getIdSkolskeGodine() {
 		return idSkolskeGodine;

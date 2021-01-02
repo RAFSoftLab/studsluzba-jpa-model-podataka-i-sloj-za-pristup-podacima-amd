@@ -42,6 +42,14 @@ public class StudentService {
 		iter.forEach(rez::add);
 		return rez;
 	}
+	
+	public Studprogram saveStudprogram(Studprogram sp) {
+		return studProgramRepository.save(sp);
+	}
+	
+	public Studprogram findStudProgramBySkraceniNaziv(String skraceniNaziv) {
+		return studProgramRepository.findBySkraceniNaziv(skraceniNaziv);
+	}
 
 	public Student saveStudent(Student s) {
 
